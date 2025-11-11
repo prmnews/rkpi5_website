@@ -21,11 +21,14 @@ dist/
 .replit
 
 # Environment Variables (keep .example files)
-.env
-.env*.local
+.env.local
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Allow example env files
+!.env.local.example
+!.env.example
 
 # Debug Logs
 npm-debug.log*
