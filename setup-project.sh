@@ -24,9 +24,20 @@ if [ ! -f "setup-project.sh" ]; then
     exit 1
 fi
 
+# Check if pnpm is installed
+if ! command -v pnpm &> /dev/null; then
+    echo -e "${RED}❌ Error: pnpm is not installed${NC}"
+    echo -e "${YELLOW}Install pnpm with: npm install -g pnpm${NC}"
+    echo -e "${YELLOW}Or visit: https://pnpm.io/installation${NC}"
+    exit 1
+fi
+
+echo -e "${GREEN}✓ pnpm found${NC}"
+echo ""
+
 # Step 1: Initialize Next.js Project
 echo -e "${BLUE}Step 1: Initializing Next.js 14 project...${NC}"
-npx create-next-app@latest . \
+pnpm dlx create-next-app@latest . \
     --typescript \
     --tailwind \
     --app \
@@ -40,14 +51,14 @@ echo ""
 
 # Step 2: Install Core Dependencies
 echo -e "${BLUE}Step 2: Installing core dependencies...${NC}"
-npm install convex @clerk/nextjs resend react-hook-form zod @hookform/resolvers framer-motion lucide-react @next/mdx @mdx-js/loader @mdx-js/react
+pnpm add convex @clerk/nextjs resend react-hook-form zod @hookform/resolvers framer-motion lucide-react @next/mdx @mdx-js/loader @mdx-js/react
 
 echo -e "${GREEN}✓ Core dependencies installed${NC}"
 echo ""
 
 # Step 3: Install Dev Dependencies
 echo -e "${BLUE}Step 3: Installing dev dependencies...${NC}"
-npm install -D @types/node @types/react @types/react-dom
+pnpm add -D @types/node @types/react @types/react-dom
 
 echo -e "${GREEN}✓ Dev dependencies installed${NC}"
 echo ""
@@ -55,21 +66,21 @@ echo ""
 # Step 4: Initialize Shadcn/ui
 echo -e "${BLUE}Step 4: Initializing Shadcn/ui...${NC}"
 echo -e "${YELLOW}Note: Use default options when prompted${NC}"
-npx shadcn-ui@latest init -y
+pnpm dlx shadcn-ui@latest init -y
 
 echo -e "${GREEN}✓ Shadcn/ui initialized${NC}"
 echo ""
 
 # Step 5: Install Shadcn Components
 echo -e "${BLUE}Step 5: Installing Shadcn UI components...${NC}"
-npx shadcn-ui@latest add button card input form toast dialog dropdown-menu tabs accordion badge -y
+pnpm dlx shadcn-ui@latest add button card input form toast dialog dropdown-menu tabs accordion badge -y
 
 echo -e "${GREEN}✓ Shadcn components installed${NC}"
 echo ""
 
 # Step 6: Initialize Convex
 echo -e "${BLUE}Step 6: Initializing Convex...${NC}"
-npx convex dev --once
+pnpm dlx convex dev --once
 
 echo -e "${GREEN}✓ Convex initialized${NC}"
 echo ""
@@ -520,8 +531,8 @@ echo "==========================================${NC}"
 echo ""
 echo -e "${BLUE}Next Steps:${NC}"
 echo "1. Copy .env.local.example to .env.local and add your API keys"
-echo "2. Run 'npm run dev' to start the development server"
-echo "3. Run 'npx convex dev' in a separate terminal"
+echo "2. Run 'pnpm dev' to start the development server"
+echo "3. Run 'pnpm dlx convex dev' in a separate terminal"
 echo "4. Check out an epic branch to start development:"
 echo "   git checkout epic/1-foundation"
 echo ""

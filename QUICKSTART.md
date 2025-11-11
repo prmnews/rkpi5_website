@@ -10,6 +10,7 @@
 Before you begin, ensure you have:
 
 - ✅ Node.js 20.x installed
+- ✅ pnpm installed (`npm install -g pnpm` or see https://pnpm.io/installation)
 - ✅ Git installed
 - ✅ GitHub CLI (optional, for easier workflows)
 - ✅ Clerk account (for auth + billing)
@@ -18,11 +19,15 @@ Before you begin, ensure you have:
 
 ---
 
-## Step 1: Clone Repository
+## Step 1: Navigate to Project Directory
 
 ```bash
-git clone https://github.com/prmnews/rkpi5_website.git
-cd rkpi5_website
+# You're already in the directory from committing!
+cd /Users/set/Repo/rkpi5_marketing
+
+# Or if cloning from scratch:
+# git clone https://github.com/prmnews/rkpi5_website.git
+# cd rkpi5_website
 ```
 
 ---
@@ -89,12 +94,12 @@ Open **two terminal windows:**
 
 **Terminal 1 - Next.js:**
 ```bash
-npm run dev
+pnpm dev
 ```
 
 **Terminal 2 - Convex:**
 ```bash
-npx convex dev
+pnpm dlx convex dev
 ```
 
 **Access:**
@@ -135,9 +140,9 @@ git commit -m "Task {epic}.{story}.{task}: Description"
 
 ### Test Before Merging
 ```bash
-npm run lint
-npm run build
-npm test  # When tests exist
+pnpm lint
+pnpm build
+pnpm test  # When tests exist
 ```
 
 ### Merge Story to Epic
@@ -256,11 +261,11 @@ git checkout epic/10-auth       # Story 10.4 (RBAC)
 
 ### Development
 ```bash
-npm run dev          # Start dev server
-npm run build        # Build for production
-npm run start        # Start production server
-npm run lint         # Run ESLint
-npx convex dev       # Start Convex backend
+pnpm dev             # Start dev server
+pnpm build           # Build for production
+pnpm start           # Start production server
+pnpm lint            # Run ESLint
+pnpm dlx convex dev  # Start Convex backend
 ```
 
 ### Git
@@ -276,12 +281,12 @@ git status                       # Check current status
 rm -rf .next
 
 # Clear node_modules and reinstall
-rm -rf node_modules package-lock.json
-npm install
+rm -rf node_modules pnpm-lock.yaml
+pnpm install
 
 # Reset Convex
 rm -rf .convex
-npx convex dev --once
+pnpm dlx convex dev --once
 ```
 
 ---
@@ -299,16 +304,16 @@ npx convex dev --once
 ## Common Issues & Solutions
 
 ### Issue: "Cannot find module '@/components/ui/button'"
-**Solution:** Run `npx shadcn-ui@latest add button`
+**Solution:** Run `pnpm dlx shadcn-ui@latest add button`
 
 ### Issue: "Convex deployment not found"
-**Solution:** Run `npx convex dev` and follow setup prompts
+**Solution:** Run `pnpm dlx convex dev` and follow setup prompts
 
 ### Issue: "Clerk environment variables missing"
 **Solution:** Add Clerk keys to `.env.local` from dashboard.clerk.com
 
 ### Issue: "Build fails with type errors"
-**Solution:** Run `npx tsc --noEmit` to see all errors, fix them
+**Solution:** Run `pnpm exec tsc --noEmit` to see all errors, fix them
 
 ### Issue: "Story branch won't merge to epic"
 **Solution:** 
@@ -325,9 +330,9 @@ git merge origin/epic/X-name  # Pull latest epic changes
 
 Before merging to main, verify:
 
-- [ ] All lint checks pass (`npm run lint`)
-- [ ] TypeScript compiles (`npx tsc --noEmit`)
-- [ ] Build succeeds (`npm run build`)
+- [ ] All lint checks pass (`pnpm lint`)
+- [ ] TypeScript compiles (`pnpm exec tsc --noEmit`)
+- [ ] Build succeeds (`pnpm build`)
 - [ ] Manual testing complete
 - [ ] All story acceptance criteria met
 - [ ] CI/CD pipeline passes
