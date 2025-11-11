@@ -15,11 +15,24 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // Only use ClerkProvider if valid publishable key exists
+  const clerkPublishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+  const hasValidClerkKey = clerkPublishableKey && clerkPublishableKey.startsWith('pk_');
+
+  if (hasValidClerkKey) {
+    return (
+      <ClerkProvider>
+        <html lang="en">
+          <body className={inter.className}>{children}</body>
+        </html>
+      </ClerkProvider>
+    );
+  }
+
+  // Fallback without Clerk for CI builds with placeholder keys
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={inter.className}>{children}</body>
-      </html>
-    </ClerkProvider>
+    <html lang="en">
+      <body className={inter.className}>{children}</body>
+    </html>
   );
 }
