@@ -15,6 +15,7 @@ dist/
 
 # Convex
 .convex/
+convex/_generated/
 
 # Production
 .vercel
