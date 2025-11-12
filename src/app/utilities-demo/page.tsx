@@ -271,7 +271,8 @@ export default function UtilitiesDemoPage() {
 }
 
 // Component that throws an error for testing
-function ThrowError() {
+function ThrowError(): null {
   throw new Error("Test error triggered by user action");
+  return null; // unreachable, but satisfies TypeScript
 }
 
