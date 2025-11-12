@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Container } from "@/components/ui";
 import { cn } from "@/lib/utils";
+import { MobileMenu, MobileMenuButton } from "./mobile-menu";
 
 const navigation = [
   { name: "Product", href: "/product" },
@@ -16,6 +17,7 @@ const navigation = [
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
 
   // Track scroll position for header background
@@ -123,26 +125,18 @@ export function Header() {
           </div>
 
           {/* Mobile Menu Button - Visible on mobile */}
-          <button
-            className="lg:hidden p-2 text-gray-600 hover:text-gray-900 transition-colors"
-            aria-label="Open menu"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
+          <MobileMenuButton
+            isOpen={isMobileMenuOpen}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          />
         </nav>
       </Container>
+
+      {/* Mobile Menu */}
+      <MobileMenu
+        isOpen={isMobileMenuOpen}
+        onClose={() => setIsMobileMenuOpen(false)}
+      />
     </motion.header>
   );
 }
