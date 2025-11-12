@@ -30,7 +30,7 @@ export default function UtilitiesDemoPage() {
           
           <div className="space-y-6">
             <div>
-              <p className="text-sm text-gray-500 mb-2">size="content" (65ch reading width)</p>
+              <p className="text-sm text-gray-500 mb-2">size=&quot;content&quot; (65ch reading width)</p>
               <Container size="content" className="bg-primary-50 p-6 rounded-lg">
                 <p className="text-gray-700">
                   This container is optimized for reading with a maximum width of 65 characters,
@@ -40,14 +40,14 @@ export default function UtilitiesDemoPage() {
             </div>
 
             <div>
-              <p className="text-sm text-gray-500 mb-2">size="container" (1280px - default)</p>
+              <p className="text-sm text-gray-500 mb-2">size=&quot;container&quot; (1280px - default)</p>
               <Container size="container" className="bg-primary-50 p-6 rounded-lg">
                 <p className="text-gray-700">Standard container width for most page sections</p>
               </Container>
             </div>
 
             <div>
-              <p className="text-sm text-gray-500 mb-2">size="wide" (1536px)</p>
+              <p className="text-sm text-gray-500 mb-2">size=&quot;wide&quot; (1536px)</p>
               <Container size="wide" className="bg-primary-50 p-6 rounded-lg">
                 <p className="text-gray-700">Wide container for hero sections and feature grids</p>
               </Container>
