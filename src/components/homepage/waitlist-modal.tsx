@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -54,8 +54,8 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
     }, 3000);
   };
 
-  // Close on Escape key
-  useState(() => {
+  // Close on Escape key and lock body scroll
+  useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isOpen) {
         onClose();
@@ -73,7 +73,7 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
       document.removeEventListener("keydown", handleEscape);
       document.body.style.overflow = "unset";
     };
-  });
+  }, [isOpen, onClose]);
 
   return (
     <AnimatePresence>
