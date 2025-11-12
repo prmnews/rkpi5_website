@@ -1,0 +1,36 @@
+# Replit Configuration for Next.js
+
+run = "pnpm run dev"
+entrypoint = "src/app/page.tsx"
+hidden = [".config", "tsconfig.json", "tsconfig.tsbuildinfo", ".next", "node_modules", ".pnpm-store"]
+
+[nix]
+channel = "stable-23_11"
+
+[deployment]
+run = ["sh", "-c", "pnpm install && pnpm run build && pnpm run start"]
+deploymentTarget = "autoscale"
+
+[languages.typescript]
+pattern = "**/{*.ts,*.js,*.tsx,*.jsx}"
+
+[languages.typescript.languageServer]
+start = "typescript-language-server --stdio"
+
+[env]
+PATH = "/home/runner/$REPL_SLUG/.config/npm/node_global/bin:/home/runner/$REPL_SLUG/node_modules/.bin"
+npm_config_prefix = "/home/runner/$REPL_SLUG/.config/npm/node_global"
+NODE_ENV = "production"
+
+[packager]
+language = "nodejs"
+
+[packager.features]
+packageSearch = true
+guessImports = true
+enabledForHosting = false
+
+[[ports]]
+localPort = 3000
+externalPort = 80
+

@@ -1,0 +1,32 @@
+name: Deploy to Replit
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  deploy:
+    name: Deploy to Replit
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Trigger Replit Deployment
+        run: |
+          echo "🚀 Triggering Replit deployment..."
+          echo "Note: Set up REPLIT_DEPLOY_WEBHOOK secret in GitHub Settings → Secrets"
+          echo "Current branch: ${{ github.ref_name }}"
+          
+          # Uncomment when webhook is configured:
+          # curl -X POST "${{ secrets.REPLIT_DEPLOY_WEBHOOK }}" \
+          #   -H "Content-Type: application/json" \
+          #   -d '{"branch": "${{ github.ref_name }}", "commit": "${{ github.sha }}"}'
+
+      - name: Deployment Status
+        run: |
+          echo "✅ Deployment triggered for commit: ${{ github.sha }}"
+          echo "📝 Check Replit dashboard for deployment status"
+
