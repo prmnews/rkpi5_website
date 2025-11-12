@@ -1,6 +1,7 @@
 import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import { Header, Footer } from "@/components/layout";
 import "./globals.css";
 
 const inter = Inter({ 
@@ -29,12 +30,22 @@ export default function RootLayout({
   const clerkPublishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
   const hasValidClerkKey = clerkPublishableKey && clerkPublishableKey.startsWith('pk_');
 
+  const LayoutContent = (
+    <>
+      <Header />
+      <main className="min-h-screen pt-16 lg:pt-20">
+        {children}
+      </main>
+      <Footer />
+    </>
+  );
+
   if (hasValidClerkKey) {
     return (
       <ClerkProvider>
         <html lang="en">
           <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
-            {children}
+            {LayoutContent}
           </body>
         </html>
       </ClerkProvider>
@@ -45,7 +56,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
-        {children}
+        {LayoutContent}
       </body>
     </html>
   );
