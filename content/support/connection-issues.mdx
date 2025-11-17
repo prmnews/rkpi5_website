@@ -1,0 +1,154 @@
+# Connection Issues
+
+Troubleshooting guide for WiFi and network connectivity problems.
+
+<Callout type="info" title="Beta Documentation">
+This troubleshooting guide will be expanded with real-world scenarios during beta testing.
+</Callout>
+
+## Common Connection Problems
+
+### Can't Find RKPi5 WiFi Network
+
+**Symptoms:**
+- RKPi5 network doesn't appear in WiFi list
+- Network appears then disappears
+- Network signal is very weak
+
+**Solutions:**
+
+1. **Check Power Status**
+   - Ensure device is powered on
+   - LED should be solid green when ready
+   - If LED is red, charge the battery
+
+2. **Check Distance**
+   - Move within 30 feet of RKPi5
+   - Ensure no thick walls between devices
+   - Avoid interference from other electronics
+
+3. **Restart RKPi5**
+   ```
+   1. Press and hold power button for 5 seconds (device shuts down)
+   2. Wait 10 seconds
+   3. Press power button briefly to boot up
+   4. Wait 30-45 seconds for complete boot
+   ```
+
+4. **Reset Network Settings**
+   <Callout type="warning">
+   This will reset your custom WiFi name and password to defaults.
+   </Callout>
+   
+   - Access admin panel via `http://192.168.4.1/admin`
+   - Navigate to Network Settings
+   - Click "Reset to Defaults"
+   - Reconnect using default credentials
+
+### Can't Connect to RKPi5 Network
+
+**Symptoms:**
+- Network appears but won't connect
+- "Incorrect password" error
+- Connection times out
+
+**Solutions:**
+
+1. **Verify Password**
+   - Check password on quick start card
+   - Passwords are case-sensitive
+   - Ensure no extra spaces when typing
+
+2. **Forget and Reconnect**
+   - Remove saved network from your device
+   - Search for network again
+   - Enter password carefully
+
+3. **Check Client Limit**
+   - RKPi5 supports up to 15 concurrent users
+   - If limit reached, disconnect other devices first
+
+### Connected but Can't Access Portal
+
+**Symptoms:**
+- Connected to WiFi but portal won't load
+- Browser shows "Cannot reach site"
+- Long loading times with no results
+
+**Solutions:**
+
+1. **Try Alternate URLs**
+   Try these addresses in order:
+   ```
+   http://rkpi5.local
+   http://192.168.4.1
+   http://rkpi5.local:3000
+   ```
+
+2. **Check Browser Cache**
+   - Clear browser cache and cookies
+   - Try incognito/private browsing mode
+   - Try a different browser
+
+3. **Verify Network Connection**
+   - Ensure you're connected to RKPi5 network (not cellular)
+   - Disable mobile data on phones
+   - Check WiFi icon shows full connection
+
+## Advanced Troubleshooting
+
+### DNS Issues
+
+<CodeBlock title="Manual DNS Configuration" language="text">
+If rkpi5.local doesn't work, configure manual DNS:
+Primary DNS: 192.168.4.1
+Secondary DNS: 8.8.8.8
+</CodeBlock>
+
+### Network Interference
+
+Common sources of interference:
+
+- Other WiFi routers nearby
+- Bluetooth devices
+- Microwave ovens
+- Cordless phones
+- Baby monitors
+
+**Solution**: Move RKPi5 away from interference sources or switch to 5GHz band (if supported by client device).
+
+### Firmware Issues
+
+<Callout type="error" title="Contact Support">
+If you suspect firmware corruption, contact support before attempting recovery.
+</Callout>
+
+Symptoms of firmware issues:
+- Device boots but network never appears
+- LED shows unusual patterns
+- Previously working device suddenly fails
+
+## Getting More Help
+
+If these solutions don't resolve your issue:
+
+1. **Check System Status**
+   - Note LED color and pattern
+   - Check battery percentage
+   - Note any error messages
+
+2. **Gather Information**
+   - Your device model (phone/tablet/laptop)
+   - Operating system version
+   - Browser being used
+   - When the problem started
+
+3. **Contact Support**
+   - Visit [Contact Page](/contact)
+   - Include system status and information above
+   - Attach screenshots if possible
+
+---
+
+*Additional troubleshooting scenarios will be added based on beta tester experiences.*
+
