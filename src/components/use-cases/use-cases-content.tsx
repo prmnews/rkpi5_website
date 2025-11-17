@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui";
-import { UseCaseCard } from "@/components/use-cases";
+import { UseCaseCard, BetaTesterCard } from "@/components/use-cases";
 import { BookOpen, Users, Church, Globe } from "lucide-react";
 
 const useCases = [
@@ -37,6 +37,27 @@ const useCases = [
     solution: "RKPi5's battery-powered, solar-compatible design works in any environment. 6-hour battery runtime supports extended teaching sessions, and the captive portal auto-connects users without technical configuration. All content is pre-loaded and ready to serve multiple users simultaneously.",
     results: "Missionaries deploy rich Biblical content anywhere—jungle camps, mountain villages, or disaster zones. Solar charging extends operation indefinitely in remote locations. Teams can disciple new believers with the same quality resources available in developed regions, accelerating church planting and leadership development.",
     color: "from-accent-orange to-orange-700",
+  },
+];
+
+const betaTesters = [
+  {
+    name: "Beta Tester Story",
+    role: "Coming Soon",
+    quote: "We're currently in our beta testing phase and will be sharing real testimonials from users who are testing RKPi5 in various environments and scenarios. Check back soon to read their experiences.",
+    results: "Beta testers are evaluating RKPi5 in home study, family settings, restricted environments, and mission fields. Their feedback will help us refine the product and share authentic user outcomes.",
+  },
+  {
+    name: "Beta Tester Story",
+    role: "Coming Soon",
+    quote: "Our beta program participants are discovering how RKPi5 serves their specific needs in real-world conditions. Their stories will provide valuable insights into practical applications and benefits.",
+    results: "Early feedback highlights ease of setup, content accessibility, and offline reliability. Detailed testimonials with specific metrics and outcomes will be published as the beta program progresses.",
+  },
+  {
+    name: "Beta Tester Story",
+    role: "Coming Soon",
+    quote: "Beta testers are exploring RKPi5's capabilities across diverse use cases—from individual study to group discipleship. Their experiences will demonstrate the versatility and impact of offline Biblical resources.",
+    results: "Participants are testing battery life, multi-user connectivity, content navigation, and solar charging in field conditions. Comprehensive results and user stories will be available upon beta completion.",
   },
 ];
 
@@ -114,6 +135,67 @@ export function UseCasesContent() {
               />
             ))}
           </motion.div>
+
+          {/* Beta Tester Stories Section */}
+          <div className="mt-16">
+            {/* Section Heading */}
+            <motion.div
+              className="text-center max-w-3xl mx-auto mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 mb-4">
+                Beta Tester Stories
+              </h2>
+              <p className="text-lg text-gray-600">
+                Real experiences from our beta testing program
+              </p>
+            </motion.div>
+
+            {/* Coming Soon Notice */}
+            <motion.div
+              className="mb-12 rounded-lg bg-sky-50 border border-sky-200 p-6"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <div className="flex items-start gap-3">
+                <span className="text-2xl">👥</span>
+                <div>
+                  <h3 className="font-semibold text-sky-900 mb-2">
+                    Beta Tester Testimonials Coming Soon
+                  </h3>
+                  <p className="text-sm text-sky-700">
+                    We&apos;re working closely with beta testers who are evaluating RKPi5 in real-world scenarios. 
+                    Their authentic testimonials, detailed outcomes, and usage metrics will be published here as 
+                    the beta program reaches completion. These stories will showcase verified results from actual users.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Beta Tester Grid */}
+            <motion.div
+              className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              {betaTesters.map((tester, index) => (
+                <BetaTesterCard
+                  key={index}
+                  name={tester.name}
+                  role={tester.role}
+                  quote={tester.quote}
+                  results={tester.results}
+                />
+              ))}
+            </motion.div>
+          </div>
 
           {/* Bottom CTA */}
           <motion.div
