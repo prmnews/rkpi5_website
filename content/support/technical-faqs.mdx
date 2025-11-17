@@ -1,0 +1,342 @@
+# Technical FAQs
+
+Technical questions and answers for advanced users and developers.
+
+<Callout type="info" title="Beta Documentation">
+Technical details will be refined during beta testing.
+</Callout>
+
+## Hardware Technical Details
+
+### What are the exact hardware specifications?
+
+**Processor:**
+- Broadcom BCM2712 (Raspberry Pi 5)
+- Quad-core ARM Cortex-A76 @ 2.4GHz
+- VideoCore VII GPU
+
+**Memory & Storage:**
+- 8GB LPDDR4X-4267 SDRAM
+- 256GB microSD card (UHS-I)
+- 26GB+ content pre-loaded
+- 200GB+ available for expansion
+
+**Connectivity:**
+- Dual-band WiFi (2.4GHz and 5GHz)
+- 802.11ac (WiFi 5)
+- Gigabit Ethernet (Bare Bones tier and above)
+- Bluetooth 5.0 / BLE
+
+**Power:**
+- 20,000mAh lithium polymer battery
+- USB-C Power Delivery (5V/3A)
+- 15W typical power consumption
+
+### Can I upgrade the storage?
+
+<Callout type="warning" title="Warranty Void">
+Opening the device voids warranty. Upgrade at your own risk.
+</Callout>
+
+Technically yes, but not recommended:
+- MicroSD card is accessible
+- Can upgrade to larger capacity
+- Must re-image with RKPi5 software
+- Contact support for imaging instructions
+
+### Can I connect external storage?
+
+**Planned for future update:**
+- USB storage mount points
+- Auto-sync to external drive
+- Backup to USB capability
+
+### What operating system does it run?
+
+RKPi5 runs a customized Linux distribution:
+
+- Base: Raspberry Pi OS (Debian-based)
+- Kernel: Linux 6.1+
+- Custom: RKPi5 management software
+- Web Server: Nginx
+- Media Server: Custom implementation
+
+## Network & Connectivity
+
+### What are the network specifications?
+
+**As WiFi Access Point:**
+```
+SSID: RKPi5-XXXX (customizable)
+Security: WPA2-PSK
+Channels: Auto (2.4GHz) or Manual (2.4/5GHz)
+DHCP Range: 192.168.4.10 - 192.168.4.254
+Gateway: 192.168.4.1
+Max Clients: 15
+```
+
+**As WiFi Client:**
+- Can connect to existing WiFi for internet access
+- Used for content updates only
+- Can operate in bridge mode (advanced)
+
+### Can I change the IP address range?
+
+Yes, through admin panel:
+- Navigate to Network Settings
+- Advanced Configuration
+- Modify DHCP settings
+- Restart network service
+
+Default is 192.168.4.x but can be changed to avoid conflicts.
+
+### Does it support WiFi 6 (802.11ax)?
+
+No, Raspberry Pi 5 supports WiFi 5 (802.11ac) only. 
+
+WiFi 5 is sufficient for:
+- Up to 15 concurrent users
+- HD video streaming
+- All current content
+
+### Can it act as a WiFi repeater?
+
+<Callout type="info" title="Advanced Feature">
+Bridge mode allows WiFi repeater functionality but requires manual configuration.
+</Callout>
+
+Repeater mode is not enabled by default but can be configured by advanced users through SSH access.
+
+## Software & Development
+
+### Can I SSH into the device?
+
+**SSH Access:**
+- Disabled by default for security
+- Can be enabled in admin panel
+- Default port: 22
+- Username/password provided after enabling
+
+<Callout type="warning">
+SSH access should only be used by advanced users. Incorrect modifications can break functionality.
+</Callout>
+
+### What programming languages are available?
+
+Pre-installed:
+- Python 3.11+
+- Node.js 18+
+- Bash
+- PHP 8+
+
+Additional languages can be installed via SSH if needed.
+
+### Can I develop custom applications?
+
+**Hobbyist Tier:**
+- Full access to DIY scripts
+- Modify as desired
+- Community support available
+
+**Other Tiers:**
+- API documentation available
+- Custom applications possible
+- May void warranty if system files modified
+
+### Is there an API?
+
+<Callout type="success" title="API Available">
+RESTful API for accessing content and system features.
+</Callout>
+
+**Planned API Endpoints:**
+```
+/api/v1/content/list       - List available content
+/api/v1/content/search     - Search content
+/api/v1/content/stream     - Stream media
+/api/v1/system/status      - System status
+/api/v1/system/battery     - Battery info
+/api/v1/users/active       - Active connections
+```
+
+API documentation will be released with public launch.
+
+### Can I backup the entire system?
+
+**Backup Options:**
+
+1. **Content Only** (via admin panel)
+   - Backs up custom configurations
+   - User-added bookmarks/notes
+   - Network settings
+
+2. **Full System** (via SSH/direct access)
+   - Complete microSD card image
+   - Requires card reader
+   - ~26GB+ backup file
+
+## Content & Media
+
+### What media codecs are supported?
+
+**Video:**
+- H.264 (AVC) - Primary
+- H.265 (HEVC) - Supported
+- MP4 container
+
+**Audio:**
+- MP3 - Primary
+- AAC - Supported
+- OGG/Vorbis - Supported
+
+**Subtitles:**
+- SRT
+- VTT
+- Embedded subtitles
+
+### What are the streaming bitrates?
+
+**Video Quality Options:**
+- 480p: ~1 Mbps (15 users simultaneously)
+- 720p: ~3 Mbps (5 users simultaneously)
+- 1080p: ~5 Mbps (3 users simultaneously)
+
+Adaptive bitrate streaming adjusts based on available bandwidth.
+
+### Can I transcode media?
+
+Transcoding is automatic:
+- Server detects client capabilities
+- Adjusts quality automatically
+- Balances quality vs. number of users
+
+Manual transcoding:
+- Available via admin panel
+- Pre-generate lower quality versions
+- Saves bandwidth for large groups
+
+## Performance & Limits
+
+### What are the performance specifications?
+
+**Tested Scenarios:**
+
+| Users | Video (720p) | Audio (128k) | Text Browsing |
+|-------|--------------|--------------|---------------|
+| 1-3   | Excellent    | Excellent    | Instant       |
+| 4-7   | Good         | Excellent    | Instant       |
+| 8-12  | Fair         | Good         | Fast          |
+| 13-15 | Limited      | Good         | Fast          |
+
+### What are the absolute limits?
+
+**Hard Limits:**
+- 15 WiFi connections maximum (hardware)
+- 5 simultaneous video streams (recommended)
+- 15 simultaneous audio streams (recommended)
+- 50 text browsers (estimated)
+
+**Soft Limits:**
+- Storage: 256GB (expandable)
+- Battery: 6+ hours (replaceable)
+- Range: ~100ft (antenna upgradeable)
+
+### Can I monitor performance?
+
+**Admin Panel Monitoring:**
+- Real-time CPU/memory usage
+- Active user count
+- Bandwidth per user
+- Battery status
+- Temperature monitoring
+
+**Logging:**
+- Access logs
+- Error logs
+- Performance logs
+- Downloadable via admin panel
+
+## Security & Administration
+
+### How secure is RKPi5?
+
+**Security Features:**
+- WPA2 encrypted WiFi
+- HTTPS for admin panel
+- Password-protected admin access
+- Optional MAC address filtering
+- Optional VPN support (advanced)
+
+**Security Limitations:**
+- No WPA3 (hardware limitation)
+- No enterprise authentication
+- Admin panel accessible to any connected user (unless restricted)
+
+### Can I set user permissions?
+
+<Callout type="info" title="Planned Feature">
+User account system with permissions planned for future release.
+</Callout>
+
+**Current State:**
+- Single admin account
+- All connected users have equal access to content
+- Admin panel requires separate password
+
+**Future:**
+- Multiple user accounts
+- Per-user permissions
+- Content access controls
+- Time limits
+
+### How do I reset to factory defaults?
+
+**Soft Reset** (Settings only):
+- Admin Panel → System → Reset Settings
+- Keeps content intact
+- Resets network/admin passwords
+
+**Hard Reset** (Full wipe):
+- Hold power button + volume up (if available)
+- Or via admin panel: Factory Reset
+- Restores to out-of-box state
+- Keeps original content
+
+## Hobbyist/DIY Questions
+
+### What's included in the DIY scripts?
+
+**Hobbyist tier downloads include:**
+- Complete setup scripts
+- Automated installation
+- Configuration templates
+- Content download/management scripts
+- Network setup automation
+- Web interface source code
+
+### What do I need to build my own?
+
+**Required Hardware:**
+- Raspberry Pi 5 (8GB recommended)
+- MicroSD card (256GB+ recommended)
+- Portable battery pack (20,000mAh+)
+- USB-C power supply
+- Case (optional)
+
+**Estimated Cost:** $150-200 for all components
+
+### Is support available for DIY builds?
+
+**DIY Support:**
+- Community forums (free)
+- Documentation (free)
+- Email support (paid consultation available)
+
+<Callout type="info">
+DIY tier is for experienced users comfortable with Linux and Raspberry Pi.
+</Callout>
+
+---
+
+*Technical specifications may change during beta testing. Final specs confirmed before public launch.*
+
