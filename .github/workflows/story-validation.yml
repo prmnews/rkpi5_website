@@ -63,6 +63,29 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       
+      - name: Configure Convex deployment
+        run: |
+          echo "Configuring Convex for CI/CD..."
+          mkdir -p .convex
+          echo '{"deployment": "'$CONVEX_DEPLOYMENT'"}' > .convex/deployment.json
+          echo "✅ Convex deployment configured"
+        env:
+          CONVEX_DEPLOYMENT: ${{ secrets.CONVEX_DEPLOYMENT }}
+
+      - name: Generate Convex types
+        run: |
+          echo "Generating Convex types..."
+          npx convex codegen || {
+            echo "❌ Convex codegen failed"
+            echo "Please verify CONVEX_DEPLOYMENT and NEXT_PUBLIC_CONVEX_URL secrets are set"
+            exit 1
+          }
+          echo "✅ Convex types generated"
+          ls convex/_generated/
+        env:
+          CONVEX_URL: ${{ secrets.NEXT_PUBLIC_CONVEX_URL }}
+          NEXT_PUBLIC_CONVEX_URL: ${{ secrets.NEXT_PUBLIC_CONVEX_URL }}
+      
       - name: Lint check
         run: pnpm lint
       
@@ -72,8 +95,8 @@ jobs:
       - name: Build check
         run: pnpm build
         env:
-          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: 'pk_test_placeholder'
-          NEXT_PUBLIC_CONVEX_URL: 'https://placeholder.convex.cloud'
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || 'pk_test_placeholder' }}
+          NEXT_PUBLIC_CONVEX_URL: ${{ secrets.NEXT_PUBLIC_CONVEX_URL }}
           NEXT_PUBLIC_SITE_URL: 'https://localhost:3000'
 
   # Check for merge conflicts with target epic branch
