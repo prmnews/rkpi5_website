@@ -80,25 +80,32 @@ jobs:
         run: |
           echo "Generating Convex types..."
           echo "CONVEX_URL: $CONVEX_URL"
+          echo "CONVEX_DEPLOYMENT configured: $(cat .convex/deployment.json)"
           
           # Generate types using configured deployment
           npx convex codegen || {
-            echo "❌ Convex codegen failed"
-            echo "Checking configuration..."
-            cat .convex/deployment.json
             echo ""
-            echo "Please verify:"
-            echo "  1. CONVEX_DEPLOYMENT secret matches your deployment"
-            echo "  2. NEXT_PUBLIC_CONVEX_URL secret is set"
-            echo "  3. Convex deployment is accessible"
+            echo "❌ Convex codegen failed"
+            echo ""
+            echo "Configuration:"
+            cat .convex/deployment.json || echo "No deployment.json"
+            echo ""
+            echo "Please verify in GitHub Secrets:"
+            echo "  1. CONVEX_DEPLOYMENT = your-deployment-name"
+            echo "  2. NEXT_PUBLIC_CONVEX_URL = https://your-deployment.convex.cloud"
+            echo ""
+            echo "Get these values from your local .env.local file"
             exit 1
           }
           
+          echo ""
           echo "✅ Convex types generated successfully"
+          echo ""
           echo "Generated files:"
           ls -la convex/_generated/
         env:
           CONVEX_URL: ${{ secrets.NEXT_PUBLIC_CONVEX_URL }}
+          NEXT_PUBLIC_CONVEX_URL: ${{ secrets.NEXT_PUBLIC_CONVEX_URL }}
 
       - name: TypeScript type check
         run: pnpm exec tsc --noEmit
