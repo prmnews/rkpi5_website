@@ -90,13 +90,20 @@ jobs:
           echo "CONVEX_DEPLOYMENT: $CONVEX_DEPLOYMENT"
           echo "Deployment config: $(cat .convex/deployment.json)"
           
+          # Codegen requires authentication in CI via deploy key
           npx convex codegen || {
             echo ""
             echo "❌ Convex codegen failed"
             echo ""
-            echo "Please verify GitHub Secrets are set:"
-            echo "  - CONVEX_DEPLOYMENT"
-            echo "  - NEXT_PUBLIC_CONVEX_URL"
+            echo "Required GitHub Secrets:"
+            echo "  - CONVEX_DEPLOYMENT (deployment name)"
+            echo "  - NEXT_PUBLIC_CONVEX_URL (deployment URL)"
+            echo "  - CONVEX_DEPLOY_KEY (authentication token for CI/CD)"
+            echo ""
+            echo "To get CONVEX_DEPLOY_KEY:"
+            echo "  1. Go to Convex Dashboard → Settings → Deploy Keys"
+            echo "  2. Create new deploy key for 'GitHub Actions CI/CD'"
+            echo "  3. Add to GitHub Secrets as CONVEX_DEPLOY_KEY"
             echo ""
             exit 1
           }
@@ -105,6 +112,7 @@ jobs:
           ls -la convex/_generated/
         env:
           CONVEX_DEPLOYMENT: ${{ secrets.CONVEX_DEPLOYMENT }}
+          CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY }}
           CONVEX_URL: ${{ secrets.NEXT_PUBLIC_CONVEX_URL }}
           NEXT_PUBLIC_CONVEX_URL: ${{ secrets.NEXT_PUBLIC_CONVEX_URL }}
 

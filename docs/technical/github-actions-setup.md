@@ -53,20 +53,24 @@ Name: CONVEX_DEPLOYMENT
 Value: happy-animal-123
 ```
 
-### 3. CONVEX_DEPLOY_KEY (Optional - for production deployments)
+### 3. CONVEX_DEPLOY_KEY (REQUIRED for CI/CD)
 
-**What it is:** Deploy key for pushing schema changes  
+**What it is:** Authentication token for CI/CD to access Convex deployment  
 **Where to find it:**
-- Convex Dashboard → Settings → Deploy Keys → Create new deploy key
-- Only needed if CI/CD will deploy schema changes
+- Convex Dashboard: https://dashboard.convex.dev
+- Select your project
+- Go to **Settings** → **Deploy Keys**
+- Click **"Create Deploy Key"**
+- Name it "GitHub Actions CI/CD"
+- Copy the generated key (format: `prod:serious-animal-123:...`)
 
 **How to add:**
 ```
 Name: CONVEX_DEPLOY_KEY
-Value: [your-deploy-key]
+Value: prod:serious-animal-123:your-key-here
 ```
 
-**Note:** For now, just `CONVEX_DEPLOYMENT` might be enough for codegen. Try without `CONVEX_DEPLOY_KEY` first.
+**Note:** This is REQUIRED for `npx convex codegen` to authenticate in CI/CD. Without it, you'll get "401 Unauthorized: MissingAccessToken" errors.
 
 ---
 
