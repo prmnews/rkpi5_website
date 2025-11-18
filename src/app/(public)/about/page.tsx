@@ -1,5 +1,5 @@
 import { Container } from "@/components/ui";
-import { Mail, Clock, Heart, Cpu, Database, Wifi, Battery, Zap } from "lucide-react";
+import { Mail, Clock, Heart, Cpu, Database, Wifi, Battery, Zap, Twitter, Youtube, Facebook } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
@@ -289,24 +289,39 @@ export default function AboutPage() {
                 </Link>
               </div>
 
-              {/* Social Links Placeholder */}
+              {/* Social Links */}
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">
                   Connect With Us
                 </h3>
-                <p className="text-sm text-gray-500 mb-4">
-                  Social media channels coming soon as we finalize our launch
-                </p>
-                <div className="flex gap-4 justify-center text-gray-400">
-                  <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
-                    <span className="text-lg">𝕏</span>
-                  </div>
-                  <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
-                    <span className="text-lg">YT</span>
-                  </div>
-                  <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
-                    <span className="text-lg">FB</span>
-                  </div>
+                <div className="flex gap-4 justify-center">
+                  <a 
+                    href="https://x.com/rkpi5" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    aria-label="Follow us on X"
+                    className="w-10 h-10 rounded-full bg-gray-100 hover:bg-primary-100 flex items-center justify-center transition-colors"
+                  >
+                    <Twitter className="w-5 h-5 text-gray-600 hover:text-primary-600" />
+                  </a>
+                  <a 
+                    href="https://youtube.com/@rkpi5" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    aria-label="Subscribe on YouTube"
+                    className="w-10 h-10 rounded-full bg-gray-100 hover:bg-primary-100 flex items-center justify-center transition-colors"
+                  >
+                    <Youtube className="w-5 h-5 text-gray-600 hover:text-primary-600" />
+                  </a>
+                  <a 
+                    href="https://facebook.com/rkpi5" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    aria-label="Like us on Facebook"
+                    className="w-10 h-10 rounded-full bg-gray-100 hover:bg-primary-100 flex items-center justify-center transition-colors"
+                  >
+                    <Facebook className="w-5 h-5 text-gray-600 hover:text-primary-600" />
+                  </a>
                 </div>
               </div>
             </div>

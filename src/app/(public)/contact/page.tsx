@@ -1,6 +1,6 @@
 import { Container } from "@/components/ui";
 import { ContactForm } from "@/components/forms";
-import { Mail, MapPin, Clock } from "lucide-react";
+import { Mail, MapPin, Clock, Twitter, Youtube, Facebook } from "lucide-react";
 
 export const metadata = {
   title: "Contact - RKPi5 | Get in Touch",
@@ -74,6 +74,40 @@ export default function ContactPage() {
                       <strong className="text-gray-900">Note:</strong> We&apos;re a small team 
                       committed to providing quality support. Thank you for your patience.
                     </p>
+                  </div>
+
+                  {/* Social Links */}
+                  <div className="pt-6 border-t border-gray-200">
+                    <h3 className="font-semibold text-gray-900 mb-3">Follow Us</h3>
+                    <div className="flex gap-4">
+                      <a 
+                        href="https://x.com/rkpi5" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        aria-label="Follow us on X"
+                        className="w-10 h-10 rounded-full bg-gray-100 hover:bg-primary-100 flex items-center justify-center transition-colors"
+                      >
+                        <Twitter className="w-5 h-5 text-gray-600 hover:text-primary-600" />
+                      </a>
+                      <a 
+                        href="https://youtube.com/@rkpi5" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        aria-label="Subscribe on YouTube"
+                        className="w-10 h-10 rounded-full bg-gray-100 hover:bg-primary-100 flex items-center justify-center transition-colors"
+                      >
+                        <Youtube className="w-5 h-5 text-gray-600 hover:text-primary-600" />
+                      </a>
+                      <a 
+                        href="https://facebook.com/rkpi5" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        aria-label="Like us on Facebook"
+                        className="w-10 h-10 rounded-full bg-gray-100 hover:bg-primary-100 flex items-center justify-center transition-colors"
+                      >
+                        <Facebook className="w-5 h-5 text-gray-600 hover:text-primary-600" />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
