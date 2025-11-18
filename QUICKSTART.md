@@ -74,6 +74,8 @@ nano .env.local  # or use your preferred editor
 # Clerk (get from https://dashboard.clerk.com)
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
 CLERK_SECRET_KEY=sk_test_...
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 
 # Convex (get from https://dashboard.convex.dev)
 CONVEX_DEPLOYMENT=...
@@ -85,6 +87,52 @@ RESEND_API_KEY=re_...
 # Site URL
 NEXT_PUBLIC_SITE_URL=http://localhost:3000  # For development
 ```
+
+### Getting Clerk API Keys
+
+1. **Create Clerk Account** (if you haven't already):
+   - Go to https://dashboard.clerk.com
+   - Sign up for a free account
+
+2. **Create a New Application:**
+   - Click "Add application"
+   - Name it "RKPi5 Marketing" (or your preferred name)
+   - Select authentication methods (Email, Google, etc.)
+   - Click "Create application"
+
+3. **Get API Keys:**
+   - Once in your application dashboard, navigate to **API Keys** in the left sidebar
+   - Copy **Publishable Key** → paste as `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
+   - Click "Show" next to **Secret Key** → paste as `CLERK_SECRET_KEY`
+   - **Important:** Keep your secret key secure and never commit it to git
+
+4. **Configure Sign-in/Sign-up URLs:**
+   - The URLs are already configured in `.env.local.example`:
+     - `NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in`
+     - `NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up`
+   - These point to pages that will be created in Story 10.3
+
+### Getting Convex Credentials
+
+1. Go to https://dashboard.convex.dev
+2. Create a new project or select existing
+3. Navigate to **Settings** → **URL & Deploy Key**
+4. Copy the deployment URL and deployment name
+
+### Troubleshooting Clerk Setup
+
+**Issue: "Clerk publishable key not found"**
+- Verify `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` is set in `.env.local`
+- Ensure it starts with `pk_test_` or `pk_live_`
+- Restart your dev server after adding environment variables
+
+**Issue: "Middleware redirect loop"**
+- Check that `/sign-in` and `/sign-up` are included in public routes
+- Verify middleware config in `src/middleware.ts`
+
+**Issue: "ClerkProvider not found"**
+- Run `pnpm install` to ensure `@clerk/nextjs` is installed
+- Check that version is 5.x or higher in `package.json`
 
 ---
 
