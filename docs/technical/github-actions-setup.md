@@ -2,16 +2,21 @@
 
 **Date:** 2025-11-18  
 **Story:** 9.2 - Build Contact Form  
-**Purpose:** Configure CI/CD pipeline for Next.js + Convex + TypeScript
+**Purpose:** Configure CI/CD pipeline for Next.js + Convex + TypeScript  
+**Updated:** Consolidated into single comprehensive workflow
 
 ---
 
 ## Overview
 
-The GitHub Actions workflow (`.github/workflows/ci.yml`) runs on every push to:
+**Single Consolidated Workflow:** `.github/workflows/ci.yml`
+
+The CI/CD pipeline runs on every push to:
 - `main` branch
 - `epic/**` branches
 - `story/**` branches
+
+**Workflow consolidation:** Combined story-validation.yml into ci.yml to eliminate duplication and ensure all quality checks run consistently across all branches.
 
 ---
 
@@ -69,32 +74,54 @@ Value: [your-deploy-key]
 
 The CI/CD pipeline runs these steps in order:
 
-### 1. Validate Branch Name (story branches only)
+### 1. Checkout Code
+- Fetches code with full history (for merge conflict checking)
+
+### 2. Validate Branch Name (conditional - story/* branches only)
 - Checks story branch format: `story/{epic}.{story}-{name}`
 - Example: `story/9.2-build-contact-form` ✅
 - Fails on: `story/9.2` ❌
 
-### 2. Install Dependencies
-- Uses pnpm with lockfile
-- Caches node_modules for speed
+### 3. Setup Environment
+- Installs pnpm (version 9)
+- Installs Node.js (version 20)
+- Configures pnpm cache for faster builds
 
-### 3. Generate Convex Types
+### 4. Install Dependencies
+- Runs `pnpm install --frozen-lockfile`
+- Uses lockfile for reproducible builds
+
+### 5. Configure Convex (CRITICAL)
+- Creates `.convex/deployment.json`
+- Configures deployment for codegen
+
+### 6. Generate Convex Types (CRITICAL)
 - Runs `npx convex codegen`
 - Creates `convex/_generated/` files
-- Requires `CONVEX_DEPLOYMENT` secret
+- **Must run BEFORE TypeScript check**
+- Requires `CONVEX_DEPLOYMENT` and `NEXT_PUBLIC_CONVEX_URL` secrets
 
-### 4. TypeScript Check
-- Runs `pnpm exec tsc --noEmit`
-- Verifies no type errors
-
-### 5. ESLint Check
-- Runs `pnpm run lint`
+### 7. ESLint Check
+- Runs `pnpm lint`
 - Verifies code quality
 
-### 6. Next.js Build
-- Runs `pnpm run build`
+### 8. TypeScript Check
+- Runs `pnpm exec tsc --noEmit`
+- Verifies no type errors
+- **Depends on Convex types from step 6**
+
+### 9. Next.js Build
+- Runs `pnpm build`
 - Creates production build
 - Verifies all pages compile
+
+### 10. Check Merge Conflicts (conditional - story/* branches only)
+- Checks for conflicts with target epic branch
+- Helps prevent merge issues
+
+### 11. Success Summary
+- Reports all passed checks
+- Provides next steps for story branches
 
 ---
 
@@ -141,19 +168,40 @@ All should pass before pushing.
 
 ---
 
+## Workflow Consolidation
+
+**Previous Setup (Redundant):**
+- ❌ `ci.yml` - Quality checks
+- ❌ `story-validation.yml` - Story-specific checks (duplicate)
+- ✅ `deploy-replit.yml` - Deployment (separate concern)
+
+**Current Setup (Consolidated):**
+- ✅ `ci.yml` - **All quality checks** (runs on all branches)
+- ✅ `deploy-replit.yml` - Deployment only (runs on main)
+
+**Benefits:**
+- Single source of truth for quality checks
+- No duplication or drift between workflows
+- Easier to maintain
+- Consistent checks across all branches
+
+---
+
 ## Best Practices
 
 ### ✅ DO:
 - Use story key format for branches: `story/9.2-build-contact-form`
 - Commit with conventional commits: `feat(epic-9): Story 9.2 - Build contact form`
-- Test locally before pushing
+- Test locally before pushing (run codegen, tsc, lint, build)
 - Keep secrets in GitHub Secrets (never commit)
+- Consolidate workflows to avoid duplication
 
 ### ❌ DON'T:
 - Commit `.env.local` or secrets
 - Commit `convex/_generated/` (it's auto-generated)
 - Use short branch names like `story/9.2`
 - Skip local testing
+- Create duplicate workflows with similar checks
 
 ---
 

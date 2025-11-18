@@ -11,6 +11,10 @@ on:
       - main
       - 'epic/**'
 
+env:
+  NODE_VERSION: '20.x'
+  PNPM_VERSION: '9'
+
 jobs:
   build-and-test:
     name: Build & Test
@@ -19,7 +23,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # For merge conflict checking
 
+      # Story branch validation (only runs on story/* branches)
       - name: Validate story branch format
         if: startsWith(github.ref, 'refs/heads/story/')
         run: |
@@ -32,86 +39,134 @@ jobs:
             echo "❌ Invalid story branch name: $BRANCH"
             echo ""
             echo "Expected format: story/{epic}.{story}-{name}"
-            echo ""
             echo "Example: story/1.1-initialize-nextjs"
+            echo ""
             exit 1
           fi
           
           echo "✅ Valid story branch name: $BRANCH"
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: ${{ env.PNPM_VERSION }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Convex setup (CRITICAL - must run before TypeScript check)
       - name: Configure Convex deployment
         run: |
           echo "Configuring Convex for CI/CD..."
           mkdir -p .convex
           echo '{"deployment": "'$CONVEX_DEPLOYMENT'"}' > .convex/deployment.json
-          cat .convex/deployment.json
+          echo "✅ Convex deployment configured: $CONVEX_DEPLOYMENT"
         env:
           CONVEX_DEPLOYMENT: ${{ secrets.CONVEX_DEPLOYMENT }}
 
       - name: Generate Convex types
         run: |
           echo "Generating Convex types..."
-          echo "CONVEX_URL: $CONVEX_URL"
-          echo "CONVEX_DEPLOYMENT configured: $(cat .convex/deployment.json)"
-          
-          # Generate types using configured deployment
           npx convex codegen || {
             echo ""
             echo "❌ Convex codegen failed"
             echo ""
-            echo "Configuration:"
-            cat .convex/deployment.json || echo "No deployment.json"
+            echo "Please verify GitHub Secrets are set:"
+            echo "  - CONVEX_DEPLOYMENT"
+            echo "  - NEXT_PUBLIC_CONVEX_URL"
             echo ""
-            echo "Please verify in GitHub Secrets:"
-            echo "  1. CONVEX_DEPLOYMENT = your-deployment-name"
-            echo "  2. NEXT_PUBLIC_CONVEX_URL = https://your-deployment.convex.cloud"
-            echo ""
-            echo "Get these values from your local .env.local file"
             exit 1
           }
-          
-          echo ""
           echo "✅ Convex types generated successfully"
-          echo ""
           echo "Generated files:"
           ls -la convex/_generated/
         env:
           CONVEX_URL: ${{ secrets.NEXT_PUBLIC_CONVEX_URL }}
           NEXT_PUBLIC_CONVEX_URL: ${{ secrets.NEXT_PUBLIC_CONVEX_URL }}
 
+      # Code quality checks
+      - name: ESLint check
+        run: pnpm lint
+
       - name: TypeScript type check
         run: pnpm exec tsc --noEmit
 
-      - name: ESLint check
-        run: pnpm run lint
-
       - name: Build Next.js
-        run: pnpm run build
+        run: pnpm build
         env:
           NEXT_PUBLIC_CONVEX_URL: ${{ secrets.NEXT_PUBLIC_CONVEX_URL }}
-          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || 'pk_test_placeholder_for_ci_builds' }}
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || 'pk_test_placeholder' }}
+          NEXT_PUBLIC_SITE_URL: 'https://localhost:3000'
 
-      - name: Summary
+      # Merge conflict check (only for story branches)
+      - name: Check merge conflicts with epic branch
+        if: startsWith(github.ref, 'refs/heads/story/')
+        run: |
+          STORY_BRANCH="${{ github.ref_name }}"
+          EPIC_NUM=$(echo $STORY_BRANCH | sed 's/story\/\([0-9]*\)\..*/\1/')
+          EPIC_BRANCH=$(git branch -r | grep "origin/epic/${EPIC_NUM}-" | head -1 | sed 's/.*origin\///' || echo "")
+          
+          if [ -z "$EPIC_BRANCH" ]; then
+            echo "⚠️ Epic branch not found for epic $EPIC_NUM"
+            echo "This is OK if it's the first story or epic branch doesn't exist yet"
+            exit 0
+          fi
+          
+          echo "Checking merge conflicts with: $EPIC_BRANCH"
+          git fetch origin $EPIC_BRANCH
+          
+          if git merge-tree $(git merge-base HEAD origin/$EPIC_BRANCH) HEAD origin/$EPIC_BRANCH | grep -q "^+<<<<<<< "; then
+            echo "❌ Merge conflicts detected with $EPIC_BRANCH"
+            echo "Please resolve conflicts before merging"
+            exit 1
+          fi
+          
+          echo "✅ No merge conflicts with $EPIC_BRANCH"
+
+      # Success summary
+      - name: Success summary
         if: success()
         run: |
-          echo "✅ All checks passed!"
-          echo "- Branch validation: ✓"
-          echo "- Dependencies installed: ✓"
-          echo "- Convex types generated: ✓"
-          echo "- TypeScript check: ✓"
-          echo "- ESLint check: ✓"
-          echo "- Next.js build: ✓"
+          echo ""
+          echo "✅ All CI/CD checks passed!"
+          echo ""
+          echo "Completed checks:"
+          echo "  - Branch validation: ✓"
+          echo "  - Dependencies installed: ✓"
+          echo "  - Convex types generated: ✓"
+          echo "  - ESLint: ✓"
+          echo "  - TypeScript: ✓"
+          echo "  - Next.js build: ✓"
+          echo "  - Merge conflicts: ✓"
+          echo ""
+          
+          if [[ "${{ github.ref }}" == refs/heads/story/* ]]; then
+            STORY_BRANCH="${{ github.ref_name }}"
+            EPIC_NUM=$(echo $STORY_BRANCH | sed 's/story\/\([0-9]*\)\..*/\1/')
+            EPIC_BRANCH="epic/${EPIC_NUM}-*"
+            
+            echo "Next steps for story branch:"
+            echo "  1. Merge to $EPIC_BRANCH"
+            echo "  2. Test epic branch"
+            echo "  3. Merge epic to main when complete"
+          fi
