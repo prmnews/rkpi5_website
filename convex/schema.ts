@@ -64,7 +64,9 @@ export default defineSchema({
     role: v.string(),
     subscriptionStatus: v.optional(v.string()),
     createdAt: v.number(),
+    updatedAt: v.optional(v.number()),
     lastSeenAt: v.number(),
+    deletedAt: v.optional(v.number()),
   })
     .index("by_clerk_id", ["clerkId"])
     .index("by_email", ["email"]),
