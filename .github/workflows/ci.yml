@@ -67,19 +67,38 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Configure Convex deployment
+        run: |
+          echo "Configuring Convex for CI/CD..."
+          mkdir -p .convex
+          echo '{"deployment": "'$CONVEX_DEPLOYMENT'"}' > .convex/deployment.json
+          cat .convex/deployment.json
+        env:
+          CONVEX_DEPLOYMENT: ${{ secrets.CONVEX_DEPLOYMENT }}
+
       - name: Generate Convex types
         run: |
           echo "Generating Convex types..."
-          echo "CONVEX_DEPLOYMENT: $CONVEX_DEPLOYMENT"
-          npx convex codegen --once || {
+          echo "CONVEX_URL: $CONVEX_URL"
+          
+          # Generate types using configured deployment
+          npx convex codegen || {
             echo "❌ Convex codegen failed"
-            echo "Make sure CONVEX_DEPLOYMENT secret is set in GitHub"
+            echo "Checking configuration..."
+            cat .convex/deployment.json
+            echo ""
+            echo "Please verify:"
+            echo "  1. CONVEX_DEPLOYMENT secret matches your deployment"
+            echo "  2. NEXT_PUBLIC_CONVEX_URL secret is set"
+            echo "  3. Convex deployment is accessible"
             exit 1
           }
+          
           echo "✅ Convex types generated successfully"
-          ls -la convex/_generated/ || echo "Warning: _generated folder not found"
+          echo "Generated files:"
+          ls -la convex/_generated/
         env:
-          CONVEX_DEPLOYMENT: ${{ secrets.CONVEX_DEPLOYMENT }}
+          CONVEX_URL: ${{ secrets.NEXT_PUBLIC_CONVEX_URL }}
 
       - name: TypeScript type check
         run: pnpm exec tsc --noEmit
