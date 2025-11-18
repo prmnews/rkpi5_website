@@ -1,4 +1,5 @@
 import { ClerkProvider } from '@clerk/nextjs';
+import { ConvexProvider } from "@/providers/convex-provider";
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { Header, Footer } from "@/components/layout";
@@ -43,21 +44,25 @@ export default function RootLayout({
   if (hasValidClerkKey) {
     return (
       <ClerkProvider>
-        <html lang="en">
-          <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
-            {LayoutContent}
-          </body>
-        </html>
+        <ConvexProvider>
+          <html lang="en">
+            <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+              {LayoutContent}
+            </body>
+          </html>
+        </ConvexProvider>
       </ClerkProvider>
     );
   }
 
   // Fallback without Clerk for CI builds with placeholder keys
   return (
-    <html lang="en">
-      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
-        {LayoutContent}
-      </body>
-    </html>
+    <ConvexProvider>
+      <html lang="en">
+        <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+          {LayoutContent}
+        </body>
+      </html>
+    </ConvexProvider>
   );
 }
