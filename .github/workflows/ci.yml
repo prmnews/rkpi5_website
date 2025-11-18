@@ -87,6 +87,9 @@ jobs:
       - name: Generate Convex types
         run: |
           echo "Generating Convex types..."
+          echo "CONVEX_DEPLOYMENT: $CONVEX_DEPLOYMENT"
+          echo "Deployment config: $(cat .convex/deployment.json)"
+          
           npx convex codegen || {
             echo ""
             echo "❌ Convex codegen failed"
@@ -101,6 +104,7 @@ jobs:
           echo "Generated files:"
           ls -la convex/_generated/
         env:
+          CONVEX_DEPLOYMENT: ${{ secrets.CONVEX_DEPLOYMENT }}
           CONVEX_URL: ${{ secrets.NEXT_PUBLIC_CONVEX_URL }}
           NEXT_PUBLIC_CONVEX_URL: ${{ secrets.NEXT_PUBLIC_CONVEX_URL }}
 
