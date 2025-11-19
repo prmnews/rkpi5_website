@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-This architecture defines a modern, full-spectrum marketing website built with Next.js 14, Convex backend, Clerk authentication with integrated billing, and deployed to Replit. The system supports waitlist-gated early adopter onboarding, e-commerce checkout for 4 product SKUs, and a comprehensive support wiki. The architecture is designed to support multi-agent UI prototyping workflows while maintaining consistency across implementations.
+This architecture defines a modern, full-spectrum marketing website built with Next.js 14, Convex backend, Clerk authentication with integrated billing, and deployed to Vercel. The system supports waitlist-gated early adopter onboarding, e-commerce checkout for 4 product SKUs, and a comprehensive support wiki. The architecture is designed to support multi-agent UI prototyping workflows while maintaining consistency across implementations.
 
 ---
 
@@ -49,7 +49,7 @@ npx create-next-app@latest rkpi5-marketing \
 | **Authentication** | Clerk | 5.x+ | Auth, User Mgmt | Auth + Billing integrated, modern UX | Manual Install |
 | **Payments** | Stripe (via Clerk) | latest | E-commerce | Industry standard, integrated with Clerk Billing | Clerk Integration |
 | **Email** | Resend | latest | Notifications | Modern API, good deliverability, developer-friendly | Manual Install |
-| **Deployment** | Replit | - | Infrastructure | Specified deployment platform | Platform |
+| **Deployment** | Vercel | latest | Infrastructure | Next.js-optimized hosting with tagged releases | Platform |
 | **Form Library** | React Hook Form | 7.49+ | All Forms | Performant, great DX, Zod integration | Manual Install |
 | **Validation** | Zod | 3.22+ | All Forms, API | TypeScript-first schema validation | Manual Install |
 | **Animations** | Framer Motion | 10.18+ | UI Polish | Smooth animations, spring physics, declarative | Manual Install |
@@ -210,7 +210,7 @@ rkpi5-marketing/
 - Resend (API key provided by Scott)
 
 **Deployment:**
-- Replit (specified platform)
+- Vercel (Next.js-optimized platform with tagged release deployments)
 
 ### Integration Points
 
@@ -446,7 +446,7 @@ export const getUserOrders = query({
 
 ### Data Protection
 
-- **Environment Variables:** Stored securely in Replit secrets
+- **Environment Variables:** Stored securely in Vercel environment variables (separate for production/preview)
 - **API Keys:** Never exposed to client (server-side only)
 - **User Data:** Encrypted at rest (Convex default)
 - **HTTPS:** All traffic encrypted in transit
@@ -617,7 +617,7 @@ export function MyComponent({ title }: Props) {
 - Lazy load Framer Motion animations
 
 **3. Caching:**
-- Static pages cached at CDN edge (Replit)
+- Static pages cached at CDN edge (Vercel Global CDN)
 - Convex queries cached on client
 - React Server Components reduce client JS
 
@@ -640,10 +640,10 @@ export function MyComponent({ title }: Props) {
 
 ## Deployment Architecture
 
-### Replit Configuration
+### Vercel Configuration
 
-```toml
-# .replit
+```json
+// vercel.json
 run = "npm run dev"
 entrypoint = "package.json"
 
@@ -675,15 +675,15 @@ NEXT_PUBLIC_CONVEX_URL=https://...
 RESEND_API_KEY=re_...
 
 # Site
-NEXT_PUBLIC_SITE_URL=https://rkpi5.replit.app
+NEXT_PUBLIC_SITE_URL=https://rkpi5-marketing.vercel.app
 ```
 
 ### Deployment Flow
 
-1. **Development:** `npm run dev` on Replit
-2. **Build:** Next.js build process (`npm run build`)
-3. **Deploy:** Replit automatic deployment to Cloud Run
-4. **Monitoring:** Convex dashboard + Replit logs
+1. **Development:** `pnpm dev` locally
+2. **Build:** `pnpm build` (tested in CI/CD)
+3. **Deploy:** Vercel automatic deployment on tagged release
+4. **Monitoring:** Convex dashboard + Vercel Analytics + GitHub Actions logs
 
 ---
 
@@ -696,7 +696,7 @@ NEXT_PUBLIC_SITE_URL=https://rkpi5.replit.app
 - Clerk account with billing enabled
 - Convex account (free tier sufficient for v1)
 - Resend account (API key from Scott)
-- Replit account
+- Vercel account
 
 ### Setup Commands
 

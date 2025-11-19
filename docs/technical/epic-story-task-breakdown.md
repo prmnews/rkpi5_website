@@ -963,16 +963,18 @@ Implement checkout flow using Clerk Billing (Stripe integration).
 
 **Description:** Process Clerk Billing webhooks for order updates  
 **Acceptance Criteria:**
-- Webhook route at `/api/webhooks/stripe`
-- Handle payment success event
+- Extend existing webhook at `/api/webhooks/clerk` with billing event handlers
+- Handle payment success event (billing.payment.succeeded)
 - Update order status in Convex
-- Handle payment failure
+- Handle payment failure events
+- Uses existing CLERK_WEBHOOK_SECRET
 
 ### Tasks
-- [ ] **Task 11.5.1:** Create webhook route **(M)**
-- [ ] **Task 11.5.2:** Parse and verify webhook signature **(M)**
-- [ ] **Task 11.5.3:** Update order status in Convex **(M)**
-- [ ] **Task 11.5.4:** Test webhook events **(M)**
+- [ ] **Task 11.5.1:** Extend existing Clerk webhook with billing event handlers **(M)**
+- [ ] **Task 11.5.2:** Handle billing.payment.succeeded event **(M)**
+- [ ] **Task 11.5.3:** Create order in Convex on payment success **(M)**
+- [ ] **Task 11.5.4:** Handle billing.payment.failed event **(M)**
+- [ ] **Task 11.5.5:** Test billing webhook events from Clerk dashboard **(M)**
 
 ---
 
