@@ -87,8 +87,9 @@ async function handleUserCreated(data: any) {
   const firstName = data.first_name || undefined;
   const lastName = data.last_name || undefined;
   const imageUrl = data.image_url || undefined;
+  const role = data.public_metadata?.role || "user"; // Read role from publicMetadata, default to "user"
 
-  console.log(`[Clerk Webhook] Creating user: ${email} (${clerkId})`);
+  console.log(`[Clerk Webhook] Creating user: ${email} (${clerkId}) with role: ${role}`);
 
   const result = await convex.mutation(api.users.syncUserFromClerk, {
     clerkId,
@@ -96,7 +97,7 @@ async function handleUserCreated(data: any) {
     firstName,
     lastName,
     imageUrl,
-    role: "user",
+    role,
   });
 
   console.log(`[Clerk Webhook] User created successfully:`, result);
@@ -111,8 +112,9 @@ async function handleUserUpdated(data: any) {
   const firstName = data.first_name || undefined;
   const lastName = data.last_name || undefined;
   const imageUrl = data.image_url || undefined;
+  const role = data.public_metadata?.role || undefined; // Read role from publicMetadata if present
 
-  console.log(`[Clerk Webhook] Updating user: ${email} (${clerkId})`);
+  console.log(`[Clerk Webhook] Updating user: ${email} (${clerkId})${role ? ` with role: ${role}` : ''}`);
 
   const result = await convex.mutation(api.users.syncUserFromClerk, {
     clerkId,
@@ -120,7 +122,7 @@ async function handleUserUpdated(data: any) {
     firstName,
     lastName,
     imageUrl,
-    role: undefined, // Preserve existing role
+    role, // Pass role if present, otherwise preserves existing role in Convex
   });
 
   console.log(`[Clerk Webhook] User updated successfully:`, result);
