@@ -177,11 +177,11 @@ All should pass before pushing.
 **Previous Setup (Redundant):**
 - ❌ `ci.yml` - Quality checks
 - ❌ `story-validation.yml` - Story-specific checks (duplicate)
-- ✅ `deploy-replit.yml` - Deployment (separate concern)
+- ✅ `deploy-vercel.yml` - Deployment (separate concern)
 
 **Current Setup (Consolidated):**
 - ✅ `ci.yml` - **All quality checks** (runs on all branches)
-- ✅ `deploy-replit.yml` - Deployment only (runs on main)
+- ✅ `deploy-vercel.yml` - Deployment only (runs on main and tagged releases)
 
 **Benefits:**
 - Single source of truth for quality checks

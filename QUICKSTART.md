@@ -261,7 +261,7 @@ git branch -D prototype/header-v3
 ### Main Branch
 - ✅ All epic checks
 - ✅ Lighthouse performance check
-- ✅ Deploy to production (Replit)
+- ✅ Deploy to production (Vercel with tagged releases)
 
 **GitHub Actions workflows:**
 - `.github/workflows/ci.yml` - Main CI/CD pipeline
@@ -346,6 +346,7 @@ pnpm dlx convex dev --once
 - **[Git Workflow](./docs/technical/git-workflow.md)** - Detailed branching strategy
 - **[Product Brief](./docs/product-brief.md)** - Product requirements
 - **[Website Structure](./docs/website-structure.md)** - Original specifications
+- **[Clerk Billing Setup](./docs/setup-clerk-billing.md)** - Stripe integration and product SKUs (Epic 11)
 
 ---
 

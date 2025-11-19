@@ -123,7 +123,7 @@ NEXT_PUBLIC_CONVEX_URL=https://...
 RESEND_API_KEY=re_...
 
 # Site Configuration
-NEXT_PUBLIC_SITE_URL=https://rkpi5.replit.app
+NEXT_PUBLIC_SITE_URL=https://rkpi5-marketing.vercel.app
 NODE_ENV=development
 EOF
 

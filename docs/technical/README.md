@@ -35,7 +35,7 @@
 - Resend (email)
 
 **Deployment:**
-- Replit
+- Vercel
 
 ---
 
