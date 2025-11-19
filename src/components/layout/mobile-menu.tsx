@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import { useAuth, UserButton } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 
 const navigation = [
@@ -20,6 +21,8 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+  const { isSignedIn } = useAuth();
+
   // Lock body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
@@ -129,34 +132,65 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
               {/* Footer CTA */}
               <div className="p-6 border-t border-gray-200 bg-gray-50">
-                <Link
-                  href="/waitlist"
-                  onClick={onClose}
-                  className={cn(
-                    "flex items-center justify-center gap-2 w-full",
-                    "px-6 py-4 rounded-lg font-semibold",
-                    "bg-primary-500 text-white",
-                    "shadow-md hover:shadow-lg",
-                    "hover:bg-primary-600",
-                    "transition-all duration-300",
-                    "group"
-                  )}
-                >
-                  <span>Join Waitlist</span>
-                  <svg
-                    className="w-5 h-5 transition-transform group-hover:translate-x-1"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 7l5 5m0 0l-5 5m5-5H6"
+                {isSignedIn ? (
+                  <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-gray-200">
+                    <span className="text-sm font-medium text-gray-700">Your Account</span>
+                    <UserButton
+                      afterSignOutUrl="/"
+                      appearance={{
+                        elements: {
+                          avatarBox: "w-10 h-10",
+                          userButtonPopoverCard: "shadow-xl",
+                          userButtonPopoverActionButton: "hover:bg-primary-50",
+                        },
+                      }}
                     />
-                  </svg>
-                </Link>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    <Link
+                      href="/sign-in"
+                      onClick={onClose}
+                      className={cn(
+                        "flex items-center justify-center w-full",
+                        "px-6 py-3 rounded-lg font-medium",
+                        "bg-white text-gray-700 border border-gray-300",
+                        "hover:bg-gray-50 hover:border-primary-500",
+                        "transition-all duration-200"
+                      )}
+                    >
+                      Sign In
+                    </Link>
+                    <Link
+                      href="/sign-up"
+                      onClick={onClose}
+                      className={cn(
+                        "flex items-center justify-center gap-2 w-full",
+                        "px-6 py-4 rounded-lg font-semibold",
+                        "bg-primary-500 text-white",
+                        "shadow-md hover:shadow-lg",
+                        "hover:bg-primary-600",
+                        "transition-all duration-300",
+                        "group"
+                      )}
+                    >
+                      <span>Get Started</span>
+                      <svg
+                        className="w-5 h-5 transition-transform group-hover:translate-x-1"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M13 7l5 5m0 0l-5 5m5-5H6"
+                        />
+                      </svg>
+                    </Link>
+                  </div>
+                )}
 
                 {/* Additional Links */}
                 <div className="mt-4 flex items-center justify-center gap-4 text-sm text-gray-500">
