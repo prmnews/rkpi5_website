@@ -5,20 +5,6 @@
   "installCommand": "pnpm install",
   "outputDirectory": ".next",
   "regions": ["iad1"],
-  "env": {
-    "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "",
-    "CLERK_SECRET_KEY": "",
-    "NEXT_PUBLIC_CONVEX_URL": "",
-    "CONVEX_DEPLOYMENT": "",
-    "CONVEX_DEPLOY_KEY": "",
-    "RESEND_API_KEY": "",
-    "CLERK_WEBHOOK_SECRET": "",
-    "NEXT_PUBLIC_CLERK_SIGN_IN_URL": "/sign-in",
-    "NEXT_PUBLIC_CLERK_SIGN_UP_URL": "/sign-up",
-    "NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL": "/dashboard",
-    "NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL": "/dashboard",
-    "NODE_ENV": "production"
-  },
   "headers": [
     {
       "source": "/(.*)",
