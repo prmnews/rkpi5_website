@@ -2,32 +2,44 @@
 
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui";
-import { Database, Wifi, Battery, Clock } from "lucide-react";
+import { Database, Wifi, Battery, Clock, Users, Shield, Globe } from "lucide-react";
 
 const features = [
   {
     icon: Database,
-    title: "26GB+ Biblical Resources",
-    description: "130+ hours of audio teaching, 39+ hours of video content, multiple Bible translations, and comprehensive discipleship materials.",
+    title: "Complete Content Library",
+    description: "26GB+ of pre-loaded biblical resources. No downloading, no internet required. Everything you need from day one.",
     color: "from-primary-500 to-primary-700",
   },
   {
-    icon: Wifi,
-    title: "No Internet Required",
-    description: "Complete offline WiFi portal with captive portal auto-popup. Works in any environment where networks may be unavailable or compromised.",
+    icon: Users,
+    title: "Multi-User Access",
+    description: "Serve 15+ users simultaneously. Perfect for home groups, underground churches, or families preparing together.",
     color: "from-accent-purple to-purple-700",
   },
   {
     icon: Battery,
-    title: "6-Hour Battery Runtime",
-    description: "25,000 mAh battery pack provides extended operation. TSA carry-on approved. Optional solar panel for field deployment.",
+    title: "Portable & Powered",
+    description: "6-hour battery runtime. TSA carry-on approved. Optional solar panel for extended field deployment.",
     color: "from-accent-green to-green-700",
   },
   {
-    icon: Clock,
-    title: "5-Minute Setup",
-    description: "Insert microSD, attach power, ready to serve 10+ users simultaneously. No IT expertise required. Works immediately out of the box.",
+    icon: Shield,
+    title: "Secure & Private",
+    description: "No internet connection means no tracking. Ideal for sensitive environments or areas under surveillance.",
     color: "from-accent-orange to-orange-700",
+  },
+  {
+    icon: Clock,
+    title: "Instant Setup",
+    description: "Insert microSD, attach power, connect devices. No IT expertise required. Works in less than 5 minutes.",
+    color: "from-blue-500 to-blue-700",
+  },
+  {
+    icon: Globe,
+    title: "Universal Compatibility",
+    description: "Works with iOS, Android, Windows, macOS. Captive portal auto-popup like hotel WiFi for seamless access.",
+    color: "from-indigo-500 to-indigo-700",
   },
 ];
 
@@ -65,16 +77,16 @@ export function Features() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Everything You Need, Offline
+            Why RKPi5?
           </h2>
           <p className="text-lg text-gray-600">
-            Designed for believers preparing for the Rapture and saints navigating the Tribulation
+            Purpose-built for believers preparing for uncertain times
           </p>
         </motion.div>
 
         {/* Feature Grid */}
         <motion.div
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"

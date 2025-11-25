@@ -1,13 +1,8 @@
 import { Container } from "@/components/ui";
 import { 
-  Database, 
   Wifi, 
   Battery, 
-  Clock,
-  Users,
-  Shield,
-  Zap,
-  Globe
+  Zap
 } from "lucide-react";
 
 export const metadata = {
@@ -81,28 +76,6 @@ export default function ProductPage() {
                   </div>
                   <div>
                     <span className="font-semibold">Display:</span> Optional 5&quot; touchscreen (Field Kit)
-                  </div>
-                </div>
-              </div>
-
-              {/* Content Specs */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <Database className="w-5 h-5 text-primary-600" />
-                  Content Library Overview
-                </h3>
-                <div className="grid sm:grid-cols-2 gap-4 text-gray-700">
-                  <div>
-                    <span className="font-semibold">Audio:</span> 130+ hours of sermons/teaching
-                  </div>
-                  <div>
-                    <span className="font-semibold">Video:</span> 39+ hours of video content
-                  </div>
-                  <div>
-                    <span className="font-semibold">Bibles:</span> Multiple translations (KJV, ASV, WEB, Open Bible)
-                  </div>
-                  <div>
-                    <span className="font-semibold">Books:</span> 19 eBooks (1,800+ pages) + survival guides
                   </div>
                 </div>
               </div>
@@ -436,72 +409,8 @@ export default function ProductPage() {
         </Container>
       </section>
 
-      {/* Feature Deep Dive */}
-      <section className="py-section-lg bg-gray-50">
-        <Container>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-center">
-            Why RKPi5?
-          </h2>
-          <p className="text-lg text-gray-600 mb-16 text-center max-w-3xl mx-auto">
-            Purpose-built for believers preparing for uncertain times
-          </p>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Database,
-                title: "Complete Content Library",
-                description: "26GB+ of pre-loaded biblical resources. No downloading, no internet required. Everything you need from day one.",
-                color: "from-primary-500 to-primary-700",
-              },
-              {
-                icon: Users,
-                title: "Multi-User Access",
-                description: "Serve 10+ users simultaneously. Perfect for home groups, underground churches, or families preparing together.",
-                color: "from-accent-purple to-purple-700",
-              },
-              {
-                icon: Battery,
-                title: "Portable & Powered",
-                description: "6-hour battery runtime. TSA carry-on approved. Optional solar panel for extended field deployment.",
-                color: "from-accent-green to-green-700",
-              },
-              {
-                icon: Shield,
-                title: "Secure & Private",
-                description: "No internet connection means no tracking. Ideal for sensitive environments or areas under surveillance.",
-                color: "from-accent-orange to-orange-700",
-              },
-              {
-                icon: Clock,
-                title: "Instant Setup",
-                description: "Insert microSD, attach power, connect devices. No IT expertise required. Works in less than 5 minutes.",
-                color: "from-blue-500 to-blue-700",
-              },
-              {
-                icon: Globe,
-                title: "Universal Compatibility",
-                description: "Works with iOS, Android, Windows, macOS. Captive portal auto-popup like hotel WiFi for seamless access.",
-                color: "from-indigo-500 to-indigo-700",
-              },
-            ].map((feature) => (
-              <div
-                key={feature.title}
-                className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow"
-              >
-                <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4`}>
-                  <feature.icon className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
       {/* Comparison Table */}
-      <section className="py-section-lg bg-gray-50">
+      <section className="py-section-lg">
         <Container>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-center">
             RKPi5 vs. Alternatives
