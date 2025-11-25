@@ -4,7 +4,7 @@ import { v } from "convex/values";
 export default defineSchema({
   waitlist: defineTable({
     email: v.string(),
-    name: v.optional(v.string()),
+    name: v.string(),
     phone: v.optional(v.string()),
     useCase: v.optional(v.string()),
     tier: v.optional(v.string()),

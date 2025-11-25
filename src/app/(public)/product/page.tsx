@@ -72,7 +72,7 @@ export default function ProductPage() {
                     <span className="font-semibold">Storage:</span> 2x 128GB microSD (SanDisk Extreme)
                   </div>
                   <div>
-                    <span className="font-semibold">Battery:</span> 25,000 mAh (6-hour runtime)
+                    <span className="font-semibold">Battery:</span> Optional 25,000 mAh (6-hour runtime)
                   </div>
                   <div>
                     <span className="font-semibold">Display:</span> Optional 5&quot; touchscreen (Field Kit)
