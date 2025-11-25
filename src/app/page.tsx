@@ -2,7 +2,6 @@ import {
   Hero,
   Features,
   Testimonials,
-  PricingPreview,
   CTASection,
 } from "@/components/homepage";
 
@@ -12,7 +11,6 @@ export default function Home() {
       <Hero />
       <Features />
       <Testimonials />
-      <PricingPreview />
       <CTASection />
     </>
   );

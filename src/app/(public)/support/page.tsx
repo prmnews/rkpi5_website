@@ -36,7 +36,7 @@ export default function SupportPage() {
       links: [
         { title: 'General FAQs', href: '/support/faqs', available: true },
         { title: 'Technical FAQs', href: '/support/technical-faqs', available: true },
-        { title: 'Pricing FAQs', href: '/support/pricing-faqs', available: true },
+        { title: 'Estimate FAQs', href: '/support/pricing-faqs', available: true },
       ],
     },
   ];
