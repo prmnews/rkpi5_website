@@ -1,9 +1,11 @@
 import { mutation } from "./_generated/server";
 import { v } from "convex/values";
+import { internal } from "./_generated/api";
 
 /**
  * Add a user to the waitlist
  * Stores submission in waitlist table with status="pending"
+ * Sends confirmation email via Resend
  */
 export const joinWaitlist = mutation({
   args: {
@@ -21,6 +23,9 @@ export const joinWaitlist = mutation({
       .withIndex("by_email", (q) => q.eq("email", args.email))
       .unique();
 
+    let waitlistId: any;
+    let action: "created" | "updated";
+
     if (existing) {
       // Update existing entry
       await ctx.db.patch(existing._id, {
@@ -31,23 +36,42 @@ export const joinWaitlist = mutation({
         source: args.source,
       });
 
-      return { success: true, waitlistId: existing._id, action: "updated" };
+      waitlistId = existing._id;
+      action = "updated";
+    } else {
+      // Insert new waitlist entry
+      waitlistId = await ctx.db.insert("waitlist", {
+        email: args.email,
+        name: args.name,
+        phone: args.phone,
+        useCase: args.useCase,
+        tier: args.tier,
+        source: args.source,
+        status: "pending",
+        notes: undefined,
+        createdAt: Date.now(),
+      });
+
+      action = "created";
     }
 
-    // Insert new waitlist entry
-    const waitlistId = await ctx.db.insert("waitlist", {
+    // Send confirmation email (async, don't wait for it)
+    // Using scheduler to avoid blocking the mutation
+    await ctx.scheduler.runAfter(0, internal.emails.sendWaitlistConfirmation, {
+      email: args.email,
+      name: args.name,
+    });
+
+    // Send admin notification (async)
+    await ctx.scheduler.runAfter(0, internal.emails.sendAdminWaitlistNotification, {
       email: args.email,
       name: args.name,
       phone: args.phone,
       useCase: args.useCase,
       tier: args.tier,
-      source: args.source,
-      status: "pending",
-      notes: undefined,
-      createdAt: Date.now(),
     });
 
-    return { success: true, waitlistId, action: "created" };
+    return { success: true, waitlistId, action };
   },
 });
 
