@@ -18,7 +18,7 @@ const faqs: FAQ[] = [
   },
   {
     q: "How many users can connect at once?",
-    a: "Typical scenarios support 15+ simultaneous users on the captive WiFi portal.",
+    a: "Typical scenarios support 10+ simultaneous users on the captive WiFi portal.",
   },
   {
     q: "Can I add my own ministry content?",

@@ -193,7 +193,7 @@ export default function AboutPage() {
                 <ul className="space-y-2 text-gray-600 text-sm">
                   <li className="flex items-start gap-2">
                     <span className="text-primary-600 mt-1">•</span>
-                    <span>Serves 15+ users simultaneously</span>
+                    <span>Serves 10+ users simultaneously</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary-600 mt-1">•</span>

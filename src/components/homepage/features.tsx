@@ -26,7 +26,7 @@ const features = [
   {
     icon: Clock,
     title: "5-Minute Setup",
-    description: "Insert microSD, attach power, ready to serve 15+ users simultaneously. No IT expertise required. Works immediately out of the box.",
+    description: "Insert microSD, attach power, ready to serve 10+ users simultaneously. No IT expertise required. Works immediately out of the box.",
     color: "from-accent-orange to-orange-700",
   },
 ];
