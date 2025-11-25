@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { SHOW_WAITLIST } from "@/lib/constants";
 
 export type PricingCardProps = {
   title: string;
@@ -88,19 +89,21 @@ export function PricingCard({
         ))}
       </ul>
 
-      <div className="mt-auto">
-        <Link
-          href={ctaHref}
-          className={cn(
-            "inline-flex w-full items-center justify-center rounded-lg px-4 py-2.5 text-sm font-semibold transition-all",
-            highlighted
-              ? "bg-primary-600 text-white shadow hover:bg-primary-700"
-              : "bg-gray-900 text-white hover:bg-gray-800"
-          )}
-        >
-          {ctaLabel}
-        </Link>
-      </div>
+      {SHOW_WAITLIST && (
+        <div className="mt-auto">
+          <Link
+            href={ctaHref}
+            className={cn(
+              "inline-flex w-full items-center justify-center rounded-lg px-4 py-2.5 text-sm font-semibold transition-all",
+              highlighted
+                ? "bg-primary-600 text-white shadow hover:bg-primary-700"
+                : "bg-gray-900 text-white hover:bg-gray-800"
+            )}
+          >
+            {ctaLabel}
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

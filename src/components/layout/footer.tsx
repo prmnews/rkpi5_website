@@ -4,7 +4,7 @@ import { Container } from "@/components/ui";
 const footerLinks = {
   product: [
     { name: "Features", href: "/product#features" },
-    { name: "Pricing", href: "/pricing" },
+    { name: "Estimates", href: "/pricing" },
     { name: "Use Cases", href: "/use-cases" },
     { name: "Specifications", href: "/product#specs" },
   ],
@@ -12,11 +12,9 @@ const footerLinks = {
     { name: "Documentation", href: "/support" },
     { name: "FAQs", href: "/support/faqs" },
     { name: "Contact", href: "/contact" },
-    { name: "Community", href: "/community" },
   ],
   company: [
     { name: "About", href: "/about" },
-    { name: "Blog", href: "/blog" },
     { name: "Privacy Policy", href: "/privacy" },
     { name: "Terms of Service", href: "/terms" },
   ],

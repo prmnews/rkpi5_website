@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui";
 import { EnterpriseContact, FeatureMatrix, PricingCard, PricingFAQs } from "@/components/pricing";
+import { SHOW_WAITLIST } from "@/lib/constants";
 
 export default function PricingPage() {
   return (
@@ -7,11 +8,18 @@ export default function PricingPage() {
       {/* Heading */}
       <Container as="section" className="text-center">
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
-          Pricing
+          Build Configurations & Estimates
         </h1>
         <p className="mt-3 text-base sm:text-lg text-gray-700">
-          Choose the option that fits your mission today. Upgrade any time.
+          Choose the configuration that fits your mission. All build scripts are FREE to download.
         </p>
+        {!SHOW_WAITLIST && (
+          <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg max-w-3xl mx-auto">
+            <p className="text-sm text-gray-700">
+              ℹ️ These are estimated DIY component costs. RKPi5 units are not currently for sale.
+            </p>
+          </div>
+        )}
       </Container>
 
       {/* Pricing Cards */}

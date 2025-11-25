@@ -296,7 +296,7 @@ export default function ProductPage() {
                 href="/pricing"
                 className="px-8 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors"
               >
-                View Pricing
+                View Estimates
               </a>
             </div>
           </div>

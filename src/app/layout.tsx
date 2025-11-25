@@ -1,4 +1,3 @@
-import { ClerkProvider } from '@clerk/nextjs';
 import { ConvexProvider } from "@/providers/convex-provider";
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
@@ -27,40 +26,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Only use ClerkProvider if valid publishable key exists
-  const clerkPublishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
-  const hasValidClerkKey = clerkPublishableKey && clerkPublishableKey.startsWith('pk_');
-
-  const LayoutContent = (
-    <>
-      <Header />
-      <main className="min-h-screen pt-16 lg:pt-20">
-        {children}
-      </main>
-      <Footer />
-    </>
-  );
-
-  if (hasValidClerkKey) {
-    return (
-      <ClerkProvider>
-        <ConvexProvider>
-          <html lang="en">
-            <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
-              {LayoutContent}
-            </body>
-          </html>
-        </ConvexProvider>
-      </ClerkProvider>
-    );
-  }
-
-  // Fallback without Clerk for CI builds with placeholder keys
   return (
     <ConvexProvider>
       <html lang="en">
         <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
-          {LayoutContent}
+          <Header />
+          <main className="min-h-screen pt-16 lg:pt-20">
+            {children}
+          </main>
+          <Footer />
         </body>
       </html>
     </ConvexProvider>
