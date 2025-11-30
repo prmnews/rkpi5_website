@@ -27,6 +27,7 @@ export default defineSchema({
     status: v.string(),
     createdAt: v.number(),
   })
+    .index("by_email", ["email"])
     .index("by_status", ["status"])
     .index("by_type", ["type"])
     .index("by_created", ["createdAt"]),

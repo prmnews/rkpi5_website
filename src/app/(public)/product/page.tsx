@@ -2,7 +2,9 @@ import { Container } from "@/components/ui";
 import { 
   Wifi, 
   Battery, 
-  Zap
+  Zap,
+  HardDrive,
+  Copy
 } from "lucide-react";
 
 export const metadata = {
@@ -99,6 +101,62 @@ export default function ProductPage() {
                   <div>
                     <span className="font-semibold">Platforms:</span> iOS, Android, Windows, macOS
                   </div>
+                </div>
+              </div>
+
+              {/* Golden Master Creation */}
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <HardDrive className="w-5 h-5 text-primary-600" />
+                  Golden Master Setup
+                </h3>
+                <div className="grid sm:grid-cols-2 gap-4 text-gray-700">
+                  <div>
+                    <span className="font-semibold">Initial Setup:</span> ~2 hours (one time)
+                  </div>
+                  <div>
+                    <span className="font-semibold">Tools Required:</span> Raspberry Pi Imager
+                  </div>
+                  <div>
+                    <span className="font-semibold">Content Loading:</span> Drag-and-drop to microSD
+                  </div>
+                  <div>
+                    <span className="font-semibold">Configuration:</span> Automated setup scripts
+                  </div>
+                </div>
+                <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                  <p className="text-sm text-gray-700">
+                    <strong>DIY Guide:</strong> Step-by-step instructions included for creating your first &quot;golden master&quot; 
+                    microSD card. Once configured, you can duplicate it unlimited times for deployment.
+                  </p>
+                </div>
+              </div>
+
+              {/* Duplication Process */}
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <Copy className="w-5 h-5 text-primary-600" />
+                  Rapid Duplication
+                </h3>
+                <div className="grid sm:grid-cols-2 gap-4 text-gray-700">
+                  <div>
+                    <span className="font-semibold">Clone Time:</span> ~15 min per 128GB card
+                  </div>
+                  <div>
+                    <span className="font-semibold">Method:</span> SD card imaging software
+                  </div>
+                  <div>
+                    <span className="font-semibold">Batch Production:</span> Multiple USB3 readers
+                  </div>
+                  <div>
+                    <span className="font-semibold">Verification:</span> Automated integrity checks
+                  </div>
+                </div>
+                <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                  <p className="text-sm text-gray-700">
+                    <strong>Scale Your Ministry:</strong> Create as many units as needed. Perfect for church deployment, 
+                    mission trips, or preparing multiple Rapture Kits for friends and family.
+                  </p>
                 </div>
               </div>
             </div>
@@ -425,7 +483,7 @@ export default function ProductPage() {
                 <tr className="border-b border-gray-200">
                   <th className="text-left p-4 font-bold text-gray-900">Feature</th>
                   <th className="text-center p-4 font-bold text-primary-600 bg-primary-50">RKPi5</th>
-                  <th className="text-center p-4 font-bold text-gray-900">USB Drive</th>
+                  <th className="text-center p-4 font-bold text-gray-900">Rapture Kit 3.1 USB Drive</th>
                   <th className="text-center p-4 font-bold text-gray-900">DIY Pi</th>
                 </tr>
               </thead>
@@ -435,7 +493,7 @@ export default function ProductPage() {
                   { feature: "Multi-User (10+)", rkpi5: "✅", usb: "❌", diy: "⚠️" },
                   { feature: "Setup < 5 min", rkpi5: "✅", usb: "✅", diy: "❌" },
                   { feature: "Captive Portal UX", rkpi5: "✅", usb: "❌", diy: "❌" },
-                  { feature: "Video Streaming", rkpi5: "✅", usb: "⚠️", diy: "⚠️" },
+                  { feature: "Video Streaming", rkpi5: "✅", usb: "✅", diy: "⚠️" },
                   { feature: "All Platforms", rkpi5: "✅", usb: "✅", diy: "⚠️" },
                   { feature: "Battery Powered", rkpi5: "✅", usb: "❌", diy: "⚠️" },
                   { feature: "No IT Skills", rkpi5: "✅", usb: "✅", diy: "❌" },
@@ -451,10 +509,18 @@ export default function ProductPage() {
             </table>
           </div>
 
-          <p className="text-center text-gray-600 mt-8">
-            <strong>Key Differentiator:</strong> RKPi5 transforms static USB content into a multi-user WiFi portal 
-            with hotel-grade UX, ideal for group study and post-Rapture scenarios.
-          </p>
+          <blockquote className="mt-8 max-w-3xl mx-auto">
+            <div className="bg-gradient-to-br from-primary-50 to-primary-100/50 border-l-4 border-primary-600 rounded-r-lg p-6 shadow-sm">
+              <p className="text-gray-700 text-lg leading-relaxed mb-4 italic">
+                &ldquo;RKPi5 transforms static USB content into a multi-user WiFi portal 
+                with hotel-grade UX, ideal for group study and post-Rapture scenarios.&rdquo;
+              </p>
+              <footer className="text-sm text-gray-600">
+                <span className="font-semibold text-gray-900">— Scott E. Townsend</span>
+                <span className="text-gray-500 ml-2">Founder, RKPi5 & I Am A Watchman</span>
+              </footer>
+            </div>
+          </blockquote>
         </Container>
       </section>
 
@@ -495,7 +561,7 @@ export default function ProductPage() {
               Ready to Prepare?
             </h2>
             <p className="text-xl text-primary-100 mb-10">
-              Join the waitlist and be among the first to receive your RKPi5
+              Join the waitlist and be among the first to build your own RKPi5
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a

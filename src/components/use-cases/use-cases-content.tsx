@@ -209,7 +209,7 @@ export function UseCasesContent() {
               Ready to Get Started?
             </h2>
             <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-              Join our waitlist to be among the first to receive RKPi5 when it launches. 
+              Join our waitlist to be among the first to build your own RKPi5 when it launches. 
               Early supporters get priority access and exclusive beta program benefits.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

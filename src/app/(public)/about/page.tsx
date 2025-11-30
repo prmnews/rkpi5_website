@@ -337,8 +337,8 @@ export default function AboutPage() {
               Join the Movement
             </h2>
             <p className="text-xl text-primary-100 mb-10">
-              Be among the first to receive RKPi5 when it launches. Join our waitlist for 
-              priority access and exclusive early adopter benefits.
+              Be among the first to build your own RKPi5 when it launches. Join our waitlist for 
+              priority access and exclusive early adopter benefits. All build scripts are FREE.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a

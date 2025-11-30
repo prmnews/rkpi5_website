@@ -33,7 +33,7 @@ export default function PricingPage() {
               "Install scripts + documentation",
               "Requires Raspberry Pi 5 (8GB+)",
               "Self-guided ~45-minute setup",
-              "Complete Rapture Kit content",
+              "Rapture Kit 3.1 USB included",
               "Create your own golden master",
               "Personal use only (no resale)",
             ]}
@@ -46,12 +46,16 @@ export default function PricingPage() {
             price={99}
             description="Pre-configured microSD kit"
             features={[
-              "2× 128GB microSD (pre-configured)",
-              "Rapture Kit content included",
+              "1× 128GB microSD (for storage)",
+              "1× 128GB microSD (redundant backup)",
+              "microSD golden master included",
+              "Rapture Kit 3.1 USB included",
               "Use with your Pi 5 (8GB+)",
               "Insert card, boot in < 5 minutes",
               "Quick start guide (PDF)",
+              "Personal use only (no resale)",
               "Email support",
+              "Shipping and Handling Included",
             ]}
             ctaLabel="Join Waitlist"
             ctaHref="/waitlist"
@@ -65,12 +69,16 @@ export default function PricingPage() {
             highlighted
             features={[
               "Raspberry Pi 5 (8GB) included",
-              "2× 128GB microSD (pre-configured)",
-              "25,000 mAh battery pack",
-              "Protective carry case",
+              "1× 128GB microSD (for storage)",
+              "1× 128GB microSD (redundant backup)",
+              "microSD golden master included",
+              "Rapture Kit 3.1 USB included",
+              "20,000 mAh battery pack",
               "Captive WiFi portal (< 5 min setup)",
               "Quick start guide",
+              "Personal use only (no resale)",
               "Email support",
+              "Shipping and Handling Included",
             ]}
             ctaLabel="Join Waitlist"
             ctaHref="/waitlist"
@@ -78,17 +86,21 @@ export default function PricingPage() {
 
           <PricingCard
             title="Field"
-            price={499}
+            price={399}
             description="Self-contained unit for the field"
             features={[
               "Raspberry Pi 5 (8GB) included",
-              "2× 128GB microSD (pre-configured)",
+              "1× 128GB microSD (for storage)",
+              "1× 128GB microSD (redundant backup)",
+              "microSD golden master included",
+              "Rapture Kit 3.1 USB included",
               "Integrated 5\" display + speakers",
-              "25,000 mAh battery pack",
+              "20,000 mAh battery pack",
               "50W foldable solar panel",
-              "Protective carry case",
               "Captive WiFi portal (< 5 min setup)",
-              "Priority email support",
+              "Personal use only (no resale)",
+              "Email support",
+              "Shipping and Handling Included",
             ]}
             ctaLabel="Join Waitlist"
             ctaHref="/waitlist"

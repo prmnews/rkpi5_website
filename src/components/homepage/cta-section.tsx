@@ -37,8 +37,8 @@ export function CTASection() {
 
             {/* Supporting Text */}
             <p className="text-xl text-primary-100 mb-10 max-w-2xl mx-auto">
-              Join the waitlist today and be among the first to receive your RKPi5. 
-              Limited beta units available.
+              Join the waitlist today and be among the first to build your own RKPi5. 
+              Looking for 10 beta testers. All build scripts are FREE.
             </p>
 
             {/* CTA Buttons */}

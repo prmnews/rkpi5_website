@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui";
-import { Database, Wifi, Battery, Clock, Users, Shield, Globe } from "lucide-react";
+import { Database, Wifi, Battery, Clock, Users, Shield, Globe, Heart, Zap, BookOpen } from "lucide-react";
 
 const features = [
   {
@@ -14,7 +14,7 @@ const features = [
   {
     icon: Users,
     title: "Multi-User Access",
-    description: "Serve 15+ users simultaneously. Perfect for home groups, underground churches, or families preparing together.",
+    description: "Serve 10+ users simultaneously. Perfect for evangelism, underground churches, or believers on the run.",
     color: "from-accent-purple to-purple-700",
   },
   {
@@ -40,6 +40,24 @@ const features = [
     title: "Universal Compatibility",
     description: "Works with iOS, Android, Windows, macOS. Captive portal auto-popup like hotel WiFi for seamless access.",
     color: "from-indigo-500 to-indigo-700",
+  },
+  {
+    icon: Heart,
+    title: "Faith-Centered Design",
+    description: "Built specifically for biblical study and discipleship. Curated content from trusted sources, organized for spiritual growth.",
+    color: "from-rose-500 to-rose-700",
+  },
+  {
+    icon: Zap,
+    title: "Zero Configuration",
+    description: "Pre-configured and ready to deploy. No servers, no cloud accounts, no maintenance. Just power on and share God's Word.",
+    color: "from-yellow-500 to-yellow-700",
+  },
+  {
+    icon: BookOpen,
+    title: "Offline-First Architecture",
+    description: "Purpose-built for areas with no internet. No buffering, no broken connections, no data costs. Always available, always reliable.",
+    color: "from-teal-500 to-teal-700",
   },
 ];
 

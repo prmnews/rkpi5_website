@@ -34,6 +34,7 @@ export const joinWaitlist = mutation({
         useCase: args.useCase,
         tier: args.tier,
         source: args.source,
+        notes: args.useCase, // Map useCase to notes field for admin reference
       });
 
       waitlistId = existing._id;
@@ -48,7 +49,7 @@ export const joinWaitlist = mutation({
         tier: args.tier,
         source: args.source,
         status: "pending",
-        notes: undefined,
+        notes: args.useCase, // Map useCase to notes field for admin reference
         createdAt: Date.now(),
       });
 
