@@ -1,16 +1,30 @@
-import { Callout, CodeBlock } from './src/components/mdx';
+import type { MDXComponents } from 'mdx/types';
+import { Callout } from 'nextra/components';
 
 /**
- * This file provides ONLY custom components for MDX files.
- * Standard HTML elements (h1, p, etc.) are NOT overridden globally
- * to avoid breaking non-MDX pages.
- * 
- * Note: Type is inferred from return value to avoid MDX type dependency issues
+ * Custom MDX Components for Nextra 3.x
+ * Nextra automatically provides styled components
  */
 
-export function useMDXComponents(components: Record<string, React.ComponentType<any>> = {}) {
+// Custom CodeBlock component with title support
+export function CodeBlock({ children, title, language }: any) {
+  return (
+    <div className="my-4">
+      {title && (
+        <div className="px-4 py-2 text-xs font-semibold text-gray-500 bg-gray-100 dark:bg-gray-800 border border-b-0 border-gray-200 dark:border-gray-700 rounded-t-lg">
+          {title}
+          {language && <span className="ml-2 text-gray-400">({language})</span>}
+        </div>
+      )}
+      <pre className={`${title ? 'rounded-t-none' : ''}`}>
+        <code>{children}</code>
+      </pre>
+    </div>
+  );
+}
+
+export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    // Only custom components, no HTML element overrides
     Callout,
     CodeBlock,
     ...components,
