@@ -107,18 +107,14 @@ jobs:
           echo "✅ Production deployment complete for ${{ steps.get_version.outputs.VERSION }}" >> $GITHUB_STEP_SUMMARY
 
       - name: Create GitHub Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.get_version.outputs.VERSION }}
-          release_name: Release ${{ steps.get_version.outputs.VERSION }}
-          body: |
-            ## Release ${{ steps.get_version.outputs.VERSION }}
+        run: |
+          gh release create ${{ steps.get_version.outputs.VERSION }} \
+            --title "Release ${{ steps.get_version.outputs.VERSION }}" \
+            --notes "## Release ${{ steps.get_version.outputs.VERSION }}
             
             Deployed to Vercel production: ${{ steps.deploy-production.outputs.DEPLOY_URL }}
             
             ### Changes
-            See commit history for details.
-          draft: false
-          prerelease: false
+            See commit history for details."
+        env:
+          GH_TOKEN: ${{ github.token }}
