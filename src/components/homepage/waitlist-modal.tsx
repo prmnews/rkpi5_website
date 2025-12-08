@@ -7,6 +7,8 @@ import { z } from "zod";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useMutation } from "convex/react";
+import { api } from "../../../convex/_generated/api";
 
 // Waitlist form validation schema
 const waitlistSchema = z.object({
@@ -26,6 +28,9 @@ interface WaitlistModalProps {
 export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const joinWaitlist = useMutation(api.waitlist.joinWaitlist);
 
   const {
     register,
@@ -38,20 +43,33 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
 
   const onSubmit = async (data: WaitlistFormData) => {
     setIsSubmitting(true);
+    setError(null);
     
-    // Simulate API call (will be replaced with Convex mutation later)
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    console.log("Waitlist submission:", data);
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    reset();
-    
-    // Close modal and reset after success
-    setTimeout(() => {
-      setIsSubmitted(false);
-      onClose();
-    }, 3000);
+    try {
+      // Save to Convex waitlist table
+      await joinWaitlist({
+        name: data.name,
+        email: data.email,
+        phone: data.phone || undefined,
+        useCase: data.useCase,
+        tier: undefined,
+        source: "website-modal",
+      });
+      
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      reset();
+      
+      // Close modal and reset after success
+      setTimeout(() => {
+        setIsSubmitted(false);
+        onClose();
+      }, 3000);
+    } catch (err) {
+      console.error("Waitlist submission error:", err);
+      setError("Failed to join waitlist. Please try again.");
+      setIsSubmitting(false);
+    }
   };
 
   // Close on Escape key and lock body scroll
@@ -225,6 +243,13 @@ export function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                         <p className="mt-1 text-sm text-red-600">{errors.useCase.message}</p>
                       )}
                     </div>
+
+                    {/* Error Message */}
+                    {error && (
+                      <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+                        <p className="text-sm text-red-600">{error}</p>
+                      </div>
+                    )}
 
                     {/* Submit Button */}
                     <button

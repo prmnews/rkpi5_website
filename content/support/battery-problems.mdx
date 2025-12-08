@@ -1,3 +1,10 @@
+---
+title: Battery Problems
+description: Troubleshooting guide for power and battery-related issues
+---
+
+import { Callout, CodeBlock } from '@/components/docs'
+
 # Battery Problems
 
 Troubleshooting guide for power and battery-related issues.
@@ -10,28 +17,32 @@ Battery performance data and troubleshooting will be refined during beta testing
 
 **Symptoms:**
 - Battery percentage not increasing
-- No charging indicator
+- No charging indicator or progress
 - Device shuts down when unplugged
 
 **Solutions:**
 
-1. **Check Charging Cable**
-   - Ensure USB-C cable is fully inserted
-   - Try a different USB-C cable
-   - Check for damage to cable or port
-
-2. **Verify Power Source**
-   - Use included power adapter (5V/3A)
+1. **Verify Power Source**
+   - Use included Pi5 power adapter (5V/3A). This is supplied specifically for wall-powered use. If you purchased the Canakit Starter Kit, one is included in the box.
    - Try different wall outlet
+   - Verify that a circuit breaker did not flip shut
    - Avoid low-power USB ports on computers
 
+2. **Check Charging Cable**
+   - Ensure USB-C cable is fully inserted into the power in port on the Pi5
+   - Try a different USB-C cable
+   - Check for damage to cable or port, perhaps a bent port
+
 3. **Check LED Status**
-   | LED Color | Status |
-   |-----------|--------|
-   | Red flashing | Charging |
-   | Red solid | Low battery |
-   | Green solid | Fully charged |
-   | Amber | Charging error |
+   <Callout type="warning">
+   Common meaning around battery pack charge state it might be different on your model.
+   </Callout>
+
+   - LED Color and (Status):
+   - Red flashing (Charging)
+   - Red solid (Low battery)
+   - Green solid (Fully charged)
+   - Amber (Charging error)
 
 4. **Temperature Check**
    <Callout type="warning">
@@ -62,18 +73,6 @@ Battery performance data and troubleshooting will be refined during beta testing
    - Video streaming uses more power
    - Audio streaming uses less power
    - Text browsing uses minimal power
-
-3. **Optimize Settings**
-   - Reduce WiFi transmit power (if signal is strong)
-   - Lower screen brightness on admin portal
-   - Disable unnecessary services
-
-4. **Battery Health**
-   <CodeBlock title="Check Battery Health in Admin Panel">
-   Settings → System → Battery Status
-   Health: Should show 80%+ for new device
-   Cycles: Track charge cycles
-   </CodeBlock>
 
 ## Device Won't Power On
 
@@ -116,11 +115,6 @@ Battery performance data and troubleshooting will be refined during beta testing
    4. Battery meter should now be accurate
    ```
 
-2. **Battery Statistics Reset**
-   - Access admin panel
-   - Navigate to System Settings
-   - Click "Reset Battery Statistics"
-
 ## Extending Battery Life
 
 ### Best Practices
@@ -158,14 +152,14 @@ Battery capacity naturally degrades over time.
 ## Battery Replacement
 
 <Callout type="warning" title="Professional Service">
-Battery replacement should only be performed by authorized service centers.
+Battery replacements are usually not possible. You should consider buying a new battery pack.
 </Callout>
 
 Signs you may need battery replacement:
 
 - Runtime less than 3 hours with light use
 - Battery health below 60%
-- Physical swelling of battery
+- Physical swelling of battery (immediately replace your battery - this is very dangerous!)
 - Rapid capacity drops
 
 **Contact support** if you believe you need a battery replacement.
@@ -173,4 +167,3 @@ Signs you may need battery replacement:
 ---
 
 *Battery performance benchmarks will be updated with real-world data from beta testing.*
-

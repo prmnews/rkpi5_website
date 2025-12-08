@@ -8,3 +8,34 @@
     --foreground: 222.2 84% 4.9%;
   }
 }
+
+/* ========================================
+   Documentation Prose Customizations
+   ======================================== */
+
+/* Scroll margin for anchor links */
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  scroll-margin-top: 6rem;
+}
+
+/* Code block styling */
+.prose pre {
+  @apply bg-slate-800 text-white !important;
+}
+
+.prose pre code {
+  @apply text-white bg-transparent !important;
+  color: white !important;
+}
+
+.prose code:not(pre code) {
+  @apply bg-gray-100 px-1.5 py-0.5 rounded text-gray-800 text-sm font-normal;
+}
+
+.prose code:not(pre code)::before,
+.prose code:not(pre code)::after {
+  content: none;
+}

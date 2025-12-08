@@ -26,6 +26,12 @@ jobs:
         with:
           version: 9
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'pnpm'
+
       - name: Install Vercel CLI
         run: pnpm add -g vercel@latest
 
@@ -116,4 +122,3 @@ jobs:
             See commit history for details.
           draft: false
           prerelease: false
-

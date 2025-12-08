@@ -95,7 +95,7 @@ export function Testimonials() {
           transition={{ delay: 0.6 }}
         >
           <p className="text-sm text-gray-500">
-            Testimonials from our beta testing program. More stories coming soon.
+            These are mock testimonials from our beta testing program. Real stories coming soon.
           </p>
         </motion.div>
       </Container>

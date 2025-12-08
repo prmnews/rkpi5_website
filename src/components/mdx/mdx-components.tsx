@@ -89,7 +89,7 @@ export const MDXComponents = {
         className={cn(
           isInline
             ? 'relative rounded bg-gray-100 dark:bg-gray-800 px-[0.3rem] py-[0.2rem] font-mono text-sm text-gray-900 dark:text-gray-100'
-            : 'block rounded-lg bg-gray-900 dark:bg-gray-950 p-4 font-mono text-sm text-gray-100 overflow-x-auto',
+            : 'block rounded-lg bg-slate-800 p-4 font-mono text-sm text-white overflow-x-auto',
           className
         )}
         {...props}
@@ -99,7 +99,7 @@ export const MDXComponents = {
   pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
     <pre
       className={cn(
-        'mb-4 mt-2 overflow-x-auto rounded-lg bg-gray-900 dark:bg-gray-950 p-4',
+        'mb-4 mt-2 overflow-x-auto rounded-lg bg-slate-800 p-4 text-white',
         className
       )}
       {...props}
@@ -232,8 +232,8 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
           )}
         </div>
       )}
-      <div className="bg-gray-900 dark:bg-gray-950 p-4">
-        <code className="font-mono text-sm text-gray-100">{children}</code>
+      <div className="bg-slate-800 p-4">
+        <code className="font-mono text-sm text-white">{children}</code>
       </div>
     </div>
   );

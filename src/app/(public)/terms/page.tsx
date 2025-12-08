@@ -17,7 +17,7 @@ export default function TermsPage() {
             <section className="mb-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Agreement to Terms</h2>
               <p className="text-gray-700 mb-4">
-                By accessing or using the RKPi5 website and services, you agree to be bound by these Terms of Service ("Terms"). 
+                By accessing or using the RKPi5 website and services, you agree to be bound by these Terms of Service (&ldquo;Terms&rdquo;). 
                 If you do not agree to these Terms, please do not use our services.
               </p>
             </section>
@@ -65,7 +65,7 @@ export default function TermsPage() {
                 <li>Performance of self-built systems</li>
               </ul>
               <p className="text-gray-700 mb-4">
-                <strong>Build scripts and documentation are provided "as-is" without warranties of any kind.</strong>
+                <strong>Build scripts and documentation are provided &ldquo;as-is&rdquo; without warranties of any kind.</strong>
               </p>
             </section>
 
@@ -116,7 +116,7 @@ export default function TermsPage() {
               <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-4">
                 <p className="text-gray-900 font-semibold mb-2">IMPORTANT DISCLAIMERS:</p>
                 <ul className="list-disc pl-6 space-y-2 text-gray-700">
-                  <li>Our website and services are provided "AS IS" without warranties of any kind</li>
+                  <li>Our website and services are provided &ldquo;AS IS&rdquo; without warranties of any kind</li>
                   <li>We make no guarantees about accuracy, reliability, or availability of our services</li>
                   <li>DIY builds carry inherent risks - proceed at your own risk</li>
                   <li>We are not responsible for damage, data loss, or injury resulting from use of our information</li>

@@ -1,8 +1,12 @@
-import { Container } from '@/components/ui';
+import { DocsLayout } from "@/components/docs";
+import { Metadata } from "next";
 
-export const metadata = {
-  title: 'Support - RKPi5 Marketing',
-  description: 'Support documentation and guides for RKPi5',
+export const metadata: Metadata = {
+  title: {
+    template: "%s – RKPi5 Support",
+    default: "Support Documentation – RKPi5",
+  },
+  description: "Find guides, troubleshooting tips, and answers to common questions about RKPi5.",
 };
 
 export default function SupportLayout({
@@ -10,14 +14,6 @@ export default function SupportLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div className="min-h-screen bg-white dark:bg-gray-950">
-      <Container>
-        <div className="py-12">
-          {children}
-        </div>
-      </Container>
-    </div>
-  );
+  return <DocsLayout>{children}</DocsLayout>;
 }
 

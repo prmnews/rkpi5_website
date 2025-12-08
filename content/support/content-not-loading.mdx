@@ -1,3 +1,10 @@
+---
+title: Content Not Loading
+description: Troubleshooting guide for issues accessing biblical resources and content
+---
+
+import { Callout } from '@/components/docs'
+
 # Content Not Loading
 
 Troubleshooting guide for issues accessing biblical resources and content.
@@ -45,7 +52,7 @@ Content loading issues and solutions will be documented during beta testing.
 
 1. **Check Media Format Support**
    <Callout type="info">
-   All content is provided in widely supported formats.
+   All content is provided in widely supported formats. The content conforms to industry standards for Video and Audio. We use Adobe PDF documents for eBooks and articles.
    </Callout>
    
    - Video: MP4 (H.264)
@@ -53,7 +60,7 @@ Content loading issues and solutions will be documented during beta testing.
    - Supported by all modern browsers
 
 2. **Browser Permissions**
-   - Allow autoplay in browser settings
+   - If you desire to do so, you can allow autoplay in browser settings
    - Enable media playback
    - Check volume isn't muted
 
@@ -76,76 +83,10 @@ Content loading issues and solutions will be documented during beta testing.
    - Try broader search terms
    - Use quotes for exact phrases: "love one another"
 
-2. **Rebuild Search Index**
-   - Access admin panel
-   - Go to Content Management
-   - Click "Rebuild Search Index"
-   - Wait for process to complete (5-10 minutes)
-
-3. **Browser Compatibility**
+2. **Browser Compatibility**
    - Ensure JavaScript is enabled
    - Disable browser extensions temporarily
    - Try different browser
-
-## Content Update Issues
-
-### Updates Won't Download
-
-**Symptoms:**
-- Update fails to start
-- Update gets stuck partway through
-- Error during update process
-
-**Solutions:**
-
-1. **Check Internet Connection**
-   <Callout type="warning">
-   Content updates require internet connectivity.
-   </Callout>
-   
-   - Connect RKPi5 to WiFi network with internet
-   - Verify internet is working (try browsing)
-   - Check for sufficient bandwidth
-
-2. **Check Storage Space**
-   ```
-   Admin Panel → System → Storage
-   Required: 10GB free space for updates
-   Current: Check available space
-   ```
-
-3. **Retry Update**
-   - Cancel current update
-   - Restart RKPi5 device
-   - Initiate update again
-
-### Content Appears Corrupted
-
-**Symptoms:**
-- Garbled text or strange characters
-- Videos show artifacts or glitches
-- Audio has static or skips
-
-**Solutions:**
-
-1. **Verify Content Integrity**
-   - Admin Panel → Content Management → Verify Files
-   - This will check for corrupted files
-   - May take 10-15 minutes
-
-2. **Re-download Affected Content**
-   - Note which resources are problematic
-   - Use "Re-download" option in admin panel
-   - Targets specific content without full reset
-
-3. **Factory Reset (Last Resort)**
-   <Callout type="error" title="Warning">
-   Factory reset will restore original content but erase custom settings.
-   </Callout>
-   
-   - Backup any custom configurations
-   - Admin Panel → System → Factory Reset
-   - Follow on-screen instructions
 
 ## Performance Issues
 
@@ -159,42 +100,12 @@ Content loading issues and solutions will be documented during beta testing.
 **Solutions:**
 
 1. **Check Active Users**
-   - Admin Panel → Users → Active Connections
-   - Performance degrades with 10+ users
-   - Ask some users to disconnect temporarily
+   - Performance degrades with 5+ users
+   - Consider asking some users to disconnect temporarily
 
 2. **Restart Services**
-   - Admin Panel → System → Restart Services
+   - Consider restarting the RKPi5 device
    - Clears cache and resets connections
-   - No need to power cycle device
-
-3. **Check System Resources**
-   ```
-   Admin Panel → System → Performance
-   CPU Usage: Should be under 70%
-   Memory: Should have 1GB+ free
-   Temperature: Should be under 70°C
-   ```
-
-### Content Database Issues
-
-**Symptoms:**
-- Missing content that should be there
-- Duplicate entries
-- Broken links or references
-
-**Solutions:**
-
-1. **Rebuild Content Database**
-   - Admin Panel → Content Management
-   - Click "Rebuild Database"
-   - This re-indexes all content
-   - Takes 15-20 minutes
-
-2. **Check for Incomplete Updates**
-   - Review update history
-   - Complete any pending updates
-   - Verify update success
 
 ## Getting Help
 
@@ -206,12 +117,7 @@ If content issues persist:
    - What have you tried?
    - Screenshot any error messages
 
-2. **Check System Logs**
-   - Admin Panel → System → Logs
-   - Look for errors related to content
-   - Note timestamps and error codes
-
-3. **Contact Support**
+2. **Contact Support**
    - Visit [Contact Page](/contact)
    - Provide documentation above
    - Include device serial number

@@ -1,95 +1,77 @@
-import { notFound } from 'next/navigation';
-import fs from 'fs';
-import path from 'path';
-import { Callout, CodeBlock } from '@/components/mdx';
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { Callout, CodeBlock, Figure, VideoFigure } from "@/components/docs";
+import { getDocTitle } from "@/lib/docs-navigation";
 
-/**
- * Support Documentation Page
- * Dynamically renders MDX content from /content/support directory
- * 
- * Note: This uses dynamic import of MDX files. For production, consider
- * using next-mdx-remote or similar for better performance.
- */
+const components = {
+  Callout,
+  CodeBlock,
+  Figure,
+  VideoFigure,
+};
 
 interface PageProps {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }
 
-// Check if MDX file exists
-async function checkMDXExists(slug: string) {
-  try {
-    const contentPath = path.join(process.cwd(), 'content', 'support', `${slug}.mdx`);
-    return fs.existsSync(contentPath);
-  } catch (error) {
-    console.error(`Error checking MDX file for slug: ${slug}`, error);
-    return false;
-  }
-}
-
-// Generate static params for all MDX files
+// Get all valid slugs for static generation
 export async function generateStaticParams() {
-  const contentDir = path.join(process.cwd(), 'content', 'support');
+  const contentDir = path.join(process.cwd(), "content/support");
+  const files = fs.readdirSync(contentDir);
   
-  try {
-    // Create directory if it doesn't exist
-    if (!fs.existsSync(contentDir)) {
-      fs.mkdirSync(contentDir, { recursive: true });
-      return [];
-    }
-
-    const files = fs.readdirSync(contentDir);
-    
-    return files
-      .filter(file => file.endsWith('.mdx'))
-      .map(file => ({
-        slug: file.replace('.mdx', ''),
-      }));
-  } catch (error) {
-    console.error('Error generating static params:', error);
-    return [];
-  }
+  return files
+    .filter((file) => file.endsWith(".mdx") && file !== "index.mdx")
+    .map((file) => ({
+      slug: file.replace(".mdx", ""),
+    }));
 }
 
 // Generate metadata for each page
-export async function generateMetadata({ params }: PageProps) {
-  const { slug } = params;
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const content = await getDocContent(slug);
   
-  // Convert slug to title (e.g., "getting-started" -> "Getting Started")
-  const title = slug
-    .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+  if (!content) {
+    return {
+      title: "Not Found",
+    };
+  }
 
   return {
-    title: `${title} - Support - RKPi5`,
-    description: `${title} support documentation for RKPi5`,
+    title: content.frontmatter.title || getDocTitle(slug),
+    description: content.frontmatter.description,
   };
 }
 
-export default async function SupportPage({ params }: PageProps) {
-  const { slug } = params;
-  const exists = await checkMDXExists(slug);
-
-  if (!exists) {
-    notFound();
+async function getDocContent(slug: string) {
+  const filePath = path.join(process.cwd(), "content/support", `${slug}.mdx`);
+  
+  if (!fs.existsSync(filePath)) {
+    return null;
   }
 
-  // Import the MDX file dynamically
-  let MDXContent;
-  try {
-    const mdxModule = await import(`@/../../content/support/${slug}.mdx`);
-    MDXContent = mdxModule.default;
-  } catch (error) {
-    console.error(`Error importing MDX file: ${slug}`, error);
+  const fileContent = fs.readFileSync(filePath, "utf8");
+  const { content, data } = matter(fileContent);
+  return { content, frontmatter: data };
+}
+
+export default async function DocPage({ params }: PageProps) {
+  const { slug } = await params;
+  const doc = await getDocContent(slug);
+
+  if (!doc) {
     notFound();
   }
 
   return (
-    <article className="prose prose-slate dark:prose-invert max-w-4xl mx-auto prose-headings:font-bold prose-a:text-sky-600 dark:prose-a:text-sky-400 prose-code:text-sm">
-      <MDXContent components={{ Callout, CodeBlock }} />
-    </article>
+    <MDXRemote 
+      source={doc.content} 
+      components={components}
+    />
   );
 }
 

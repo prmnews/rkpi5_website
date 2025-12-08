@@ -108,7 +108,7 @@ export default function SitemapPage() {
           <div className="mt-12 p-6 bg-blue-50 border border-blue-200 rounded-lg">
             <h2 className="text-lg font-semibold text-gray-900 mb-3">Need Help?</h2>
             <p className="text-gray-700 mb-4">
-              Can't find what you're looking for? Our support documentation covers a wide range of topics, 
+              Can&apos;t find what you&apos;re looking for? Our support documentation covers a wide range of topics, 
               or you can reach out to us directly.
             </p>
             <div className="flex gap-4">

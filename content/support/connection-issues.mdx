@@ -1,3 +1,10 @@
+---
+title: Connection Issues
+description: Troubleshooting guide for WiFi and network connectivity problems
+---
+
+import { Callout, CodeBlock } from '@/components/docs'
+
 # Connection Issues
 
 Troubleshooting guide for WiFi and network connectivity problems.
@@ -8,10 +15,10 @@ This troubleshooting guide will be expanded with real-world scenarios during bet
 
 ## Common Connection Problems
 
-### Can't Find RKPi5 WiFi Network
+### Can't Find 'rapture_kit' WiFi Network
 
 **Symptoms:**
-- RKPi5 network doesn't appear in WiFi list
+- 'rapture_kit' network doesn't appear in WiFi list
 - Network appears then disappears
 - Network signal is very weak
 
@@ -20,11 +27,12 @@ This troubleshooting guide will be expanded with real-world scenarios during bet
 1. **Check Power Status**
    - Ensure device is powered on
    - LED should be solid green when ready
-   - If LED is red, charge the battery
+   - If LED is red, it means the Pi has not been turned on
+   - Note the LED might be red if the battery is drained. If so, charge the battery
 
 2. **Check Distance**
-   - Move within 30 feet of RKPi5
-   - Ensure no thick walls between devices
+   - Move closer, perhaps within 30 feet of RKPi5
+   - Ensure no thick walls between devices. This reduces the reach of the Wi-Fi signal.
    - Avoid interference from other electronics
 
 3. **Restart RKPi5**
@@ -32,43 +40,32 @@ This troubleshooting guide will be expanded with real-world scenarios during bet
    1. Press and hold power button for 5 seconds (device shuts down)
    2. Wait 10 seconds
    3. Press power button briefly to boot up
-   4. Wait 30-45 seconds for complete boot
+   4. Wait 60-90 seconds for complete boot
+   5. The LED light will turn from red to quickly blinking green, then to solid green when fully booted
    ```
-
-4. **Reset Network Settings**
-   <Callout type="warning">
-   This will reset your custom WiFi name and password to defaults.
-   </Callout>
-   
-   - Access admin panel via `http://192.168.4.1/admin`
-   - Navigate to Network Settings
-   - Click "Reset to Defaults"
-   - Reconnect using default credentials
 
 ### Can't Connect to RKPi5 Network
 
 **Symptoms:**
 - Network appears but won't connect
-- "Incorrect password" error
 - Connection times out
 
 **Solutions:**
 
-1. **Verify Password**
-   - Check password on quick start card
-   - Passwords are case-sensitive
-   - Ensure no extra spaces when typing
+1. **Forget and Reconnect**
+   - Remove 'rapture_kit' by fogetting this network from your device
+   - Search for network again, it will appear in a few seconds
+   - Join the 'rapture_kit' Wi-Fi hotspot
+   - You should see the captive portal hotspot
 
-2. **Forget and Reconnect**
-   - Remove saved network from your device
-   - Search for network again
-   - Enter password carefully
+2. **Check Client Limit**
+   - RKPi5 supports concurrent users, but there is a decreased capacity the more users that are connected
+   - More important is the type of media these clients are consuming
+   - For example, if multiple people are watching video, the throughput will be diminished
+   - If the RKPi5 is under heavy load, there might be refusals to connect
+   - Wait a bit and try again
 
-3. **Check Client Limit**
-   - RKPi5 supports up to 15 concurrent users
-   - If limit reached, disconnect other devices first
-
-### Connected but Can't Access Portal
+### Connected but Can't Access the Captive Portal
 
 **Symptoms:**
 - Connected to WiFi but portal won't load
@@ -78,32 +75,42 @@ This troubleshooting guide will be expanded with real-world scenarios during bet
 **Solutions:**
 
 1. **Try Alternate URLs**
-   Try these addresses in order:
+   Try thise IP number in your browser:
    ```
-   http://rkpi5.local
-   http://192.168.4.1
-   http://rkpi5.local:3000
+   http://10.42.0.1
+   https://10.42.0.1
    ```
 
 2. **Check Browser Cache**
    - Clear browser cache and cookies
    - Try incognito/private browsing mode
    - Try a different browser
+   - Try a different device
 
 3. **Verify Network Connection**
-   - Ensure you're connected to RKPi5 network (not cellular)
-   - Disable mobile data on phones
+   - Ensure you're connected to RKPi5 network (no internet, or cellular connection is permitted)
+   - Remember that the 'rapture_kit' hotspot will show 'no internet connected' this is not an error
+   - Remember that if you navigate to a real website, you will be 'captive' and redirected to 'rapture_kit' landing Page
    - Check WiFi icon shows full connection
 
+### Done with 'rapture_kit' captive portal
+
+**Symptoms:**
+- You try to navigate to a website but are blocked
+- You get a 404 website not found error
+- You are redirected back to the 'rapture_kit' captive portal
+
+## This is a design feature, not a bug!
+
+**Solutions:**
+
+1. Disonnect from the 'rapture_kit' captive portal
+2. Look for a cancel option, choosing this will disconnect and bring you back to the list of other available networds
+3. Turn Wi-Fi off by flipping the toggle
+4. Wait a few seconds, turn the toggle back on. The list of other available networks will reappear
+5. Once on your detault Wi-Fi network, all internet connected services will be available
+
 ## Advanced Troubleshooting
-
-### DNS Issues
-
-<CodeBlock title="Manual DNS Configuration" language="text">
-If rkpi5.local doesn't work, configure manual DNS:
-Primary DNS: 192.168.4.1
-Secondary DNS: 8.8.8.8
-</CodeBlock>
 
 ### Network Interference
 
@@ -115,18 +122,7 @@ Common sources of interference:
 - Cordless phones
 - Baby monitors
 
-**Solution**: Move RKPi5 away from interference sources or switch to 5GHz band (if supported by client device).
-
-### Firmware Issues
-
-<Callout type="error" title="Contact Support">
-If you suspect firmware corruption, contact support before attempting recovery.
-</Callout>
-
-Symptoms of firmware issues:
-- Device boots but network never appears
-- LED shows unusual patterns
-- Previously working device suddenly fails
+**Solution**: Move RKPi5 unit away from interference sources 
 
 ## Getting More Help
 

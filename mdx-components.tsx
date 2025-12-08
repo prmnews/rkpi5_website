@@ -1,16 +1,13 @@
-import { Callout, CodeBlock } from './src/components/mdx';
+import type { MDXComponents } from 'mdx/types';
+import { Callout, CodeBlock } from '@/components/docs';
 
 /**
- * This file provides ONLY custom components for MDX files.
- * Standard HTML elements (h1, p, etc.) are NOT overridden globally
- * to avoid breaking non-MDX pages.
- * 
- * Note: Type is inferred from return value to avoid MDX type dependency issues
+ * Custom MDX Components for App Router
+ * These components are used when rendering MDX content
  */
 
-export function useMDXComponents(components: Record<string, React.ComponentType<any>> = {}) {
+export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    // Only custom components, no HTML element overrides
     Callout,
     CodeBlock,
     ...components,

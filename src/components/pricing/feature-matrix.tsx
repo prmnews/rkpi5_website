@@ -17,8 +17,11 @@ const tiers: { key: TierKey; name: string }[] = [
 
 const rows: FeatureRow[] = [
   {
+    label: "Custom Built and Tested",
+    values: { hobbyist: false, bareBones: false, solo: true, field: true },
+  },  {
     label: "Rapture Kit content included (26GB+)",
-    values: { hobbyist: true, bareBones: true, solo: true, field: true },
+    values: { hobbyist: "Download for free", bareBones: true, solo: true, field: true },
   },
   {
     label: "Pre-configured microSD cards",
@@ -29,7 +32,7 @@ const rows: FeatureRow[] = [
     values: { hobbyist: false, bareBones: false, solo: true, field: true },
   },
   {
-    label: "25,000 mAh battery pack",
+    label: "20,000 mAh battery pack",
     values: { hobbyist: false, bareBones: false, solo: true, field: true },
   },
   {
@@ -46,15 +49,15 @@ const rows: FeatureRow[] = [
   },
   {
     label: "Email support",
-    values: { hobbyist: false, bareBones: true, solo: true, field: true },
+    values: { hobbyist: true, bareBones: true, solo: true, field: true },
   },
   {
     label: "Priority email support",
     values: { hobbyist: false, bareBones: false, solo: false, field: true },
   },
   {
-    label: "Extra storage for custom content",
-    values: { hobbyist: "DIY", bareBones: "DIY", solo: "Limited", field: "≈75GB" },
+    label: "Shipping and Handling Included",
+    values: { hobbyist: false, bareBones: true, solo: true, field: true },
   },
 ];
 

@@ -1,18 +1,15 @@
 import { Container } from "@/components/ui";
 import { 
-  Database, 
   Wifi, 
   Battery, 
-  Clock,
-  Users,
-  Shield,
   Zap,
-  Globe
+  HardDrive,
+  Copy
 } from "lucide-react";
 
 export const metadata = {
   title: "Product - RKPi5 | Biblical Resources Offline",
-  description: "Explore the RKPi5: 26GB+ biblical content, WiFi portal, 6-hour battery, serves 15+ users. Perfect for believers preparing for uncertain times.",
+  description: "Explore the RKPi5: 26GB+ biblical content, WiFi portal, 6-hour battery, serves 10+ users. Perfect for believers preparing for uncertain times.",
 };
 
 export default function ProductPage() {
@@ -27,14 +24,14 @@ export default function ProductPage() {
             </h1>
             <p className="text-xl sm:text-2xl text-primary-100 mb-10">
               Offline WiFi portal preloaded with 26GB+ of biblical resources. 
-              Serves 15+ users simultaneously. Setup in less than 5 minutes.
+              Serves 10+ users simultaneously. Setup in less than 5 minutes.
             </p>
 
             {/* Key Stats Bar */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {[
                 { value: "26GB+", label: "Content Library" },
-                { value: "15+", label: "Concurrent Users" },
+                { value: "10+", label: "Concurrent Users" },
                 { value: "6hrs", label: "Battery Life" },
                 { value: "<5min", label: "Setup Time" },
               ].map((stat) => (
@@ -77,32 +74,10 @@ export default function ProductPage() {
                     <span className="font-semibold">Storage:</span> 2x 128GB microSD (SanDisk Extreme)
                   </div>
                   <div>
-                    <span className="font-semibold">Battery:</span> 25,000 mAh (6-hour runtime)
+                    <span className="font-semibold">Battery:</span> Optional 25,000 mAh (6-hour runtime)
                   </div>
                   <div>
                     <span className="font-semibold">Display:</span> Optional 5&quot; touchscreen (Field Kit)
-                  </div>
-                </div>
-              </div>
-
-              {/* Content Specs */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <Database className="w-5 h-5 text-primary-600" />
-                  Content Library
-                </h3>
-                <div className="grid sm:grid-cols-2 gap-4 text-gray-700">
-                  <div>
-                    <span className="font-semibold">Audio:</span> 130+ hours of sermons/teaching
-                  </div>
-                  <div>
-                    <span className="font-semibold">Video:</span> 39+ hours of video content
-                  </div>
-                  <div>
-                    <span className="font-semibold">Bibles:</span> Multiple translations
-                  </div>
-                  <div>
-                    <span className="font-semibold">Books:</span> PDF library + survival guides
                   </div>
                 </div>
               </div>
@@ -115,7 +90,7 @@ export default function ProductPage() {
                 </h3>
                 <div className="grid sm:grid-cols-2 gap-4 text-gray-700">
                   <div>
-                    <span className="font-semibold">Concurrent Users:</span> 15+ simultaneous
+                    <span className="font-semibold">Concurrent Users:</span> 10+ simultaneous
                   </div>
                   <div>
                     <span className="font-semibold">Range:</span> Standard WiFi (50-100ft)
@@ -128,77 +103,372 @@ export default function ProductPage() {
                   </div>
                 </div>
               </div>
+
+              {/* Golden Master Creation */}
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <HardDrive className="w-5 h-5 text-primary-600" />
+                  Golden Master Setup
+                </h3>
+                <div className="grid sm:grid-cols-2 gap-4 text-gray-700">
+                  <div>
+                    <span className="font-semibold">Initial Setup:</span> ~2 hours (one time)
+                  </div>
+                  <div>
+                    <span className="font-semibold">Tools Required:</span> Raspberry Pi Imager
+                  </div>
+                  <div>
+                    <span className="font-semibold">Content Loading:</span> Drag-and-drop to microSD
+                  </div>
+                  <div>
+                    <span className="font-semibold">Configuration:</span> Automated setup scripts
+                  </div>
+                </div>
+                <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                  <p className="text-sm text-gray-700">
+                    <strong>DIY Guide:</strong> Step-by-step instructions included for creating your first &quot;golden master&quot; 
+                    microSD card. Once configured, you can duplicate it unlimited times for deployment.
+                  </p>
+                </div>
+              </div>
+
+              {/* Duplication Process */}
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <Copy className="w-5 h-5 text-primary-600" />
+                  Rapid Duplication
+                </h3>
+                <div className="grid sm:grid-cols-2 gap-4 text-gray-700">
+                  <div>
+                    <span className="font-semibold">Clone Time:</span> ~15 min per 128GB card
+                  </div>
+                  <div>
+                    <span className="font-semibold">Method:</span> SD card imaging software
+                  </div>
+                  <div>
+                    <span className="font-semibold">Batch Production:</span> Multiple USB3 readers
+                  </div>
+                  <div>
+                    <span className="font-semibold">Verification:</span> Automated integrity checks
+                  </div>
+                </div>
+                <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                  <p className="text-sm text-gray-700">
+                    <strong>Scale Your Ministry:</strong> Create as many units as needed. Perfect for church deployment, 
+                    mission trips, or preparing multiple Rapture Kits for friends and family.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* Feature Deep Dive */}
-      <section className="py-section-lg">
+      {/* Detailed Content Breakdown */}
+      <section className="py-section-lg bg-white">
         <Container>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-center">
-            Why RKPi5?
-          </h2>
-          <p className="text-lg text-gray-600 mb-16 text-center max-w-3xl mx-auto">
-            Purpose-built for believers preparing for uncertain times
-          </p>
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-center">
+              Complete Content Breakdown
+            </h2>
+            <p className="text-lg text-gray-600 mb-12 text-center">
+              26GB+ of carefully curated biblical resources organized into 9 sections
+            </p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Database,
-                title: "Complete Content Library",
-                description: "26GB+ of pre-loaded biblical resources. No downloading, no internet required. Everything you need from day one.",
-                color: "from-primary-500 to-primary-700",
-              },
-              {
-                icon: Users,
-                title: "Multi-User Access",
-                description: "Serve 15+ users simultaneously. Perfect for home groups, underground churches, or families preparing together.",
-                color: "from-accent-purple to-purple-700",
-              },
-              {
-                icon: Battery,
-                title: "Portable & Powered",
-                description: "6-hour battery runtime. TSA carry-on approved. Optional solar panel for extended field deployment.",
-                color: "from-accent-green to-green-700",
-              },
-              {
-                icon: Shield,
-                title: "Secure & Private",
-                description: "No internet connection means no tracking. Ideal for sensitive environments or areas under surveillance.",
-                color: "from-accent-orange to-orange-700",
-              },
-              {
-                icon: Clock,
-                title: "Instant Setup",
-                description: "Insert microSD, attach power, connect devices. No IT expertise required. Works in less than 5 minutes.",
-                color: "from-blue-500 to-blue-700",
-              },
-              {
-                icon: Globe,
-                title: "Universal Compatibility",
-                description: "Works with iOS, Android, Windows, macOS. Captive portal auto-popup like hotel WiFi for seamless access.",
-                color: "from-indigo-500 to-indigo-700",
-              },
-            ].map((feature) => (
-              <div
-                key={feature.title}
-                className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow"
-              >
-                <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4`}>
-                  <feature.icon className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+            <div className="space-y-8">
+              {/* Section 01 */}
+              <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-700 text-sm font-bold">01</span>
+                  Information for the Rapture Kit Sender
+                </h3>
+                <p className="text-gray-700 leading-relaxed">
+                  An 11-page PDF document explaining what the Rapture Kit is, how to use it before the Rapture, 
+                  important links to legal resources for including legal documents, and five (5) sample letters to 
+                  introduce the Rapture Kit resource to recipients.
+                </p>
               </div>
-            ))}
+
+              {/* Section 02 */}
+              <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-700 text-sm font-bold">02</span>
+                  First Things First
+                </h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  The recommended starting point for discovering what just happened and why. Two critical video presentations:
+                </p>
+                <ul className="space-y-3 text-gray-700 ml-4">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>Did Many People Just Disappear</strong> (15 min, Lamb & Lion Ministries) - Docudrama revealing what happened and the desire for you to come to salvation</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>What Just Happened to all the Missing People</strong> (39 min) - Tyler and Tom give a heartfelt message revealing the TRUTH</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>After the Rapture - Left Behind?</strong> (1hr 6min) - Prophecy Update&apos;s thorough explanation of what you witnessed</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>What Just Happened</strong> (56 min) - Broader explanation including theology of the Rapture and next steps</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>Post Rapture Emergency Message</strong> (4 audio files, ~1.5 hrs total) - Urgent plea for those left behind, with translations in 12 languages</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Section 03 */}
+              <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-700 text-sm font-bold">03</span>
+                  Bibles
+                </h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  Multiple Bible translations in PDF format, all public domain for unrestricted offline use. 
+                  Designed for discrete study without requiring internet connectivity.
+                </p>
+                <ul className="space-y-2 text-gray-700 ml-4">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>King James Bible (KJV)</strong> - PDF format</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>American Standard Bible (ASV)</strong> - PDF format</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>World English Bible (WEB)</strong> - PDF format</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>HTML-based ASV</strong> - Offline browser version with complete local storage</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>Open Bible Web App</strong> (1GB) - Includes Berean Study Bible, 6 translations, parallel commentaries, Strong&apos;s Lexicon, cross references, and Hebrew text analysis</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Section 04 */}
+              <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-700 text-sm font-bold">04</span>
+                  Books
+                </h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  19 eBooks totaling over 1,800 pages covering Bible prophecy, discipleship, and survival preparation.
+                </p>
+                <div className="grid sm:grid-cols-2 gap-3 text-gray-700 ml-4">
+                  <div>
+                    <strong>Biblical Content:</strong>
+                    <ul className="space-y-1 mt-2 text-sm">
+                      <li>• Bible prophecy resources</li>
+                      <li>• Discipleship and growth materials</li>
+                      <li>• Teaching and preaching guides</li>
+                      <li>• Bible prophecy timeline (English & Spanish)</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <strong>Survival Resources:</strong>
+                    <ul className="space-y-1 mt-2 text-sm">
+                      <li>• Bug-out bag guide</li>
+                      <li>• Edible plants identification</li>
+                      <li>• First aid manual</li>
+                      <li>• Camouflage & concealment</li>
+                      <li>• Bushcraft and hunting techniques</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* Section 05 */}
+              <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-700 text-sm font-bold">05</span>
+                  Discipleship Study Materials
+                </h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  Over 4 hours of video instruction plus study guides and PowerPoint presentations:
+                </p>
+                <ul className="space-y-2 text-gray-700 ml-4 text-sm">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>Nehemiah</strong> (10 min video)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>Reasons to Believe</strong> (3-part series, 1hr 18min)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>The Gift of Salvation - How to be Saved</strong> (24 min video)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>The Story of Jesus Bible Study</strong> (3 eBooks, 496 pages + 10 PowerPoint slide decks)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>The Wonders of Bible Prophecy</strong> (7-part series, 1hr 54min)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>What it Means to be a Watchman</strong> (18 min video)</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Section 06 */}
+              <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-700 text-sm font-bold">06</span>
+                  What Tribulation Saints Need to Know
+                </h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  14-part video series (5+ hours) by I Am A Watchman founder Scott E. Townsend, balancing &ldquo;speaking the 
+                  Truth in love&rdquo; with &ldquo;brutal honesty&rdquo; about what Tribulation Saints will face.
+                </p>
+                <div className="bg-white rounded-lg p-4 border border-gray-300">
+                  <p className="text-sm text-gray-700 mb-2"><strong>Topics covered:</strong></p>
+                  <div className="grid sm:grid-cols-2 gap-2 text-sm text-gray-600">
+                    <ul className="space-y-1">
+                      <li>• Fear and faith</li>
+                      <li>• The grace of God</li>
+                      <li>• Reliability of Bible prophecy</li>
+                      <li>• What will happen</li>
+                      <li>• Your ministry calling</li>
+                      <li>• Evangelism strategies</li>
+                      <li>• Your seal</li>
+                    </ul>
+                    <ul className="space-y-1">
+                      <li>• The Mark of the Beast</li>
+                      <li>• What you must discern</li>
+                      <li>• Your destiny</li>
+                      <li>• Finishing well</li>
+                      <li>• Personal message from Scott</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* Section 07 */}
+              <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-700 text-sm font-bold">07</span>
+                  Sermons and Teachings
+                </h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  Curated sermon series from trusted teachers to equip Tribulation Saints with sound doctrine. 
+                  Combined total: <strong>130 hours audio + 39 hours video</strong>.
+                </p>
+                <ul className="space-y-2 text-gray-700 ml-4 text-sm">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>Charlie Campbell:</strong> The End Times - Ten Upcoming Events (1 sermon, 58 min video)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>Nathan Jones & Vic Bautista:</strong> Book of Daniel chapters 8-12 (16 teachings, 10hrs 34min audio)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>Brandon Holthaus:</strong> Book of Revelation (45 sermons, 32hrs 31min audio)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>Dr. Andy Woods:</strong> Book of Revelation (75 sermons, 84hrs 19min audio)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>Gary Ray:</strong> Various subjects (9 teachings, 2hrs 46min audio)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>Jack Hibbs feat. Amir Tsarfati:</strong> Things You Should Know (56 min video)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>Tom Hughes:</strong> Book of Revelation (40 sermons, 29hrs 27min video)</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Section 08 */}
+              <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-700 text-sm font-bold">08</span>
+                  Additional Articles
+                </h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Collection of 64 I Am A Watchman articles published since 2018 covering topics to encourage, equip, 
+                  and train Christ Followers to finish well. Focus on the believer&apos;s role to &ldquo;watch and warn&rdquo; - helping 
+                  establish a second chance rescue effort to bring as many as possible to faith in Jesus Christ, avoid 
+                  the Mark of the Beast, and finish strong before the Second Coming.
+                </p>
+              </div>
+
+              {/* Section 09 */}
+              <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-700 text-sm font-bold">09</span>
+                  Partner Content
+                </h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  Curated partner content as of August 2025, organized for easy navigation:
+                </p>
+                <ul className="space-y-2 text-gray-700 ml-4 text-sm">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>Britt Gillette:</strong> All 4 of his book series</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>CO Wyler:</strong> The complete 4-book &ldquo;Untaken&rdquo; series</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>FluidicIce:</strong> 4 PDF resources including 293-page &ldquo;The Rapture Survival Guide&rdquo;</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary-600 mt-1">•</span>
+                    <span><strong>Raspberry Pi Server Solutions:</strong> RKPi5 captive portal server hotspot by Scott Townsend</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Summary Stats */}
+            <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="bg-white rounded-lg p-4 border border-gray-200 text-center">
+                <div className="text-2xl font-bold text-primary-600 mb-1">9</div>
+                <div className="text-sm text-gray-600">Content Sections</div>
+              </div>
+              <div className="bg-white rounded-lg p-4 border border-gray-200 text-center">
+                <div className="text-2xl font-bold text-primary-600 mb-1">130+</div>
+                <div className="text-sm text-gray-600">Hours of Audio</div>
+              </div>
+              <div className="bg-white rounded-lg p-4 border border-gray-200 text-center">
+                <div className="text-2xl font-bold text-primary-600 mb-1">39+</div>
+                <div className="text-sm text-gray-600">Hours of Video</div>
+              </div>
+              <div className="bg-white rounded-lg p-4 border border-gray-200 text-center">
+                <div className="text-2xl font-bold text-primary-600 mb-1">1,800+</div>
+                <div className="text-sm text-gray-600">Pages of Books</div>
+              </div>
+            </div>
           </div>
         </Container>
       </section>
 
       {/* Comparison Table */}
-      <section className="py-section-lg bg-gray-50">
+      <section className="py-section-lg">
         <Container>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-center">
             RKPi5 vs. Alternatives
@@ -213,17 +483,17 @@ export default function ProductPage() {
                 <tr className="border-b border-gray-200">
                   <th className="text-left p-4 font-bold text-gray-900">Feature</th>
                   <th className="text-center p-4 font-bold text-primary-600 bg-primary-50">RKPi5</th>
-                  <th className="text-center p-4 font-bold text-gray-900">USB Drive</th>
+                  <th className="text-center p-4 font-bold text-gray-900">Rapture Kit 3.1 USB Drive</th>
                   <th className="text-center p-4 font-bold text-gray-900">DIY Pi</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {[
                   { feature: "Content Included", rkpi5: "✅", usb: "✅", diy: "❌" },
-                  { feature: "Multi-User (15+)", rkpi5: "✅", usb: "❌", diy: "⚠️" },
+                  { feature: "Multi-User (10+)", rkpi5: "✅", usb: "❌", diy: "⚠️" },
                   { feature: "Setup < 5 min", rkpi5: "✅", usb: "✅", diy: "❌" },
                   { feature: "Captive Portal UX", rkpi5: "✅", usb: "❌", diy: "❌" },
-                  { feature: "Video Streaming", rkpi5: "✅", usb: "⚠️", diy: "⚠️" },
+                  { feature: "Video Streaming", rkpi5: "✅", usb: "✅", diy: "⚠️" },
                   { feature: "All Platforms", rkpi5: "✅", usb: "✅", diy: "⚠️" },
                   { feature: "Battery Powered", rkpi5: "✅", usb: "❌", diy: "⚠️" },
                   { feature: "No IT Skills", rkpi5: "✅", usb: "✅", diy: "❌" },
@@ -239,10 +509,18 @@ export default function ProductPage() {
             </table>
           </div>
 
-          <p className="text-center text-gray-600 mt-8">
-            <strong>Key Differentiator:</strong> RKPi5 transforms static USB content into a multi-user WiFi portal 
-            with hotel-grade UX, ideal for group study and post-Rapture scenarios.
-          </p>
+          <blockquote className="mt-8 max-w-3xl mx-auto">
+            <div className="bg-gradient-to-br from-primary-50 to-primary-100/50 border-l-4 border-primary-600 rounded-r-lg p-6 shadow-sm">
+              <p className="text-gray-700 text-lg leading-relaxed mb-4 italic">
+                &ldquo;RKPi5 transforms static USB content into a multi-user WiFi portal 
+                with hotel-grade UX, ideal for group study and post-Rapture scenarios.&rdquo;
+              </p>
+              <footer className="text-sm text-gray-600">
+                <span className="font-semibold text-gray-900">— Scott E. Townsend</span>
+                <span className="text-gray-500 ml-2">Founder, RKPi5 & I Am A Watchman</span>
+              </footer>
+            </div>
+          </blockquote>
         </Container>
       </section>
 
@@ -283,7 +561,7 @@ export default function ProductPage() {
               Ready to Prepare?
             </h2>
             <p className="text-xl text-primary-100 mb-10">
-              Join the waitlist and be among the first to receive your RKPi5
+              Join the waitlist and be among the first to build your own RKPi5
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a

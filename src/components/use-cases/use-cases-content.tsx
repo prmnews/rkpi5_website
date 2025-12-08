@@ -1,41 +1,59 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui";
 import { UseCaseCard, BetaTesterCard } from "@/components/use-cases";
-import { BookOpen, Users, Church, Globe } from "lucide-react";
+import { WaitlistModal } from "@/components/homepage/waitlist-modal";
+import { PersonStanding, Wifi, BookOpen, Users, Church, Globe } from "lucide-react";
 
 const useCases = [
   {
+    icon: Wifi,
+    title: "Personal Evangelism",
+    problem: "Sharing the Gospel requires accessible resources that can be easily shared with seekers. Traditional methods rely on internet connectivity or expensive printed materials. Evangelists need portable, comprehensive content they can deploy instantly in any conversation or setting.",
+    solution: "RKPi5 creates a local WiFi network using a captive portal. It contains a static website with pre-loaded sermons, Bibles, Scripture booklets in multiple translations. Power on the device, let curious seekers connect and then learn from the rich depth of its content.",
+    results: "Evangelists engage seekers anywhere—coffee shops, parks, or remote locations—with professional-quality Gospel content. Multiple people access content simultaneously, enabling group discussions and immediate follow-up discipleship with comprehensive Biblical resources.",
+    color: "from-orange-500 to-orange-700",
+  },
+  {
+    icon: PersonStanding,
+    title: "Training a New Generation of Believers",
+    problem: "After the rapture, new believers will desperately need Biblical training and discipleship resources. Internet infrastructure may be compromised or monitored, making traditional digital access dangerous or impossible. Physical Bibles and materials may be scarce or confiscated.",
+    solution: "RKPi5 provides a complete offline discipleship library that operates independently of any network infrastructure. Groups gather safely, connect to the local portal, and access video and audio sermons, eBooks, articles, and teaching series, and training materials without leaving digital footprints.",
+    results: "Emerging leaders gain access to quality theological training when they need it most. Small groups multiply as trained believers disciple others, building resilient communities of faith and continuing the Lord's work during the most challenging times in history.",
+    color: "from-stone-500 to-stone-700",
+  },
+  {
     icon: BookOpen,
     title: "Home Study",
-    problem: "Individual believers seeking deeper Biblical knowledge often struggle with finding comprehensive, offline-accessible resources that don't require constant internet connectivity. Study materials are fragmented across multiple platforms and devices, making consistent learning challenging.",
-    solution: "RKPi5 provides a complete offline library with 26GB+ of theological content, multiple Bible translations, and structured discipleship materials. Students can access everything from a single device without internet dependency, enabling focused study in any environment.",
-    results: "Learners gain uninterrupted access to 130+ hours of audio teaching and comprehensive study materials. The portable nature allows study anywhere—during commutes, travel, or in areas with poor connectivity—creating consistent learning habits and deeper theological understanding.",
+    problem: "Individual believers seeking deeper Biblical knowledge struggle to find comprehensive, offline-accessible resources. Study materials are scattered across multiple platforms and devices, making consistent learning challenging and entirely dependent on internet connectivity.",
+    solution: "RKPi5 provides a complete offline library with 26GB+ of theological content, multiple Bible translations, and structured discipleship materials. Access everything from a single device without internet dependency, enabling focused study in any environment or circumstance.",
+    results: "Learners gain uninterrupted access to 130+ hours of audio, 39 hours of video, 16 eBooks, 4 hours of teaching and comprehensive study materials. The portable design allows study anywhere—during commutes, travel, or in areas with poor connectivity—building consistent habits and deeper theological understanding.",
     color: "from-primary-500 to-primary-700",
   },
   {
     icon: Users,
     title: "Family Prep",
-    problem: "Families preparing for uncertain times need reliable access to Biblical teaching that works for all ages, but coordinating multiple devices and ensuring age-appropriate content can be overwhelming. Parents want a simple solution that the whole family can use together.",
-    solution: "With RKPi5's WiFi portal, up to 15 family members can connect simultaneously to the same content library. Parents can guide children through appropriate materials while accessing deeper theological resources themselves. No account management or complex setup required—just connect and access.",
-    results: "Families establish regular Biblical learning routines without technical friction. The shared access model fosters discussion and accountability, while the offline nature ensures teaching continuity regardless of external circumstances. Multi-generational discipleship becomes practical and sustainable.",
+    problem: "Families preparing for uncertain times need reliable access to Biblical teaching that works for all ages. Coordinating multiple devices and ensuring age-appropriate content is overwhelming. Parents want a simple solution the whole family can use together without technical hassle.",
+    solution: "With RKPi5's WiFi portal, up to 10-15 family members or neighborhood friends can connect simultaneously to the same content library. Parents guide children through appropriate materials while accessing deeper theological resources themselves. No account management or complex setup—just connect and access.",
+    results: "Families establish regular Biblical learning routines without technical friction. The shared access model fosters discussion and accountability, while offline operation ensures teaching continuity regardless of external circumstances. Multi-generational discipleship becomes sustainable.",
     color: "from-accent-purple to-purple-700",
   },
   {
     icon: Church,
     title: "Underground Churches",
-    problem: "Communities in restricted-access environments face severe challenges accessing Biblical resources. Internet monitoring, censorship, and network shutdowns make traditional online resources dangerous or impossible to access. Physical materials are bulky and raise security concerns.",
-    solution: "RKPi5 operates completely offline with no internet trail or external connections. The device appears as a local WiFi network, with content accessible only to those physically present. Compact form factor enables discreet transport and rapid deployment when needed.",
-    results: "Believers gain secure access to comprehensive teaching resources without digital footprints. Small groups can study together safely, and leaders can disciple others with professional-quality materials that would otherwise be unavailable. The offline nature provides protection and peace of mind.",
+    problem: "Communities in restricted environments face severe challenges accessing Biblical resources. Internet monitoring, censorship, and network shutdowns make traditional online resources dangerous or impossible to access. Physical materials are bulky and raise security concerns.",
+    solution: "RKPi5 operates completely offline with no internet trail or external connections. The device appears as a local WiFi network within a limited range, with content accessible only to those physically present. Compact form factor enables discreet transport and rapid deployment when needed.",
+    results: "Believers gain secure access to comprehensive teaching resources without digital footprints. Small groups study together safely, and leaders disciple others with professional-quality materials otherwise unavailable. The offline nature provides protection and peace of mind.",
     color: "from-accent-green to-green-700",
   },
   {
     icon: Globe,
     title: "Mission Fields",
-    problem: "Remote missionary work often means operating in areas with unreliable or non-existent internet infrastructure. Missionaries need comprehensive resources for teaching and discipleship but can't depend on connectivity. Shipping physical materials is expensive and logistically challenging.",
-    solution: "RKPi5's battery-powered, solar-compatible design works in any environment. 6-hour battery runtime supports extended teaching sessions, and the captive portal auto-connects users without technical configuration. All content is pre-loaded and ready to serve multiple users simultaneously.",
-    results: "Missionaries deploy rich Biblical content anywhere—jungle camps, mountain villages, or disaster zones. Solar charging extends operation indefinitely in remote locations. Teams can disciple new believers with the same quality resources available in developed regions, accelerating church planting and leadership development.",
+    problem: "Remote missionary work means operating in areas with unreliable or non-existent internet infrastructure. Often, however, people will have a mobile phone. Missionaries need comprehensive resources for teaching and discipleship but cannot depend on connectivity. Shipping physical materials is expensive and logistically challenging.",
+    solution: "RKPi5's battery-powered, solar-compatible design works in any environment. Six-hour battery runtime supports extended teaching sessions, and the captive portal auto-connects users without technical configuration. All content is pre-loaded and ready to serve multiple users.",
+    results: "Missionaries deploy rich Biblical content anywhere—jungle camps, mountain villages, or disaster zones. Solar charging extends operation indefinitely in remote locations. Teams disciple new believers with quality resources, accelerating church planting and leadership development.",
     color: "from-accent-orange to-orange-700",
   },
 ];
@@ -72,7 +90,10 @@ const containerVariants = {
 };
 
 export function UseCasesContent() {
+  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
+
   return (
+    <>
     <div className="min-h-screen bg-white">
       <Container>
         <div className="py-16">
@@ -209,16 +230,16 @@ export function UseCasesContent() {
               Ready to Get Started?
             </h2>
             <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-              Join our waitlist to be among the first to receive RKPi5 when it launches. 
+              Join our waitlist to be among the first to build your own RKPi5 when it launches. 
               Early supporters get priority access and exclusive beta program benefits.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/#waitlist"
+              <button
+                onClick={() => setIsWaitlistOpen(true)}
                 className="inline-block rounded-lg bg-primary-600 px-6 py-3 text-sm font-semibold text-white hover:bg-primary-700 transition-colors"
               >
                 Join Waitlist
-              </a>
+              </button>
               <a
                 href="/product"
                 className="inline-block rounded-lg bg-white border border-gray-300 px-6 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-50 transition-colors"
@@ -230,6 +251,13 @@ export function UseCasesContent() {
         </div>
       </Container>
     </div>
+
+    {/* Waitlist Modal */}
+    <WaitlistModal
+      isOpen={isWaitlistOpen}
+      onClose={() => setIsWaitlistOpen(false)}
+    />
+    </>
   );
 }
 

@@ -262,7 +262,7 @@ export default function UtilitiesDemoPage() {
             <p>✓ Task 2.2.1: Container component with 3 size variants</p>
             <p>✓ Task 2.2.2: LoadingSpinner with sm/md/lg sizes + variants</p>
             <p>✓ Task 2.2.3: ErrorBoundary with custom fallback support</p>
-            <p>✓ Task 2.2.4: 15+ helper functions in lib/utils.ts</p>
+            <p>✓ Task 2.2.4: 10+ helper functions in lib/utils.ts</p>
           </div>
         </section>
       </Container>

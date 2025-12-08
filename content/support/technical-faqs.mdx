@@ -1,9 +1,16 @@
+---
+title: Technical FAQs
+description: Technical questions and answers for advanced users and developers
+---
+
+import { Callout } from '@/components/docs'
+
 # Technical FAQs
 
 Technical questions and answers for advanced users and developers.
 
 <Callout type="info" title="Beta Documentation">
-Technical details will be refined during beta testing.
+Technical details will be refined during beta testing. This is for highly technical nerds!
 </Callout>
 
 ## Hardware Technical Details
@@ -11,31 +18,40 @@ Technical details will be refined during beta testing.
 ### What are the exact hardware specifications?
 
 **Processor:**
-- Broadcom BCM2712 (Raspberry Pi 5)
-- Quad-core ARM Cortex-A76 @ 2.4GHz
-- VideoCore VII GPU
+- Broadcom BCM2712 2.4GHz quad-core 64-bit Arm Cortex-A76 CPU
+- Cryptography extensions, 512KB per-core L2 caches and a 2MB shared L3 cache
+- VideoCore VII GPU, supporting OpenGL ES 3.1, Vulkan 1.3
 
 **Memory & Storage:**
-- 8GB LPDDR4X-4267 SDRAM
-- 256GB microSD card (UHS-I)
+- 8GB LPDDR4X-4267 SDRAM (1GB, 2GB, 4GB, 8GB, and 16GB)
+- 128GB microSD card (SanDisk 128GB Extreme microSDXC UHS-I)
+- microSD card slot, with support for high-speed SDR104 mode
 - 26GB+ content pre-loaded
-- 200GB+ available for expansion
 
 **Connectivity:**
 - Dual-band WiFi (2.4GHz and 5GHz)
 - 802.11ac (WiFi 5)
 - Gigabit Ethernet (Bare Bones tier and above)
-- Bluetooth 5.0 / BLE
+- Dual 4Kp60 HDMI® display output with HDR support
+- 2 × USB 3.0 ports, supporting simultaneous 5Gbps operation
+- 2 × USB 2.0 ports
+- 4Kp60 HEVC decoder
+- Bluetooth 5.0 / Bluetooth Low Energy (BLE)
+- 2 × 4-lane MIPI camera/display transceivers
 
 **Power:**
-- 20,000mAh lithium polymer battery
-- USB-C Power Delivery (5V/3A)
+- 5V/5A DC power via USB-C, with Power Delivery support
 - 15W typical power consumption
+
+**Other:**
+- Raspberry Pi standard 40-pin header
+- Real-time clock (RTC), powered from external battery (Note: purchased separately)
+- Power button
 
 ### Can I upgrade the storage?
 
-<Callout type="warning" title="Warranty Void">
-Opening the device voids warranty. Upgrade at your own risk.
+<Callout type="warning" title="Storage Options">
+The RKPi5 persistent storage is solely on microSD cards, there is no hard disk
 </Callout>
 
 Technically yes, but not recommended:
@@ -46,20 +62,20 @@ Technically yes, but not recommended:
 
 ### Can I connect external storage?
 
-**Planned for future update:**
-- USB storage mount points
-- Auto-sync to external drive
-- Backup to USB capability
+**microSD or USB storage**:
+- **Optional** - USB storage mount points are built-in to the Raspberry Pi platform
+- **mandatory** - microSD storage is where the operating system boots from
+- **GENERAL NOTE**: The RKPi5 is complete with the microSD card that is preloaded with the operating system. At the time that the **golden master** microSD is created, it also loads Rapture Kit 3.1 static website content. Therefore, the single microSD card (with a best practices duplicate) is all that is needed. No external storage is required.
 
 ### What operating system does it run?
 
 RKPi5 runs a customized Linux distribution:
 
 - Base: Raspberry Pi OS (Debian-based)
+- Version: 64-bit Trixie Operating System
 - Kernel: Linux 6.1+
-- Custom: RKPi5 management software
 - Web Server: Nginx
-- Media Server: Custom implementation
+- Media Server: Custom implementation on Nginx foundation
 
 ## Network & Connectivity
 
@@ -67,55 +83,46 @@ RKPi5 runs a customized Linux distribution:
 
 **As WiFi Access Point:**
 ```
-SSID: RKPi5-XXXX (customizable)
+SSID: rapture_kit (only customizable in the installer/configuration shell scripts [advanced users only])
 Security: WPA2-PSK
-Channels: Auto (2.4GHz) or Manual (2.4/5GHz)
-DHCP Range: 192.168.4.10 - 192.168.4.254
-Gateway: 192.168.4.1
-Max Clients: 15
+Channels: Auto (2.4GHz) We optimize on 2.4GHz for compatibility
+Gateway: 10.42.0.1
+Max Clients: 10-15
 ```
 
 **As WiFi Client:**
-- Can connect to existing WiFi for internet access
-- Used for content updates only
-- Can operate in bridge mode (advanced)
+- Does not connect to the internet
+- Cannot be used as a router or Bridge
+- Only serves Wi-Fi captive portal static website content
+- In a client device, such as a phone, tablet, or PC, you must disconnect from the RKPi5 and join another Wi-Fi connection for default behavior
+- **NOTE**: Any attempt to navigate to another website while connected to the 'rapture_kit' network connection will be **forced** back to the Rapture Kit content.
 
 ### Can I change the IP address range?
 
-Yes, through admin panel:
-- Navigate to Network Settings
-- Advanced Configuration
-- Modify DHCP settings
-- Restart network service
-
-Default is 192.168.4.x but can be changed to avoid conflicts.
+- No, the IP is baked into the RKPi5 configuration scripts.
+- Changing the default SSID name of 'rapture_kit' or the IP address requires editing the *.sh install scripts
+- Thus, you are building a forked master image for your new specfications
+- **NOTE**: This is not supported. You are on your own if you run into problems!
 
 ### Does it support WiFi 6 (802.11ax)?
 
 No, Raspberry Pi 5 supports WiFi 5 (802.11ac) only. 
 
 WiFi 5 is sufficient for:
-- Up to 15 concurrent users
-- HD video streaming
+- Up to 10-15 concurrent users
+- HD video or MP3 audio streaming
 - All current content
-
-### Can it act as a WiFi repeater?
-
-<Callout type="info" title="Advanced Feature">
-Bridge mode allows WiFi repeater functionality but requires manual configuration.
-</Callout>
-
-Repeater mode is not enabled by default but can be configured by advanced users through SSH access.
 
 ## Software & Development
 
 ### Can I SSH into the device?
 
 **SSH Access:**
-- Disabled by default for security
-- Can be enabled in admin panel
+- Disabled by default for security!
+- Can be enabled during installation of the Trixie operating system (for new builds only)
 - Default port: 22
-- Username/password provided after enabling
+- Username/password are baked into the *.sh shell install scripts
+- You can modify the user name and password in the scripts prior to forking the application
 
 <Callout type="warning">
 SSH access should only be used by advanced users. Incorrect modifications can break functionality.
@@ -133,15 +140,10 @@ Additional languages can be installed via SSH if needed.
 
 ### Can I develop custom applications?
 
-**Hobbyist Tier:**
+**All Tier:**
 - Full access to DIY scripts
 - Modify as desired
 - Community support available
-
-**Other Tiers:**
-- API documentation available
-- Custom applications possible
-- May void warranty if system files modified
 
 ### Is there an API?
 
@@ -149,31 +151,18 @@ Additional languages can be installed via SSH if needed.
 RESTful API for accessing content and system features.
 </Callout>
 
-**Planned API Endpoints:**
-```
-/api/v1/content/list       - List available content
-/api/v1/content/search     - Search content
-/api/v1/content/stream     - Stream media
-/api/v1/system/status      - System status
-/api/v1/system/battery     - Battery info
-/api/v1/users/active       - Active connections
-```
-
-API documentation will be released with public launch.
+If you want a full development platform, the RKPi5 solution is not the correct starting point. What you are looking for is WAMPi.
 
 ### Can I backup the entire system?
 
 **Backup Options:**
 
-1. **Content Only** (via admin panel)
-   - Backs up custom configurations
-   - User-added bookmarks/notes
-   - Network settings
-
-2. **Full System** (via SSH/direct access)
-   - Complete microSD card image
-   - Requires card reader
-   - ~26GB+ backup file
+- To "backup" the microSD card, use a clone tool to do an image-to-image transfer between microSD cards.
+- For example, we create a **golden master** image on a microSD card, then use Etcher or Pi Imager to make duplicates
+- This is a standard Raspberry Pi operation, not specific to the RKPi5 solution
+- Duplicating the microSD is permitted. It is wise to make at least one duplicate
+- microSD cards are durable, but can show signs of wear or can sometimes get corrupted
+- Having a backup microSD card gives you complete fault tollerance. There is no migration beween **old and new**
 
 ## Content & Media
 
@@ -237,98 +226,41 @@ Manual transcoding:
 - 50 text browsers (estimated)
 
 **Soft Limits:**
-- Storage: 256GB (expandable)
+- Storage: 128GB (expandable)
 - Battery: 6+ hours (replaceable)
 - Range: ~100ft (antenna upgradeable)
 
 ### Can I monitor performance?
 
-**Admin Panel Monitoring:**
-- Real-time CPU/memory usage
-- Active user count
-- Bandwidth per user
-- Battery status
-- Temperature monitoring
+- No. This is a feature, not a bug or limitation.
+- We are trying to protect users that access the RKPi5 from hostile actors
 
-**Logging:**
-- Access logs
-- Error logs
-- Performance logs
-- Downloadable via admin panel
+### What's included in the RKPi5 build scripts?
 
-## Security & Administration
-
-### How secure is RKPi5?
-
-**Security Features:**
-- WPA2 encrypted WiFi
-- HTTPS for admin panel
-- Password-protected admin access
-- Optional MAC address filtering
-- Optional VPN support (advanced)
-
-**Security Limitations:**
-- No WPA3 (hardware limitation)
-- No enterprise authentication
-- Admin panel accessible to any connected user (unless restricted)
-
-### Can I set user permissions?
-
-<Callout type="info" title="Planned Feature">
-User account system with permissions planned for future release.
-</Callout>
-
-**Current State:**
-- Single admin account
-- All connected users have equal access to content
-- Admin panel requires separate password
-
-**Future:**
-- Multiple user accounts
-- Per-user permissions
-- Content access controls
-- Time limits
-
-### How do I reset to factory defaults?
-
-**Soft Reset** (Settings only):
-- Admin Panel → System → Reset Settings
-- Keeps content intact
-- Resets network/admin passwords
-
-**Hard Reset** (Full wipe):
-- Hold power button + volume up (if available)
-- Or via admin panel: Factory Reset
-- Restores to out-of-box state
-- Keeps original content
-
-## Hobbyist/DIY Questions
-
-### What's included in the DIY scripts?
-
-**Hobbyist tier downloads include:**
-- Complete setup scripts
-- Automated installation
-- Configuration templates
-- Content download/management scripts
-- Network setup automation
-- Web interface source code
+**All tiers use the same install scripts:**
+- Complete setup scripts (these are .sh or shell scripts used by Linux)
+- Automated installation (single script install orchestrates the other component scripts)
+- Configuration templates (requires extreme expertise, don't recommend modivations)
+- Content download (independent from https://rapturekit.org/download) requires a PC/Mac + monitor + keyboard + mouse
+- Network setup is configured in the shell scripts and configure the Wi-Fi captive portal and static website content
+- Content has a index.html page for the landing (home) page. Nginx routes to the Rapture Kit 3.1 home page automatically
 
 ### What do I need to build my own?
 
 **Required Hardware:**
 - Raspberry Pi 5 (8GB recommended)
-- MicroSD card (256GB+ recommended)
+- MicroSD card (128GB+ recommended)
 - Portable battery pack (20,000mAh+)
 - USB-C power supply
 - Case (optional)
+- You will need a PC/Mac, monitor, keyboard, and mouse with internet connection to create a new **golden master** microSD card
 
-**Estimated Cost:** $150-200 for all components
+**Estimated Cost:** $150-500 for all components depending on complexity and add-on options (solar panel, etc.)
 
 ### Is support available for DIY builds?
 
 **DIY Support:**
-- Community forums (free)
+- Community forums (perhaps in the future)
 - Documentation (free)
 - Email support (paid consultation available)
 

@@ -97,7 +97,7 @@ export function Hero() {
             >
               {[
                 { value: "26GB+", label: "Content" },
-                { value: "15+", label: "Users" },
+                { value: "10+", label: "Users" },
                 { value: "6hrs", label: "Battery" },
                 { value: "<5min", label: "Setup" },
               ].map((stat, index) => (

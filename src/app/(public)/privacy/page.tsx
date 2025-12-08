@@ -17,7 +17,7 @@ export default function PrivacyPage() {
             <section className="mb-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Overview</h2>
               <p className="text-gray-700 mb-4">
-                RKPi5 ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, 
+                RKPi5 (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) is committed to protecting your privacy. This Privacy Policy explains how we collect, 
                 use, disclose, and safeguard your information when you visit our website or interact with our services.
               </p>
             </section>
@@ -46,7 +46,7 @@ export default function PrivacyPage() {
               <ul className="list-disc pl-6 mb-4 space-y-2 text-gray-700">
                 <li>Respond to your inquiries and provide customer support</li>
                 <li>Maintain and improve our website and services</li>
-                <li>Send you updates about RKPi5 product availability (if you've joined the waitlist)</li>
+                <li>Send you updates about RKPi5 product availability (if you&apos;ve joined the waitlist)</li>
                 <li>Analyze usage patterns and optimize user experience</li>
                 <li>Comply with legal obligations and protect our rights</li>
               </ul>
@@ -104,7 +104,7 @@ export default function PrivacyPage() {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Children's Privacy</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Children&apos;s Privacy</h2>
               <p className="text-gray-700 mb-4">
                 Our services are not directed to individuals under the age of 13. We do not knowingly collect personal information from children. 
                 If you believe we have collected information from a child, please contact us immediately.
@@ -114,7 +114,7 @@ export default function PrivacyPage() {
             <section className="mb-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Changes to This Privacy Policy</h2>
               <p className="text-gray-700 mb-4">
-                We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated "Last Updated" date. 
+                We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated &ldquo;Last Updated&rdquo; date. 
                 We encourage you to review this policy periodically.
               </p>
             </section>
