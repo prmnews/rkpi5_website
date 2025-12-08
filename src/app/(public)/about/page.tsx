@@ -33,7 +33,7 @@ export default function AboutPage() {
         <Container size="content">
           <div className="max-w-3xl mx-auto">
             <div className="flex items-center justify-center mb-6">
-              <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
+              <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
                 <Heart className="w-8 h-8 text-white" />
               </div>
             </div>
@@ -46,15 +46,24 @@ export default function AboutPage() {
                 anywhere, anytime—regardless of internet availability or infrastructure conditions.
               </p>
               <p>
-                We believe that access to Scripture, sound theological teaching, and discipleship 
+                We believe that access to the Bible, sound theological teaching from trusted teachers, and discipleship 
                 materials shouldn&apos;t depend on the grid staying up or networks remaining accessible. 
                 Whether you&apos;re preparing for the Rapture, serving in restricted-access areas, 
                 or ministering in remote mission fields, RKPi5 ensures God&apos;s Word is always within reach.
               </p>
               <p>
+                The RKPi5 is just one part of our Advanced Gospel Initiatives designed to support believers today and our future
+                brothers and sisters in Christ after the Rapture. As Christian-based content is systematically removed from the internet,
+                we need to be prepared to share the Gospel of Jesus Christ with others. The RKPi5 is a tool to help us do that. This is our
+                way to extend the baton of faith in Jesus Christ to the next generation of believers!
+              </p>
+              <p>
                 Our vision is a world where every believer has offline access to the resources 
-                they need to grow in faith, make disciples, and remain faithful in any circumstance—
-                from comfortable home study to the most challenging field conditions.
+                they need to grow in faith, make more disciples, and remain faithful in any circumstance—
+                from comfortable home study to the most challenging field conditions. Especially as enforcement and censorship of 
+                Christian-based content increases, we need to be prepared to share the Gospel of Jesus Christ with others.
+                Furthermore, during the Seal, Trumpet, and Bowl judgments, it will be exceedingly difficult to pass on 
+                critical resources--including Bibles--to others. The RKPi5 is a tool to help us do that.
               </p>
             </div>
           </div>
@@ -77,7 +86,7 @@ export default function AboutPage() {
               </p>
               <div className="space-y-4 text-gray-700 leading-relaxed">
                 <p>
-                  Scott is a technology innovator and devoted believer who saw the critical need for 
+                  Scott is a technology innovator and devoted Watchman who saw the critical need for 
                   reliable offline Biblical resources in an increasingly uncertain world. With a background 
                   in software engineering and systems architecture, Scott recognized that believers preparing 
                   for the Rapture and the Tribulation needed more than just digital files—they needed a 
@@ -90,8 +99,8 @@ export default function AboutPage() {
                   traditional online resources would fail when networks go down or access is restricted.
                 </p>
                 <p>
-                  &ldquo;I wanted to create something that would work in a basement bunker, an underground 
-                  church, or a jungle mission station with the same reliability,&rdquo; Scott explains. 
+                  &ldquo;I wanted to create something that would work in a coffee shop or fleeing into the wild.
+                  It is suitable for the home, the office, the church, the mission field, and the wilderness,&rdquo; Scott explains.                 
                   &ldquo;RKPi5 isn&apos;t just a product—it&apos;s a tool for the body of Christ to remain 
                   connected to sound teaching and Scripture when everything else fails.&rdquo;
                 </p>
@@ -99,7 +108,9 @@ export default function AboutPage() {
                   By combining his technical expertise with a heart for ministry, Scott has developed 
                   RKPi5 as a practical solution that bridges the gap between digital convenience and 
                   infrastructure independence. His goal is to equip 10,000+ believers with offline 
-                  Biblical libraries before the Rapture or widespread network disruptions occur.
+                  Biblical libraries before the Rapture or widespread network disruptions occur. 
+                  Utlimately, the 2 Witnesses, 144,000 Jewish evangelists, and the Gospel Angel will 
+                  prevail...but if possible, we want to help play a role in End Times missions.
                 </p>
               </div>
             </div>

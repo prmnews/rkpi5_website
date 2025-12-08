@@ -1,16 +1,16 @@
-import nextra from 'nextra';
+import createMDX from '@next/mdx';
 
-const withNextra = nextra({
-  theme: 'nextra-theme-docs',
-  themeConfig: './theme.config.tsx',
-  defaultShowCopyCode: true
+const withMDX = createMDX({
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+  },
 });
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Only include mdx (not md) to avoid duplicate page detection
-  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'mdx'],
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 };
 
-export default withNextra(nextConfig);
+export default withMDX(nextConfig);
 

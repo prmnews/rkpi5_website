@@ -1,0 +1,150 @@
+---
+title: Connection Issues
+description: Troubleshooting guide for WiFi and network connectivity problems
+---
+
+import { Callout, CodeBlock } from '@/components/docs'
+
+# Connection Issues
+
+Troubleshooting guide for WiFi and network connectivity problems.
+
+<Callout type="info" title="Beta Documentation">
+This troubleshooting guide will be expanded with real-world scenarios during beta testing.
+</Callout>
+
+## Common Connection Problems
+
+### Can't Find 'rapture_kit' WiFi Network
+
+**Symptoms:**
+- 'rapture_kit' network doesn't appear in WiFi list
+- Network appears then disappears
+- Network signal is very weak
+
+**Solutions:**
+
+1. **Check Power Status**
+   - Ensure device is powered on
+   - LED should be solid green when ready
+   - If LED is red, it means the Pi has not been turned on
+   - Note the LED might be red if the battery is drained. If so, charge the battery
+
+2. **Check Distance**
+   - Move closer, perhaps within 30 feet of RKPi5
+   - Ensure no thick walls between devices. This reduces the reach of the Wi-Fi signal.
+   - Avoid interference from other electronics
+
+3. **Restart RKPi5**
+   ```
+   1. Press and hold power button for 5 seconds (device shuts down)
+   2. Wait 10 seconds
+   3. Press power button briefly to boot up
+   4. Wait 60-90 seconds for complete boot
+   5. The LED light will turn from red to quickly blinking green, then to solid green when fully booted
+   ```
+
+### Can't Connect to RKPi5 Network
+
+**Symptoms:**
+- Network appears but won't connect
+- Connection times out
+
+**Solutions:**
+
+1. **Forget and Reconnect**
+   - Remove 'rapture_kit' by fogetting this network from your device
+   - Search for network again, it will appear in a few seconds
+   - Join the 'rapture_kit' Wi-Fi hotspot
+   - You should see the captive portal hotspot
+
+2. **Check Client Limit**
+   - RKPi5 supports concurrent users, but there is a decreased capacity the more users that are connected
+   - More important is the type of media these clients are consuming
+   - For example, if multiple people are watching video, the throughput will be diminished
+   - If the RKPi5 is under heavy load, there might be refusals to connect
+   - Wait a bit and try again
+
+### Connected but Can't Access the Captive Portal
+
+**Symptoms:**
+- Connected to WiFi but portal won't load
+- Browser shows "Cannot reach site"
+- Long loading times with no results
+
+**Solutions:**
+
+1. **Try Alternate URLs**
+   Try thise IP number in your browser:
+   ```
+   http://10.42.0.1
+   https://10.42.0.1
+   ```
+
+2. **Check Browser Cache**
+   - Clear browser cache and cookies
+   - Try incognito/private browsing mode
+   - Try a different browser
+   - Try a different device
+
+3. **Verify Network Connection**
+   - Ensure you're connected to RKPi5 network (no internet, or cellular connection is permitted)
+   - Remember that the 'rapture_kit' hotspot will show 'no internet connected' this is not an error
+   - Remember that if you navigate to a real website, you will be 'captive' and redirected to 'rapture_kit' landing Page
+   - Check WiFi icon shows full connection
+
+### Done with 'rapture_kit' captive portal
+
+**Symptoms:**
+- You try to navigate to a website but are blocked
+- You get a 404 website not found error
+- You are redirected back to the 'rapture_kit' captive portal
+
+## This is a design feature, not a bug!
+
+**Solutions:**
+
+1. Disonnect from the 'rapture_kit' captive portal
+2. Look for a cancel option, choosing this will disconnect and bring you back to the list of other available networds
+3. Turn Wi-Fi off by flipping the toggle
+4. Wait a few seconds, turn the toggle back on. The list of other available networks will reappear
+5. Once on your detault Wi-Fi network, all internet connected services will be available
+
+## Advanced Troubleshooting
+
+### Network Interference
+
+Common sources of interference:
+
+- Other WiFi routers nearby
+- Bluetooth devices
+- Microwave ovens
+- Cordless phones
+- Baby monitors
+
+**Solution**: Move RKPi5 unit away from interference sources 
+
+## Getting More Help
+
+If these solutions don't resolve your issue:
+
+1. **Check System Status**
+   - Note LED color and pattern
+   - Check battery percentage
+   - Note any error messages
+
+2. **Gather Information**
+   - Your device model (phone/tablet/laptop)
+   - Operating system version
+   - Browser being used
+   - When the problem started
+
+3. **Contact Support**
+   - Visit [Contact Page](/contact)
+   - Include system status and information above
+   - Attach screenshots if possible
+
+---
+
+*Additional troubleshooting scenarios will be added based on beta tester experiences.*
+

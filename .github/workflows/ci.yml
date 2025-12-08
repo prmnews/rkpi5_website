@@ -5,7 +5,6 @@ on:
     branches:
       - main
       - 'epic/**'
-      - 'story/**'
   pull_request:
     branches:
       - main
@@ -16,35 +15,14 @@ env:
   PNPM_VERSION: '9'
 
 jobs:
-  build-and-test:
-    name: Build & Test
+  # Gate 1: Code Quality Checks
+  quality-checks:
+    name: Quality Checks (Lint + TypeScript + Build)
     runs-on: ubuntu-latest
     
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # For merge conflict checking
-
-      # Story branch validation (only runs on story/* branches)
-      - name: Validate story branch format
-        if: startsWith(github.ref, 'refs/heads/story/')
-        run: |
-          BRANCH="${GITHUB_REF#refs/heads/}"
-          
-          # Expected format: story/{epic}.{story}-{kebab-case-name}
-          # Example: story/9.2-build-contact-form
-          
-          if [[ ! "$BRANCH" =~ ^story/[0-9]+\.[0-9]+-[a-z0-9-]+$ ]]; then
-            echo "❌ Invalid story branch name: $BRANCH"
-            echo ""
-            echo "Expected format: story/{epic}.{story}-{name}"
-            echo "Example: story/1.1-initialize-nextjs"
-            echo ""
-            exit 1
-          fi
-          
-          echo "✅ Valid story branch name: $BRANCH"
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -57,40 +35,21 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # Convex setup (CRITICAL - must run before TypeScript check)
       - name: Configure Convex deployment
         run: |
           echo "Configuring Convex for CI/CD..."
           mkdir -p .convex
           echo '{"deployment": "'$CONVEX_DEPLOYMENT'"}' > .convex/deployment.json
-          echo "✅ Convex deployment configured: $CONVEX_DEPLOYMENT"
+          echo "✅ Convex deployment configured"
         env:
           CONVEX_DEPLOYMENT: ${{ secrets.CONVEX_DEPLOYMENT }}
 
       - name: Generate Convex types
         run: |
           echo "Generating Convex types..."
-          echo "CONVEX_DEPLOYMENT: $CONVEX_DEPLOYMENT"
-          echo "Deployment config: $(cat .convex/deployment.json)"
-          
-          # Codegen requires authentication in CI via deploy key
           npx convex codegen || {
             echo ""
             echo "❌ Convex codegen failed"
@@ -100,85 +59,98 @@ jobs:
             echo "  - NEXT_PUBLIC_CONVEX_URL (deployment URL)"
             echo "  - CONVEX_DEPLOY_KEY (authentication token for CI/CD)"
             echo ""
-            echo "To get CONVEX_DEPLOY_KEY:"
-            echo "  1. Go to Convex Dashboard → Settings → Deploy Keys"
-            echo "  2. Create new deploy key for 'GitHub Actions CI/CD'"
-            echo "  3. Add to GitHub Secrets as CONVEX_DEPLOY_KEY"
-            echo ""
             exit 1
           }
           echo "✅ Convex types generated successfully"
-          echo "Generated files:"
-          ls -la convex/_generated/
         env:
           CONVEX_DEPLOYMENT: ${{ secrets.CONVEX_DEPLOYMENT }}
           CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY }}
           CONVEX_URL: ${{ secrets.NEXT_PUBLIC_CONVEX_URL }}
           NEXT_PUBLIC_CONVEX_URL: ${{ secrets.NEXT_PUBLIC_CONVEX_URL }}
 
-      # Code quality checks
-      - name: ESLint check
-        run: pnpm lint
+      - name: Run ESLint
+        run: |
+          echo "Running ESLint..."
+          pnpm lint
+          echo "✅ ESLint passed"
 
-      - name: TypeScript type check
-        run: pnpm exec tsc --noEmit
+      - name: Run TypeScript type check
+        run: |
+          echo "Running TypeScript type check..."
+          pnpm exec tsc --noEmit
+          echo "✅ TypeScript passed"
 
-      - name: Build Next.js
-        run: pnpm build
+      - name: Build Next.js application
+        run: |
+          echo "Building Next.js application..."
+          pnpm build
+          echo "✅ Build passed"
         env:
           NEXT_PUBLIC_CONVEX_URL: ${{ secrets.NEXT_PUBLIC_CONVEX_URL }}
-          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || 'pk_test_placeholder' }}
-          NEXT_PUBLIC_SITE_URL: 'https://localhost:3000'
+          NEXT_PUBLIC_SITE_URL: 'https://rkpi5-marketing.vercel.app'
+          NEXT_PUBLIC_SHOW_WAITLIST: 'true'
 
-      # Merge conflict check (only for story branches)
-      - name: Check merge conflicts with epic branch
-        if: startsWith(github.ref, 'refs/heads/story/')
-        run: |
-          STORY_BRANCH="${{ github.ref_name }}"
-          EPIC_NUM=$(echo $STORY_BRANCH | sed 's/story\/\([0-9]*\)\..*/\1/')
-          EPIC_BRANCH=$(git branch -r | grep "origin/epic/${EPIC_NUM}-" | head -1 | sed 's/.*origin\///' || echo "")
-          
-          if [ -z "$EPIC_BRANCH" ]; then
-            echo "⚠️ Epic branch not found for epic $EPIC_NUM"
-            echo "This is OK if it's the first story or epic branch doesn't exist yet"
-            exit 0
-          fi
-          
-          echo "Checking merge conflicts with: $EPIC_BRANCH"
-          git fetch origin $EPIC_BRANCH
-          
-          if git merge-tree $(git merge-base HEAD origin/$EPIC_BRANCH) HEAD origin/$EPIC_BRANCH | grep -q "^+<<<<<<< "; then
-            echo "❌ Merge conflicts detected with $EPIC_BRANCH"
-            echo "Please resolve conflicts before merging"
-            exit 1
-          fi
-          
-          echo "✅ No merge conflicts with $EPIC_BRANCH"
-
-      # Success summary
-      - name: Success summary
+      - name: Quality checks summary
         if: success()
         run: |
           echo ""
-          echo "✅ All CI/CD checks passed!"
+          echo "✅ All quality checks passed!"
           echo ""
           echo "Completed checks:"
-          echo "  - Branch validation: ✓"
           echo "  - Dependencies installed: ✓"
           echo "  - Convex types generated: ✓"
           echo "  - ESLint: ✓"
           echo "  - TypeScript: ✓"
           echo "  - Next.js build: ✓"
-          echo "  - Merge conflicts: ✓"
           echo ""
-          
-          if [[ "${{ github.ref }}" == refs/heads/story/* ]]; then
-            STORY_BRANCH="${{ github.ref_name }}"
-            EPIC_NUM=$(echo $STORY_BRANCH | sed 's/story\/\([0-9]*\)\..*/\1/')
-            EPIC_BRANCH="epic/${EPIC_NUM}-*"
-            
-            echo "Next steps for story branch:"
-            echo "  1. Merge to $EPIC_BRANCH"
-            echo "  2. Test epic branch"
-            echo "  3. Merge epic to main when complete"
-          fi
+
+  # Gate 2: Deploy to Vercel (only if quality checks pass)
+  deploy-preview:
+    name: Deploy to Vercel (Preview)
+    needs: quality-checks
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Install Vercel CLI
+        run: pnpm add -g vercel@latest
+
+      - name: Pull Vercel environment
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Build project artifacts
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Deploy to Vercel preview
+        id: deploy
+        run: |
+          DEPLOY_URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
+          echo "DEPLOY_URL=$DEPLOY_URL" >> $GITHUB_OUTPUT
+          echo "✅ Deployed to: $DEPLOY_URL"
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Deployment summary
+        run: |
+          echo "## 🎉 Preview Deployment Successful" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Preview URL:** ${{ steps.deploy.outputs.DEPLOY_URL }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Branch:** main" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "This is a preview deployment for testing. Production deploys via tagged releases." >> $GITHUB_STEP_SUMMARY

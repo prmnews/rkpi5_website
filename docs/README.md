@@ -1,67 +1,65 @@
 # RKPi5 Marketing Website - Documentation
 
 **Purpose:** Marketing website for RKPi5 + Rapture Kit Content Platform  
-**Status:** Planning complete, awaiting approval before development  
-**Launch Strategy:** Beta program (3 testers) → Learn → Public launch  
-**Target Beta:** < 2 weeks from approval  
-**Target Public Launch:** Q1 2026 (post-beta validation)
+**Status:** Development complete, waitlist active  
+**Product:** Raspberry Pi 5 captive WiFi portal with 26GB+ biblical content
 
 ---
 
-## Quick Start
+## Current State
 
-### Phase 0: Beta Program (DO NOT SKIP)
+This is a **waitlist-only marketing site**. There is no e-commerce, checkout, or user authentication.
 
-**Before any website development:**
-1. **Build beta units** (DIY, Solo, Field kits)
-2. **Ship to 3 beta testers**
-3. **Conduct 60-min Zoom onboarding** per tester
-4. **Collect 2-4 weeks of real usage feedback**
-5. **Create marketing materials** from beta learnings:
-   - Product demos (real footage)
-   - Tutorial videos
-   - Troubleshooting guides
-   - Testimonials
-6. **Build support wiki** based on actual user questions
+**Features:**
+- Product information and feature showcase
+- DIY build configurations with cost estimates
+- Support documentation (MDX-based)
+- Waitlist signup with email confirmation
+- Contact form with admin notification
 
-**Why Beta First?**
-- Authentic marketing content from real users
-- Identify pain points before public launch
-- Validate SKU positioning (DIY vs Solo vs Field)
-- Create genuine testimonials and use cases
+---
 
-### Phase 1: Review Documentation (After Beta Complete)
+## Website Pages
 
-Read these files in order:
-1. **product-brief.md** - Product positioning, target market, pricing, beta strategy
-2. **website-structure.md** - Technical specs, page structure, design system
-3. **PROMPTS.md** - AI agent prompts for building the website
+| Page | Description |
+|------|-------------|
+| Homepage | Hero, features, testimonials, CTA |
+| Product | Features, specs, content library details |
+| Pricing | DIY build configurations & estimates (4 tiers) |
+| Support | MDX documentation (FAQs, setup guides, troubleshooting) |
+| Use Cases | Pre/post-Rapture scenarios |
+| About | Mission, founder info |
+| Contact | Contact form |
+| Waitlist | Waitlist signup page |
+| Privacy/Terms | Legal pages |
 
-### Phase 2: Choose Your Approach
+---
 
-**Option A: Iterative Build (Recommended)**
-- Use Prompts 1-10 sequentially
-- More control, easier to review
-- Estimated time: 4-6 hours
+## Tech Stack
 
-**Option B: All-in-One Build**
-- Use Prompt 11 only
-- Fastest approach
-- Estimated time: 2-3 hours
+| Component | Technology |
+|-----------|------------|
+| Framework | Next.js 14 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS |
+| Database | Convex (waitlist + contacts) |
+| Email | Resend |
+| Deployment | Vercel |
 
-### Phase 3: Provide Context
+---
 
-When using prompts, also provide:
-- `docs/product-brief.md` (updated with beta learnings)
-- Beta testimonials and use cases
-- Product demo videos (from beta)
-- Design reference: https://linear.app
+## Build Configurations (Pricing Tiers)
 
-### Phase 4: Deploy
+The pricing page shows **DIY build configurations** with estimated hardware costs:
 
-- Platform: Replit
-- Framework: Next.js 14
-- Configure environment variables (Clerk, Convex, Stripe)
+| Tier | Hardware Cost | Description |
+|------|---------------|-------------|
+| Hobbyist | FREE | Scripts only, requires existing Pi5 |
+| Bare Bones | ~$80-120 | 2× microSD cards, use with your Pi5 |
+| Solo | ~$280-320 | Complete kit with Pi5, battery, case |
+| Field | ~$450-550 | Self-contained with display, speakers, solar |
+
+**Note:** All software/scripts are FREE. Prices are estimated DIY component costs.
 
 ---
 
@@ -69,205 +67,85 @@ When using prompts, also provide:
 
 ### Planning Documents
 
-1. **product-brief.md**
-   - Value proposition
-   - Target personas
-   - Competitive positioning
-   - Pricing tiers
-   - Marketing messages
-   - SEO keywords
+1. **product-brief.md** — Product positioning, pricing strategy, target personas, marketing messages
 
-2. **website-structure.md**
-   - Site structure (10 pages)
-   - Component architecture
-   - Design system (Linear-inspired)
-   - Tech stack details
-   - Convex schema
-   - Performance targets
+2. **technical/** — Technical documentation
+   - `architecture-decisions.md` — Original architecture planning
+   - `epic-story-task-breakdown.md` — Development task breakdown
+   - `git-workflow.md` — Branching strategy
+   - `deployment-vercel.md` — Vercel deployment guide
 
-3. **PROMPTS.md**
-   - 11 AI agent prompts
-   - Prompt execution order
-   - Recommended approach
-   - Additional context needed
+### Status Documents (Root)
 
-4. **README.md** (this file)
-   - Quick start guide
-   - File overview
-   - Next steps
+- `REFACTOR-COMPLETE.md` — Details of e-commerce removal
+- `EMAIL-INTEGRATION-COMPLETE.md` — Resend email integration details
+- `QUICKSTART.md` — Quick start guide for development
 
 ---
 
-## Website Overview
+## Development
 
-### Pages (10 Total)
+### Quick Start
 
-**Public (7):**
-- Homepage - Hero, features, CTA
-- Product - Features, specs, demo
-- Pricing - 3 tiers, comparison
-- Documentation - MDX docs with search
-- Use Cases - Customer stories
-- About - Mission, team, contact
-- Blog - Updates, insights
+```bash
+# Install dependencies
+pnpm install
 
-**Protected (3):**
-- Dashboard - Orders, downloads
-- Checkout - Stripe payment
-- Admin - Waitlist, orders, analytics
+# Start development
+pnpm dev
 
-### Key Features
+# In separate terminal
+npx convex dev
+```
 
-1. **Beta Signup Form** - Priority access for beta cohort
-2. **Support Wiki** - Troubleshooting guides from beta learnings
-3. **Waitlist System** - Convex storage, email confirmation (post-beta)
-4. **Product Demos** - Real footage from beta testers
-5. **Stripe Checkout** - One-time payments ($99, $299, $499)
-6. **Responsive Design** - Mobile-first, touch-optimized
+### Environment Variables
 
-**Deferred Until Post-Beta:**
-- Admin dashboard (not needed for beta cohort of 3)
-- Advanced documentation search
-- Blog system
+```bash
+# Convex
+CONVEX_DEPLOYMENT=...
+NEXT_PUBLIC_CONVEX_URL=...
+
+# Resend
+RESEND_API_KEY=re_...
+
+# Site
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_SHOW_WAITLIST=true
+```
 
 ---
 
-## Tech Stack
+## Database Schema
 
-**Frontend:**
-- Next.js 14 (App Router)
-- TypeScript
-- Tailwind CSS
-- Shadcn/ui components
-- Framer Motion (animations)
-- Lucide React (icons)
+**Tables (Convex):**
 
-**Backend:**
-- Convex (database, realtime)
-- Clerk (authentication)
-- Stripe (payments)
-- Resend (email notifications)
-
-**Deployment:**
-- Replit (hosting)
-- Vercel Analytics (metrics)
+| Table | Purpose |
+|-------|---------|
+| `waitlist` | Waitlist signups (email, name, use case, tier) |
+| `contacts` | Contact form submissions |
 
 ---
 
-## Design Inspiration
+## Feature Flags
 
-**Primary:** Linear.app
-- Clean, contemporary aesthetic
-- Generous whitespace
-- Subtle gradients
-- Fast animations (150-200ms)
-- Card-based layouts
-- Excellent typography
-
-**Secondary:**
-- Vercel.com (developer focus)
-- Stripe.com (pricing page)
-- Tailwind UI (component patterns)
+| Flag | Purpose |
+|------|---------|
+| `NEXT_PUBLIC_SHOW_WAITLIST` | Show/hide waitlist CTAs (set to `false` to expire waitlist) |
 
 ---
 
-## Development Timeline
+## What's NOT Included
 
-### Phase 0: Beta Program (< 2 weeks)
-- [ ] Build 3 beta units (DIY, Solo, Field)
-- [ ] Ship to beta testers
-- [ ] 60-min Zoom onboarding per tester
-- [ ] 2-4 weeks hands-on testing
-- [ ] Collect feedback via 1:1 discussions
-- [ ] Film product demos, tutorials
-- [ ] Create troubleshooting guides
+This site intentionally excludes:
+- User authentication (no Clerk)
+- Payment processing (no Stripe)
+- Shopping cart or checkout
+- User accounts or dashboards
+- Admin dashboard
 
-### Phase 1: Beta Website (Week 1-2)
-**Minimal launch to support beta program only:**
-- [ ] Project setup (Next.js, Tailwind, Shadcn)
-- [ ] Basic homepage (hero + beta signup)
-- [ ] Product overview page
-- [ ] Beta signup form (email → manual followup)
-- [ ] Support wiki (empty shell, populate during beta)
-
-### Phase 2: Public Website (Week 3-6, Post-Beta)
-**Full marketing site with beta-derived content:**
-- [ ] Update homepage with beta testimonials
-- [ ] Product demos (real footage from beta)
-- [ ] Full pricing page (3 tiers)
-- [ ] Support wiki (populated with beta FAQs)
-- [ ] Convex + Clerk + Stripe configuration
-- [ ] Waitlist system
-- [ ] Checkout flow
-
-### Phase 3: Polish & Deploy (Week 7-8)
-- [ ] Mobile optimization
-- [ ] SEO optimization
-- [ ] Performance tuning
-- [ ] Replit deployment
-- [ ] Influencer demo program (Prophecy Watchers, Lamb & Lion)
-
-**Total:** 2 weeks beta website + 6 weeks full website = 8 weeks to public launch-ready
+The RKPi5 is currently a **DIY product** with free build scripts. Pre-built units will be available in the future.
 
 ---
 
-## Success Metrics
-
-### Launch Goals (Month 1)
-
-| Metric | Target |
-|--------|--------|
-| Unique visitors | 1,000 |
-| Waitlist signups | 100 |
-| Demo requests | 20 |
-| Conversion rate | 10% (waitlist → customer) |
-| Page load time | <3s |
-| Lighthouse score | >90 |
-
-### Revenue Goals (Quarter 1)
-
-| Metric | Target |
-|--------|--------|
-| Units sold | 50 |
-| Revenue | $12,500 |
-| Average order value | $250 |
-| Customer acquisition cost | <$50 |
-
----
-
-## Next Steps
-
-### CRITICAL: DO NOT START WEBSITE DEVELOPMENT UNTIL BETA COMPLETE
-
-**Current Phase: Planning → Beta Prep**
-
-1. **✅ Review all documentation** in this folder
-2. **Scott's approval gate** - Comprehensive review of all 3 docs
-3. **Build beta units** (3 units: DIY, Solo, Field)
-4. **Execute beta program** (2-4 weeks)
-5. **Create marketing materials** from beta learnings
-6. **THEN start website development** with authentic content
-
-**Beta Deliverables Required Before Website Dev:**
-- Product demo videos (real usage footage)
-- Tutorial videos (setup, troubleshooting)
-- User testimonials (from 3 beta testers)
-- FAQs and troubleshooting guides (from actual user questions)
-- Use case validation (which SKUs resonate? What messaging works?)
-
----
-
-## Support
-
-**For questions about:**
-- Product positioning → See `product-brief.md`
-- Technical specs → See `website-structure.md`
-- AI prompts → See `PROMPTS.md`
-- RKPi5 product → See `../productBrief.md`, `../prd.md`
-
----
-
-**Prepared By:** Sarah (Product Owner)  
-**Date:** November 11, 2025  
-**Status:** Ready for development
-
+**Product Creator:** Scott E. Townsend  
+**Last Updated:** December 2025

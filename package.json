@@ -18,10 +18,10 @@
     "@next/mdx": "^16.0.1",
     "convex": "^1.29.0",
     "framer-motion": "^12.23.24",
+    "gray-matter": "^4.0.3",
     "lucide-react": "^0.553.0",
     "next": "^14.2.33",
-    "nextra": "^3.3.1",
-    "nextra-theme-docs": "^3.3.1",
+    "next-mdx-remote": "^5.0.0",
     "ngrok": "5.0.0-beta.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -30,6 +30,8 @@
     "zod": "^4.1.12"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.16",
+    "@types/mdx": "^2.0.13",
     "@types/node": "^24.10.0",
     "@types/react": "^19.2.3",
     "@types/react-dom": "^19.2.2",

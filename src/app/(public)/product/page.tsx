@@ -209,7 +209,7 @@ export default function ProductPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary-600 mt-1">•</span>
-                    <span><strong>After the Rapture - Left Behind?</strong> (1hr 6min) - Prophecy Update's thorough explanation of what you witnessed</span>
+                    <span><strong>After the Rapture - Left Behind?</strong> (1hr 6min) - Prophecy Update&apos;s thorough explanation of what you witnessed</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary-600 mt-1">•</span>
@@ -251,7 +251,7 @@ export default function ProductPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary-600 mt-1">•</span>
-                    <span><strong>Open Bible Web App</strong> (1GB) - Includes Berean Study Bible, 6 translations, parallel commentaries, Strong's Lexicon, cross references, and Hebrew text analysis</span>
+                    <span><strong>Open Bible Web App</strong> (1GB) - Includes Berean Study Bible, 6 translations, parallel commentaries, Strong&apos;s Lexicon, cross references, and Hebrew text analysis</span>
                   </li>
                 </ul>
               </div>
@@ -332,8 +332,8 @@ export default function ProductPage() {
                   What Tribulation Saints Need to Know
                 </h3>
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  14-part video series (5+ hours) by I Am A Watchman founder Scott E. Townsend, balancing "speaking the 
-                  Truth in love" with "brutal honesty" about what Tribulation Saints will face.
+                  14-part video series (5+ hours) by I Am A Watchman founder Scott E. Townsend, balancing &ldquo;speaking the 
+                  Truth in love&rdquo; with &ldquo;brutal honesty&rdquo; about what Tribulation Saints will face.
                 </p>
                 <div className="bg-white rounded-lg p-4 border border-gray-300">
                   <p className="text-sm text-gray-700 mb-2"><strong>Topics covered:</strong></p>
@@ -408,7 +408,7 @@ export default function ProductPage() {
                 </h3>
                 <p className="text-gray-700 leading-relaxed">
                   Collection of 64 I Am A Watchman articles published since 2018 covering topics to encourage, equip, 
-                  and train Christ Followers to finish well. Focus on the believer's role to "watch and warn" - helping 
+                  and train Christ Followers to finish well. Focus on the believer&apos;s role to &ldquo;watch and warn&rdquo; - helping 
                   establish a second chance rescue effort to bring as many as possible to faith in Jesus Christ, avoid 
                   the Mark of the Beast, and finish strong before the Second Coming.
                 </p>
@@ -430,11 +430,11 @@ export default function ProductPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary-600 mt-1">•</span>
-                    <span><strong>CO Wyler:</strong> The complete 4-book "Untaken" series</span>
+                    <span><strong>CO Wyler:</strong> The complete 4-book &ldquo;Untaken&rdquo; series</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary-600 mt-1">•</span>
-                    <span><strong>FluidicIce:</strong> 4 PDF resources including 293-page "The Rapture Survival Guide"</span>
+                    <span><strong>FluidicIce:</strong> 4 PDF resources including 293-page &ldquo;The Rapture Survival Guide&rdquo;</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary-600 mt-1">•</span>

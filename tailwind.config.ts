@@ -6,9 +6,7 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./pages/**/*.{js,ts,jsx,tsx,md,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-    "./theme.config.tsx",
+    "./content/**/*.{md,mdx}",
   ],
   theme: {
     extend: {
@@ -94,9 +92,15 @@ const config: Config = {
         "section-sm": "4rem",     // Smaller vertical spacing
         "section-lg": "8rem",     // Larger vertical spacing
       },
+      borderWidth: {
+        "3": "3px",
+      },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/typography"),
+  ],
 }
 
 export default config

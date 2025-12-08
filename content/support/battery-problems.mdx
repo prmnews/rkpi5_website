@@ -1,0 +1,169 @@
+---
+title: Battery Problems
+description: Troubleshooting guide for power and battery-related issues
+---
+
+import { Callout, CodeBlock } from '@/components/docs'
+
+# Battery Problems
+
+Troubleshooting guide for power and battery-related issues.
+
+<Callout type="info" title="Beta Documentation">
+Battery performance data and troubleshooting will be refined during beta testing.
+</Callout>
+
+## Battery Not Charging
+
+**Symptoms:**
+- Battery percentage not increasing
+- No charging indicator or progress
+- Device shuts down when unplugged
+
+**Solutions:**
+
+1. **Verify Power Source**
+   - Use included Pi5 power adapter (5V/3A). This is supplied specifically for wall-powered use. If you purchased the Canakit Starter Kit, one is included in the box.
+   - Try different wall outlet
+   - Verify that a circuit breaker did not flip shut
+   - Avoid low-power USB ports on computers
+
+2. **Check Charging Cable**
+   - Ensure USB-C cable is fully inserted into the power in port on the Pi5
+   - Try a different USB-C cable
+   - Check for damage to cable or port, perhaps a bent port
+
+3. **Check LED Status**
+   <Callout type="warning">
+   Common meaning around battery pack charge state it might be different on your model.
+   </Callout>
+
+   - LED Color and (Status):
+   - Red flashing (Charging)
+   - Red solid (Low battery)
+   - Green solid (Fully charged)
+   - Amber (Charging error)
+
+4. **Temperature Check**
+   <Callout type="warning">
+   Device may refuse to charge if too hot or too cold.
+   </Callout>
+   
+   - Allow device to reach room temperature
+   - Don't charge in direct sunlight
+   - Ensure ventilation isn't blocked
+
+## Battery Draining Too Fast
+
+**Expected Runtime**: 6+ hours typical use
+
+**Symptoms:**
+- Battery depletes faster than 6 hours
+- Sudden battery drops
+- Inconsistent battery readings
+
+**Solutions:**
+
+1. **Check Number of Users**
+   - More connected users = faster drain
+   - Expected: 6+ hours with 3-5 users
+   - With 10-15 users: 4-5 hours
+
+2. **Check Content Usage**
+   - Video streaming uses more power
+   - Audio streaming uses less power
+   - Text browsing uses minimal power
+
+## Device Won't Power On
+
+**Symptoms:**
+- No response when pressing power button
+- No LED indicators
+- Completely unresponsive
+
+**Solutions:**
+
+1. **Charge the Battery**
+   - Connect to charger for at least 30 minutes
+   - Completely depleted batteries may show no immediate response
+   - Wait for charging LED to appear
+
+2. **Hard Reset**
+   - Hold power button for 15 seconds
+   - Release and wait 10 seconds
+   - Press power button normally
+
+3. **Check for Physical Damage**
+   - Inspect device for damage
+   - Check ports for debris
+   - Ensure no moisture in ports
+
+## Battery Percentage Incorrect
+
+**Symptoms:**
+- Battery shows 100% then immediately drops
+- Percentage jumps around
+- Shows 0% but device still works
+
+**Solutions:**
+
+1. **Calibrate Battery**
+   ```
+   1. Charge to 100%
+   2. Use device until it shuts down (0%)
+   3. Charge uninterrupted to 100%
+   4. Battery meter should now be accurate
+   ```
+
+## Extending Battery Life
+
+### Best Practices
+
+<Callout type="success" title="Pro Tips">
+Follow these tips to maximize your RKPi5 battery life.
+</Callout>
+
+1. **Optimal Charging**
+   - Charge between 20% and 80% for daily use
+   - Full 0-100% cycles monthly for calibration
+   - Avoid leaving on charger 24/7
+
+2. **Usage Optimization**
+   - Limit concurrent users when possible
+   - Prefer audio over video content
+   - Disable WiFi when not in use
+
+3. **Storage Guidelines**
+   - Store at 50-60% charge
+   - Recharge every 3 months if stored
+   - Keep in cool, dry location
+
+### Expected Battery Lifespan
+
+<Callout type="info">
+Battery capacity naturally degrades over time.
+</Callout>
+
+- **New Device**: 6+ hours runtime
+- **After 1 Year**: 5+ hours runtime (typical)
+- **After 2 Years**: 4+ hours runtime (typical)
+- **Charge Cycles**: 500+ cycles expected
+
+## Battery Replacement
+
+<Callout type="warning" title="Professional Service">
+Battery replacements are usually not possible. You should consider buying a new battery pack.
+</Callout>
+
+Signs you may need battery replacement:
+
+- Runtime less than 3 hours with light use
+- Battery health below 60%
+- Physical swelling of battery (immediately replace your battery - this is very dangerous!)
+- Rapid capacity drops
+
+**Contact support** if you believe you need a battery replacement.
+
+---
+
+*Battery performance benchmarks will be updated with real-world data from beta testing.*
