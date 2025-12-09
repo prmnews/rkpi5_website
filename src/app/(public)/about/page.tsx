@@ -269,10 +269,10 @@ export default function AboutPage() {
                   <h3 className="text-xl font-semibold text-gray-900">Email</h3>
                 </div>
                 <a
-                  href="mailto:info@rapturekit.com"
+                  href="mailto:info@mail.rkpi5.com"
                   className="text-primary-600 hover:text-primary-700 font-medium text-lg"
                 >
-                  info@rapturekit.com
+                  info@mail.rkpi5.com
                 </a>
               </div>
 

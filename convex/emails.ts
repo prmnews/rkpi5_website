@@ -6,7 +6,15 @@ import { Resend } from "resend";
 
 // Lazy-initialize Resend client to avoid issues during Convex module analysis
 function getResendClient() {
-  return new Resend(process.env.RESEND_API_KEY);
+  const apiKey = process.env.RESEND_API_KEY;
+  
+  if (!apiKey) {
+    console.error("❌ CRITICAL: RESEND_API_KEY not found in environment!");
+    console.error("Set it with: npx convex env set RESEND_API_KEY re_your_key_here --prod");
+    throw new Error("RESEND_API_KEY environment variable is required");
+  }
+  
+  return new Resend(apiKey);
 }
 
 /**
@@ -20,9 +28,9 @@ export const testResendConnection = internalAction({
       const resend = getResendClient();
       const { data, error } = await resend.emails.send({
         from: "RKPi5 <noreply@mail.rkpi5.com>",
-        to: ["info@rkpi5.com"],
+        to: ["info@mail.rkpi5.com"],
         bcc: ["kmx-iAaW7gXy3JeDt@proton.me"],
-        replyTo: "info@rkpi5.com",
+        replyTo: "info@mail.rkpi5.com",
         subject: "Testing *send* to resend endpoint from waitlist",
         html: `
           <!DOCTYPE html>
@@ -77,7 +85,7 @@ export const testResendConnection = internalAction({
                   <li>✅ SPF/DKIM: Authenticated</li>
                   <li>✅ Verified Domain: mail.rkpi5.com</li>
                   <li>✅ FROM Address: noreply@mail.rkpi5.com</li>
-                  <li>✅ TO Address: info@rkpi5.com</li>
+                  <li>✅ TO Address: info@mail.rkpi5.com</li>
                   <li>✅ BCC Monitoring: kmx-iAaW7gXy3JeDt@proton.me</li>
                 </ul>
                 
@@ -99,7 +107,7 @@ export const testResendConnection = internalAction({
                 
                 <h2>Next Steps:</h2>
                 <ol>
-                  <li>Verify this email arrived in info@rkpi5.com inbox</li>
+                  <li>Verify this email arrived in info@mail.rkpi5.com inbox</li>
                   <li>Check BCC copy in kmx-iAaW7gXy3JeDt@proton.me</li>
                   <li>Review email headers for SPF/DKIM PASS</li>
                   <li>Confirm email not in spam folder</li>
@@ -130,7 +138,7 @@ export const testResendConnection = internalAction({
       return { 
         success: true, 
         emailId: data?.id,
-        message: "Test email sent successfully! Check info@rkpi5.com and BCC inbox.",
+        message: "Test email sent successfully! Check info@mail.rkpi5.com and BCC inbox.",
         timestamp: new Date().toISOString()
       };
     } catch (error) {
@@ -160,7 +168,7 @@ export const sendWaitlistConfirmation = internalAction({
         from: "RKPi5 <noreply@mail.rkpi5.com>",
         to: [email],
         bcc: ["kmx-iAaW7gXy3JeDt@proton.me"],
-        replyTo: "info@rkpi5.com",
+        replyTo: "info@mail.rkpi5.com",
         subject: "[WAITLIST] Welcome to the RKPi5 Waitlist!",
         html: `
           <!DOCTYPE html>
@@ -274,13 +282,19 @@ export const sendWaitlistConfirmation = internalAction({
       });
 
       if (error) {
-        console.error("[sendWaitlistConfirmation] Resend error:", error);
+        console.error("❌ [sendWaitlistConfirmation] Resend API error:", error);
+        console.error("   User email:", email);
+        console.error("   Check: 1) RESEND_API_KEY is set, 2) API key is valid, 3) Domain verified");
         throw new Error(error.message);
       }
 
+      console.log("✅ [sendWaitlistConfirmation] Email sent successfully to:", email);
+      console.log("   Email ID:", data?.id);
       return { success: true, emailId: data?.id };
     } catch (error) {
-      console.error("[sendWaitlistConfirmation] Failed to send email:", error);
+      console.error("❌ [sendWaitlistConfirmation] Failed to send email:", error);
+      console.error("   This is a CRITICAL error - user did NOT receive confirmation");
+      console.error("   User email:", email);
       // Don't throw - we don't want to fail the waitlist signup if email fails
       // Just log the error and return failure status
       return { success: false, error: String(error) };
@@ -305,7 +319,7 @@ export const sendAdminWaitlistNotification = internalAction({
       const resend = getResendClient();
       const { data, error } = await resend.emails.send({
         from: "RKPi5 Waitlist <noreply@mail.rkpi5.com>",
-        to: ["info@rkpi5.com"],
+        to: ["info@mail.rkpi5.com"],
         bcc: ["kmx-iAaW7gXy3JeDt@proton.me"],
         replyTo: args.email, // Reply goes to the user who signed up
         subject: `[WAITLIST] New Signup: ${args.name}`,
@@ -359,13 +373,18 @@ export const sendAdminWaitlistNotification = internalAction({
       });
 
       if (error) {
-        console.error("[sendAdminWaitlistNotification] Resend error:", error);
+        console.error("❌ [sendAdminWaitlistNotification] Resend API error:", error);
+        console.error("   Admin will NOT be notified of signup:", args.name, args.email);
+        console.error("   Check: 1) RESEND_API_KEY is set, 2) API key is valid, 3) Domain verified");
         throw new Error(error.message);
       }
 
+      console.log("✅ [sendAdminWaitlistNotification] Admin notified of signup:", args.name);
+      console.log("   Email ID:", data?.id);
       return { success: true, emailId: data?.id };
     } catch (error) {
-      console.error("[sendAdminWaitlistNotification] Failed to send email:", error);
+      console.error("❌ [sendAdminWaitlistNotification] Failed to send email:", error);
+      console.error("   This is a CRITICAL error - admin NOT notified of:", args.name, args.email);
       return { success: false, error: String(error) };
     }
   },
@@ -389,7 +408,7 @@ export const sendContactNotification = internalAction({
       const resend = getResendClient();
       const { data, error } = await resend.emails.send({
         from: "RKPi5 Contact <noreply@mail.rkpi5.com>",
-        to: ["info@rkpi5.com"],
+        to: ["info@mail.rkpi5.com"],
         bcc: ["kmx-iAaW7gXy3JeDt@proton.me"],
         replyTo: args.email, // Reply goes to the person who contacted
         subject: `[CONTACT] ${args.type}: ${args.name}`,
@@ -445,13 +464,18 @@ export const sendContactNotification = internalAction({
       });
 
       if (error) {
-        console.error("[sendContactNotification] Resend error:", error);
+        console.error("❌ [sendContactNotification] Resend API error:", error);
+        console.error("   Admin will NOT be notified of contact:", args.name, args.email);
+        console.error("   Check: 1) RESEND_API_KEY is set, 2) API key is valid, 3) Domain verified");
         throw new Error(error.message);
       }
 
+      console.log("✅ [sendContactNotification] Admin notified of contact from:", args.name);
+      console.log("   Email ID:", data?.id);
       return { success: true, emailId: data?.id };
     } catch (error) {
-      console.error("[sendContactNotification] Failed to send email:", error);
+      console.error("❌ [sendContactNotification] Failed to send email:", error);
+      console.error("   This is a CRITICAL error - admin NOT notified of contact from:", args.name, args.email);
       return { success: false, error: String(error) };
     }
   },

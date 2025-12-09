@@ -50,10 +50,10 @@ export default function ContactPage() {
                       <h3 className="font-semibold text-gray-900">Email</h3>
                     </div>
                     <a
-                      href="mailto:info@rapturekit.com"
+                      href="mailto:info@mail.rkpi5.com"
                       className="text-primary-600 hover:text-primary-700"
                     >
-                      info@rapturekit.com
+                      info@mail.rkpi5.com
                     </a>
                   </div>
 
@@ -150,10 +150,10 @@ export default function ContactPage() {
                   Email us directly for immediate inquiries
                 </p>
                 <a
-                  href="mailto:info@rapturekit.com"
+                  href="mailto:info@mail.rkpi5.com"
                   className="text-primary-600 hover:text-primary-700 font-medium text-sm"
                 >
-                  info@rapturekit.com
+                  info@mail.rkpi5.com
                 </a>
               </div>
 
