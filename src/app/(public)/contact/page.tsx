@@ -1,6 +1,6 @@
 import { Container } from "@/components/ui";
 import { ContactForm } from "@/components/forms";
-import { Mail, MapPin, Clock, Twitter, Youtube, Facebook } from "lucide-react";
+import { MapPin, Clock, Twitter, Youtube, Facebook } from "lucide-react";
 
 export const metadata = {
   title: "Contact - RKPi5 | Get in Touch",
@@ -43,20 +43,6 @@ export default function ContactPage() {
                 </h2>
                 
                 <div className="space-y-6">
-                  {/* Email */}
-                  <div>
-                    <div className="flex items-center gap-2 mb-2">
-                      <Mail className="w-5 h-5 text-primary-600" />
-                      <h3 className="font-semibold text-gray-900">Email</h3>
-                    </div>
-                    <a
-                      href="mailto:info@mail.rkpi5.com"
-                      className="text-primary-600 hover:text-primary-700"
-                    >
-                      info@mail.rkpi5.com
-                    </a>
-                  </div>
-
                   {/* Response Time */}
                   <div>
                     <div className="flex items-center gap-2 mb-2">
@@ -141,22 +127,7 @@ export default function ContactPage() {
               Prefer a different communication method? We&apos;re happy to connect in the way that works best for you.
             </p>
             
-            <div className="grid sm:grid-cols-2 gap-6">
-              {/* Direct Email */}
-              <div className="bg-white rounded-xl p-6 border border-gray-200">
-                <Mail className="w-8 h-8 text-primary-600 mx-auto mb-3" />
-                <h3 className="font-semibold text-gray-900 mb-2">Direct Email</h3>
-                <p className="text-sm text-gray-600 mb-3">
-                  Email us directly for immediate inquiries
-                </p>
-                <a
-                  href="mailto:info@mail.rkpi5.com"
-                  className="text-primary-600 hover:text-primary-700 font-medium text-sm"
-                >
-                  info@mail.rkpi5.com
-                </a>
-              </div>
-
+            <div className="max-w-md mx-auto">
               {/* About Page */}
               <div className="bg-white rounded-xl p-6 border border-gray-200">
                 <MapPin className="w-8 h-8 text-primary-600 mx-auto mb-3" />

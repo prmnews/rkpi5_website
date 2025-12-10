@@ -1,5 +1,5 @@
 import { Container } from "@/components/ui";
-import { Mail, Clock, Heart, Cpu, Database, Wifi, Battery, Zap, Twitter, Youtube, Facebook } from "lucide-react";
+import { Clock, Heart, Cpu, Database, Wifi, Battery, Zap, Twitter, Youtube, Facebook } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
@@ -262,18 +262,17 @@ export default function AboutPage() {
             </p>
 
             <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
-              {/* Email Contact */}
-              <div className="mb-8">
-                <div className="flex items-center justify-center gap-2 mb-3">
-                  <Mail className="w-5 h-5 text-primary-600" />
-                  <h3 className="text-xl font-semibold text-gray-900">Email</h3>
-                </div>
-                <a
-                  href="mailto:info@mail.rkpi5.com"
-                  className="text-primary-600 hover:text-primary-700 font-medium text-lg"
+              {/* Contact Form Link */}
+              <div className="mb-8 pb-8 border-b border-gray-200">
+                <p className="text-gray-600 mb-6">
+                  Send us a detailed message and we&apos;ll get back to you promptly.
+                </p>
+                <Link
+                  href="/contact"
+                  className="inline-block rounded-lg bg-primary-600 px-8 py-4 text-base font-semibold text-white hover:bg-primary-700 transition-colors shadow-md hover:shadow-lg"
                 >
-                  info@mail.rkpi5.com
-                </a>
+                  Contact Form
+                </Link>
               </div>
 
               {/* Response Time */}
@@ -285,19 +284,6 @@ export default function AboutPage() {
                 <p className="text-gray-600">
                   We typically respond within 24-48 hours during business days
                 </p>
-              </div>
-
-              {/* Contact Form Link */}
-              <div className="mb-8">
-                <p className="text-gray-600 mb-4">
-                  Prefer a form? Send us a detailed message and we&apos;ll get back to you promptly.
-                </p>
-                <Link
-                  href="/contact"
-                  className="inline-block rounded-lg bg-primary-600 px-6 py-3 text-sm font-semibold text-white hover:bg-primary-700 transition-colors"
-                >
-                  Contact Form
-                </Link>
               </div>
 
               {/* Social Links */}
