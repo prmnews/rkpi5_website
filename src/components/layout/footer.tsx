@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/ui";
 
 const footerLinks = {
@@ -69,9 +70,13 @@ export function Footer() {
           {/* Brand Section */}
           <div className="lg:col-span-4">
             <Link href="/" className="flex items-center gap-2 group w-fit">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
-                <span className="text-white font-bold text-xl">R</span>
-              </div>
+              <Image
+                src="/logo_rkpi5_com.png"
+                alt="RKPi5 Logo"
+                width={40}
+                height={40}
+                className="rounded-lg shadow-md group-hover:shadow-lg transition-shadow"
+              />
               <div className="flex flex-col">
                 <span className="font-bold text-white text-lg leading-none">
                   RKPi5
